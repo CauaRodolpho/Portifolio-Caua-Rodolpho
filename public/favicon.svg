@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Cauã Rodolpho — CR</title>
+  <defs>
+    <linearGradient id="panel" x1="8" y1="4" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#071827" />
+      <stop offset="1" stop-color="#020812" />
+    </linearGradient>
+    <linearGradient id="cyan" x1="13" y1="11" x2="51" y2="53" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#67E8F9" />
+      <stop offset="1" stop-color="#06B6D4" />
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="1.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect x="3" y="3" width="58" height="58" rx="15" fill="url(#panel)" stroke="#164E63" stroke-width="2" />
+  <rect x="8" y="8" width="48" height="48" rx="11" fill="none" stroke="#22D3EE" stroke-opacity="0.25" />
+
+  <path d="M8 21V14a6 6 0 0 1 6-6h7M43 8h7a6 6 0 0 1 6 6v7M56 43v7a6 6 0 0 1-6 6h-7M21 56h-7a6 6 0 0 1-6-6v-7"
+        fill="none" stroke="url(#cyan)" stroke-width="2" stroke-linecap="round" filter="url(#glow)" />
+
+  <text x="32" y="39.5" text-anchor="middle" fill="url(#cyan)"
+        font-family="JetBrains Mono, Consolas, monospace" font-size="22" font-weight="700" letter-spacing="-1.5"
+        filter="url(#glow)">CR</text>
+
+  <circle cx="32" cy="49" r="1.5" fill="#67E8F9" filter="url(#glow)" />
+</svg>
