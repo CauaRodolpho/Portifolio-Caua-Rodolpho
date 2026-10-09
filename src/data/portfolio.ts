@@ -143,7 +143,7 @@ export type PortfolioProject = {
   originLinks?: { label: string; url: string }[];
   demoAvailable?: boolean;
   featured?: boolean;
-  image: string;
+  image?: string;
   imageFit?: "cover" | "contain";
   gradient: string;
   github: string;
@@ -236,22 +236,83 @@ export const PROJECTS: PortfolioProject[] = [
   },
   {
     kind: "Main Quest",
-    title: "Nexus Cloud",
-    tagline:
-      "Plataforma de gerenciamento de serviços em nuvem com foco em System Design Front-end.",
+    title: "FlowView",
+    tagline: "Dashboards personalizáveis para acompanhar finanças, vendas e marketing.",
+    description:
+      "Aplicação Front-End para criar painéis a partir de dados próprios, com gráficos, indicadores, tabelas, insights e exportações.",
     difficulty: "S",
-    status: "In Development",
-    tech: ["React", "TypeScript", "Tailwind CSS", "Component Architecture"],
+    status: "Online",
+    tech: ["React", "TypeScript", "Next.js", "Tailwind CSS", "Recharts", "LocalStorage"],
     architecture:
-      "Desacoplamento de camadas, componentes genéricos reutilizáveis e gerenciamento eficiente de estado.",
-    problem: "Dashboards de infraestrutura em nuvem pouco escaláveis e difíceis de manter.",
+      "Aplicação organizada por domínio, com cálculos separados da interface, dados tipados e persistência versionada no navegador.",
+    problem:
+      "Transformar registros próprios em indicadores úteis e personalizáveis sem exigir cadastro em um servidor.",
     learnings:
-      "Arquitetura modular escalável e layout responsivo para dashboards de alta performance.",
-    roadmap: ["Seção de planos", "Prévia do dashboard", "Novas seções da Home"],
-    image: "/projects/nexus-cloud.webp",
-    gradient: "linear-gradient(135deg, oklch(0.3 0.1 255), oklch(0.7 0.14 225))",
-    github: "https://github.com/CauaRodolpho/Nexus-Cloud",
-    demo: "https://nexus-cloud-lyart.vercel.app/",
+      "Modelagem de dados com TypeScript, regras de cálculo por domínio, importação e exportação de arquivos, persistência local e testes automatizados.",
+    roadmap: ["Restaurar backup JSON", "Importar arquivos Excel", "Sincronização opcional com API"],
+    highlights: [
+      "Painéis de Finanças, Vendas e Marketing",
+      "Criação e personalização de dashboards",
+      "Importação CSV e exportação em CSV, JSON, PNG e PDF",
+      "Testes automatizados para cálculos e persistência",
+    ],
+    image: "https://raw.githubusercontent.com/CauaRodolpho/FlowView/main/docs/flowview-preview.jpg",
+    gradient: "linear-gradient(135deg, oklch(0.2 0.11 265), oklch(0.58 0.18 225))",
+    github: "https://github.com/CauaRodolpho/FlowView",
+    demo: "https://dashhub-caua.rodolfinhom5.chatgpt.site",
+  },
+  {
+    kind: "Main Quest",
+    title: "FlowTask",
+    tagline: "Gestão de projetos e tarefas com Kanban, revisão e perfis demonstrativos.",
+    description:
+      "Aplicação Front-End que simula o dia a dia de uma equipe de desenvolvimento, com acompanhamento de projetos, produtividade e entregas.",
+    difficulty: "S",
+    status: "Online",
+    tech: ["React", "TypeScript", "Tailwind CSS", "Next.js", "Radix UI", "Zod", "GSAP", "LocalStorage"],
+    architecture:
+      "Regras de permissões e revisão centralizadas no Front-End, com dados demonstrativos persistidos no navegador.",
+    problem:
+      "Organizar tarefas de uma equipe e diferenciar o trabalho individual, a revisão do Tech Lead e o acesso administrativo.",
+    learnings:
+      "Fluxos por perfil, validação de backups com Zod, transições de status e adaptação de telas densas para dispositivos móveis.",
+    roadmap: ["Criar API e autenticação", "Persistir dados em banco", "Adicionar testes automatizados"],
+    highlights: [
+      "Quadro Kanban e acompanhamento de projetos",
+      "Revisão de entregas conforme o perfil",
+      "Relatórios de produtividade e saúde do projeto",
+      "Importação e exportação de backup em JSON",
+    ],
+    gradient: "linear-gradient(135deg, oklch(0.2 0.11 265), oklch(0.58 0.18 225))",
+    github: "https://github.com/CauaRodolpho/FlowStack",
+    demo: "https://flowtask-caua.rodolfinhom5.chatgpt.site",
+  },
+  {
+    kind: "Main Quest",
+    title: "Ateliê AnaCraft",
+    tagline: "Loja demonstrativa de artesanato personalizado, do catálogo ao checkout.",
+    description:
+      "Aplicação Front-End de e-commerce com busca, favoritos, carrinho, personalização de produtos e confirmação de compra demonstrativa.",
+    difficulty: "S",
+    status: "Online",
+    tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "React Router", "Context API", "GSAP", "LocalStorage"],
+    architecture:
+      "Rotas com React Router, Context API para carrinho e favoritos e persistência local no navegador.",
+    problem:
+      "Apresentar um fluxo de compra personalizado para produtos artesanais em telas de computador e celular.",
+    learnings:
+      "Estado compartilhado, carrinho que diferencia personalizações, filtros na URL, imagens responsivas e acessibilidade.",
+    roadmap: ["Conectar API e banco de dados", "Implementar autenticação", "Integrar pagamento e frete"],
+    highlights: [
+      "Catálogo, busca e filtros por categoria",
+      "Personalização de produtos e favoritos",
+      "Carrinho que separa itens com opções diferentes",
+      "Checkout demonstrativo com confirmação do pedido",
+    ],
+    image: "https://raw.githubusercontent.com/CauaRodolpho/Loja-Atelie/main/docs/images/home-desktop.webp",
+    gradient: "linear-gradient(135deg, oklch(0.2 0.11 345), oklch(0.65 0.16 20))",
+    github: "https://github.com/CauaRodolpho/Loja-Atelie",
+    demo: "https://loja-atelie-phi.vercel.app/",
   },
   {
     kind: "Side Quest",
@@ -365,7 +426,7 @@ export const COURSES_IN_PROGRESS = [
 ] as const;
 
 export const STATS = [
-  { label: "Projetos principais", value: "3" },
+  { label: "Projetos principais", value: "5" },
   { label: "Certificações", value: "6" },
   { label: "Tecnologias", value: "10" },
   { label: "Objetivo", value: "1ª vaga" },
