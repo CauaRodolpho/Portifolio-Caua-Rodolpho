@@ -269,14 +269,27 @@ export const PROJECTS: PortfolioProject[] = [
       "Aplicação Front-End que simula o dia a dia de uma equipe de desenvolvimento, com acompanhamento de projetos, produtividade e entregas.",
     difficulty: "S",
     status: "Online",
-    tech: ["React", "TypeScript", "Tailwind CSS", "Next.js", "Radix UI", "Zod", "GSAP", "LocalStorage"],
+    tech: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Next.js",
+      "Radix UI",
+      "Zod",
+      "GSAP",
+      "LocalStorage",
+    ],
     architecture:
       "Regras de permissões e revisão centralizadas no Front-End, com dados demonstrativos persistidos no navegador.",
     problem:
       "Organizar tarefas de uma equipe e diferenciar o trabalho individual, a revisão do Tech Lead e o acesso administrativo.",
     learnings:
       "Fluxos por perfil, validação de backups com Zod, transições de status e adaptação de telas densas para dispositivos móveis.",
-    roadmap: ["Criar API e autenticação", "Persistir dados em banco", "Adicionar testes automatizados"],
+    roadmap: [
+      "Criar API e autenticação",
+      "Persistir dados em banco",
+      "Adicionar testes automatizados",
+    ],
     highlights: [
       "Quadro Kanban e acompanhamento de projetos",
       "Revisão de entregas conforme o perfil",
@@ -295,21 +308,35 @@ export const PROJECTS: PortfolioProject[] = [
       "Aplicação Front-End de e-commerce com busca, favoritos, carrinho, personalização de produtos e confirmação de compra demonstrativa.",
     difficulty: "S",
     status: "Online",
-    tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "React Router", "Context API", "GSAP", "LocalStorage"],
+    tech: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "React Router",
+      "Context API",
+      "GSAP",
+      "LocalStorage",
+    ],
     architecture:
       "Rotas com React Router, Context API para carrinho e favoritos e persistência local no navegador.",
     problem:
       "Apresentar um fluxo de compra personalizado para produtos artesanais em telas de computador e celular.",
     learnings:
       "Estado compartilhado, carrinho que diferencia personalizações, filtros na URL, imagens responsivas e acessibilidade.",
-    roadmap: ["Conectar API e banco de dados", "Implementar autenticação", "Integrar pagamento e frete"],
+    roadmap: [
+      "Conectar API e banco de dados",
+      "Implementar autenticação",
+      "Integrar pagamento e frete",
+    ],
     highlights: [
       "Catálogo, busca e filtros por categoria",
       "Personalização de produtos e favoritos",
       "Carrinho que separa itens com opções diferentes",
       "Checkout demonstrativo com confirmação do pedido",
     ],
-    image: "https://raw.githubusercontent.com/CauaRodolpho/Loja-Atelie/main/docs/images/home-desktop.webp",
+    image:
+      "https://raw.githubusercontent.com/CauaRodolpho/Loja-Atelie/main/docs/images/home-desktop.webp",
     gradient: "linear-gradient(135deg, oklch(0.2 0.11 345), oklch(0.65 0.16 20))",
     github: "https://github.com/CauaRodolpho/Loja-Atelie",
     demo: "https://loja-atelie-phi.vercel.app/",
