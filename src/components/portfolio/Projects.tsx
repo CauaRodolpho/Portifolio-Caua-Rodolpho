@@ -79,17 +79,19 @@ function QuestCard({
             className={`relative overflow-hidden ${main ? "aspect-[16/9] sm:aspect-[21/8]" : "aspect-[16/9]"}`}
             style={{ background: p.gradient }}
           >
-            <img
-              src={p.image}
-              alt={`${t("Captura de tela do projeto")} ${p.title}`}
-              loading="lazy"
-              className={`absolute inset-0 size-full transition-transform duration-700 group-hover:scale-[1.03] ${
-                p.imageFit === "contain" ? "object-contain" : "object-cover"
-              }`}
-              onError={(event) => {
-                event.currentTarget.style.display = "none";
-              }}
-            />
+            {p.image && (
+              <img
+                src={p.image}
+                alt={`${t("Captura de tela do projeto")} ${p.title}`}
+                loading="lazy"
+                className={`absolute inset-0 size-full transition-transform duration-700 group-hover:scale-[1.03] ${
+                  p.imageFit === "contain" ? "object-contain" : "object-cover"
+                }`}
+                onError={(event) => {
+                  event.currentTarget.style.display = "none";
+                }}
+              />
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-black/20" />
             <div className="absolute inset-0 grid-bg opacity-40 mix-blend-overlay" />
             <div className="absolute inset-0 scanlines opacity-25" />
@@ -299,7 +301,7 @@ export function Projects() {
           code={t("P03 · Registro de projetos")}
           title={t("Missões em andamento")}
           subtitle={t(
-            "AuthFlow é o projeto principal Full Stack. Chronos e Nexus Cloud seguem como main quests, enquanto Stranger Things e Pokedex ampliam o repertório técnico.",
+            "AuthFlow é meu projeto Full Stack de destaque. FlowView, FlowTask e Ateliê AnaCraft mostram diferentes aplicações de Front-End, enquanto Chronos, Stranger Things e Pokedex completam meu portfólio.",
           )}
         />
         <div className="mb-5 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
