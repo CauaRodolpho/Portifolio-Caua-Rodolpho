@@ -45,8 +45,8 @@ const translations: Record<string, string> = {
   "Avancei para React, TypeScript e Tailwind CSS, praticando componentização, tipagem, gerenciamento de estados e organização de interfaces modernas e acessíveis.":
     "I progressed to React, TypeScript, and Tailwind CSS, practicing component architecture, typing, state management, and the organization of modern, accessible interfaces.",
   "Projetos que marcaram a evolução": "Projects that shaped my growth",
-  "O Chronos e o Nexus Cloud fortaleceram minha base em interfaces, TypeScript e arquitetura Front-End. Com o AuthFlow, avancei para uma aplicação Full Stack com autenticação, API, banco de dados e deploy completo.":
-    "Chronos and Nexus Cloud strengthened my foundation in interfaces, TypeScript, and Front-End architecture. With AuthFlow, I advanced to a Full Stack application with authentication, an API, a database, and a complete deployment.",
+  "O AuthFlow ampliou minha experiência com integração Full Stack. Com FlowView, FlowTask e Ateliê AnaCraft, pratiquei diferentes desafios de arquitetura, dados e experiência Front-End.":
+    "AuthFlow expanded my experience with Full Stack integration. With FlowView, FlowTask, and Ateliê AnaCraft, I practiced different challenges in architecture, data, and Front-End experience.",
   "Aprendizado atual": "Current learning",
   "Atualmente estou aprofundando meus conhecimentos na Formação TypeScript Fullstack Developer e em Design Thinking, buscando desenvolver soluções mais completas e centradas nas necessidades do usuário.":
     "I am currently deepening my knowledge through the TypeScript Fullstack Developer program and Design Thinking, aiming to build more complete, user-centered solutions.",
