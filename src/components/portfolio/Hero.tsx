@@ -149,6 +149,49 @@ export function Hero({ start }: { start: boolean }) {
     return () => ctx.revert();
   }, [start]);
 
+  useEffect(() => {
+    const section = root.current;
+    if (!section) return;
+
+    const pointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (!pointer.matches || reducedMotion.matches) return;
+
+    const layers = Array.from(section.querySelectorAll<HTMLElement>("[data-hero-depth]"));
+    const movers = layers.map((element) => {
+      const depth = Number(element.dataset.heroDepth ?? 0);
+      return {
+        moveX: gsap.quickTo(element, "x", { duration: 0.85, ease: "power3.out" }),
+        moveY: gsap.quickTo(element, "y", { duration: 0.85, ease: "power3.out" }),
+        depth,
+      };
+    });
+
+    const move = (event: PointerEvent) => {
+      const bounds = section.getBoundingClientRect();
+      const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 2;
+      const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 2;
+      movers.forEach((layer) => {
+        layer.moveX(x * layer.depth);
+        layer.moveY(y * layer.depth);
+      });
+    };
+
+    const reset = () => movers.forEach((layer) => {
+      layer.moveX(0);
+      layer.moveY(0);
+    });
+
+    section.addEventListener("pointermove", move);
+    section.addEventListener("pointerleave", reset);
+
+    return () => {
+      section.removeEventListener("pointermove", move);
+      section.removeEventListener("pointerleave", reset);
+      layers.forEach((element) => gsap.killTweensOf(element, "x,y"));
+    };
+  }, []);
+
   return (
     <section
       ref={root}
@@ -156,13 +199,15 @@ export function Hero({ start }: { start: boolean }) {
       className="relative min-h-[820px] scroll-mt-28 overflow-hidden bg-slate-100 px-4 pb-8 pt-28 text-slate-950 dark:bg-[#020a12] dark:text-white sm:px-6 lg:min-h-screen lg:pt-32"
     >
       <div
-        className="absolute inset-0 bg-cover bg-center"
+        data-hero-depth="-10"
+        className="absolute -inset-4 bg-cover bg-center"
         style={{ backgroundImage: `url('${heroPoster}')` }}
         aria-hidden="true"
       />
       <video
         key={heroVideo}
-        className="absolute inset-0 size-full object-cover object-center motion-reduce:hidden"
+        data-hero-depth="-10"
+        className="absolute -inset-4 h-[calc(100%+2rem)] w-[calc(100%+2rem)] object-cover object-center motion-reduce:hidden"
         autoPlay
         muted
         loop
@@ -181,7 +226,8 @@ export function Hero({ start }: { start: boolean }) {
 
       <div ref={cursorGlow} className="hero-cursor-glow" aria-hidden="true" />
 
-      <div className="pointer-events-none absolute left-1/2 top-[58%] -translate-x-1/2 -translate-y-1/2 opacity-60">
+      <div data-hero-depth="8"
+        className="pointer-events-none absolute left-1/2 top-[58%] -translate-x-1/2 -translate-y-1/2 opacity-60">
         <div className="relative size-[min(72vw,720px)]">
           <div
             data-orbit-slow
@@ -271,6 +317,7 @@ export function Hero({ start }: { start: boolean }) {
 
         <aside
           data-hero-panel
+          data-hero-depth="-16"
           aria-label={t("Resumo de habilidades")}
           className="absolute left-0 top-[42%] hidden w-64 rounded-2xl border border-cyan-300/25 bg-[#03121d]/68 p-5 shadow-[0_20px_70px_-35px_rgba(34,211,238,0.8)] backdrop-blur-xl lg:block"
         >
@@ -300,6 +347,7 @@ export function Hero({ start }: { start: boolean }) {
 
         <aside
           data-hero-panel
+          data-hero-depth="16"
           aria-label={t("Projetos em destaque")}
           className="absolute right-0 top-[38%] hidden w-72 rounded-2xl border border-cyan-300/25 bg-[#03121d]/68 p-5 shadow-[0_20px_70px_-35px_rgba(34,211,238,0.8)] backdrop-blur-xl lg:block"
         >
