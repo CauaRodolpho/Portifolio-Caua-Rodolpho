@@ -265,13 +265,6 @@ const translations: Record<string, string> = {
   "Conexão estabelecida.": "Connection established.",
   "Bem-vindo ao portfólio de Cauã Rodolpho.": "Welcome to Cauã Rodolpho's portfolio.",
   "Pular introdução": "Skip intro",
-};
-
-type LanguageContextValue = {
-  language: Language;
-  setLanguage: (language: Language) => void;
-  toggleLanguage: () => void;
-  t: (text: string) => string;
   "Dashboards personalizáveis para acompanhar finanças, vendas e marketing.": "Customizable dashboards for tracking finance, sales, and marketing.",
   "Aplicação Front-End para criar painéis a partir de dados próprios, com gráficos, indicadores, tabelas, insights e exportações.": "Front-End application for creating dashboards from personal data, with charts, metrics, tables, insights, and exports.",
   "Aplicação organizada por domínio, com cálculos separados da interface, dados tipados e persistência versionada no navegador.": "Application organized by domain, with calculations separated from the interface, typed data, and versioned browser storage.",
@@ -308,6 +301,21 @@ type LanguageContextValue = {
   "Personalização de produtos e favoritos": "Product customization and favorites",
   "Carrinho que separa itens com opções diferentes": "Cart that keeps differently customized items separate",
   "Checkout demonstrativo com confirmação do pedido": "Demo checkout with order confirmation",
+};
+
+type LanguageContextValue = {
+  language: Language;
+  setLanguage: (language: Language) => void;
+  toggleLanguage: () => void;
+  t: (text: string) => string;
+
+};
+
+type LanguageContextValue = {
+  language: Language;
+  setLanguage: (language: Language) => void;
+  toggleLanguage: () => void;
+  t: (text: string) => string;
 
 };
 
