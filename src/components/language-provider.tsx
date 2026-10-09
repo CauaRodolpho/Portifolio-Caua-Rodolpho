@@ -308,7 +308,7 @@ type LanguageContextValue = {
   "Personalização de produtos e favoritos": "Product customization and favorites",
   "Carrinho que separa itens com opções diferentes": "Cart that keeps differently customized items separate",
   "Checkout demonstrativo com confirmação do pedido": "Demo checkout with order confirmation",
-  "AuthFlow é meu projeto Full Stack de destaque. FlowView, FlowTask e Ateliê AnaCraft mostram diferentes aplicações de Front-End, enquanto Chronos, Stranger Things e Pokedex completam meu portfólio.": "AuthFlow is my flagship Full Stack project. FlowView, FlowTask, and Ateliê AnaCraft showcase different Front-End applications, while Chronos, Stranger Things, and Pokedex complete my portfolio.",
+
 };
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
