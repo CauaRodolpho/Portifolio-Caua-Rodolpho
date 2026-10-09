@@ -265,23 +265,35 @@ const translations: Record<string, string> = {
   "Conexão estabelecida.": "Connection established.",
   "Bem-vindo ao portfólio de Cauã Rodolpho.": "Welcome to Cauã Rodolpho's portfolio.",
   "Pular introdução": "Skip intro",
-  "Dashboards personalizáveis para acompanhar finanças, vendas e marketing.": "Customizable dashboards for tracking finance, sales, and marketing.",
-  "Aplicação Front-End para criar painéis a partir de dados próprios, com gráficos, indicadores, tabelas, insights e exportações.": "Front-End application for creating dashboards from personal data, with charts, metrics, tables, insights, and exports.",
-  "Aplicação organizada por domínio, com cálculos separados da interface, dados tipados e persistência versionada no navegador.": "Application organized by domain, with calculations separated from the interface, typed data, and versioned browser storage.",
-  "Transformar registros próprios em indicadores úteis e personalizáveis sem exigir cadastro em um servidor.": "Turn personal records into useful, customizable metrics without requiring a server account.",
-  "Modelagem de dados com TypeScript, regras de cálculo por domínio, importação e exportação de arquivos, persistência local e testes automatizados.": "TypeScript data modeling, domain-specific calculations, file import and export, local persistence, and automated tests.",
+  "Dashboards personalizáveis para acompanhar finanças, vendas e marketing.":
+    "Customizable dashboards for tracking finance, sales, and marketing.",
+  "Aplicação Front-End para criar painéis a partir de dados próprios, com gráficos, indicadores, tabelas, insights e exportações.":
+    "Front-End application for creating dashboards from personal data, with charts, metrics, tables, insights, and exports.",
+  "Aplicação organizada por domínio, com cálculos separados da interface, dados tipados e persistência versionada no navegador.":
+    "Application organized by domain, with calculations separated from the interface, typed data, and versioned browser storage.",
+  "Transformar registros próprios em indicadores úteis e personalizáveis sem exigir cadastro em um servidor.":
+    "Turn personal records into useful, customizable metrics without requiring a server account.",
+  "Modelagem de dados com TypeScript, regras de cálculo por domínio, importação e exportação de arquivos, persistência local e testes automatizados.":
+    "TypeScript data modeling, domain-specific calculations, file import and export, local persistence, and automated tests.",
   "Restaurar backup JSON": "Restore JSON backups",
   "Importar arquivos Excel": "Import Excel files",
   "Sincronização opcional com API": "Optional API synchronization",
   "Painéis de Finanças, Vendas e Marketing": "Finance, Sales, and Marketing dashboards",
   "Criação e personalização de dashboards": "Dashboard creation and customization",
-  "Importação CSV e exportação em CSV, JSON, PNG e PDF": "CSV import and export to CSV, JSON, PNG, and PDF",
-  "Testes automatizados para cálculos e persistência": "Automated tests for calculations and persistence",
-  "Gestão de projetos e tarefas com Kanban, revisão e perfis demonstrativos.": "Project and task management with Kanban, reviews, and demo profiles.",
-  "Aplicação Front-End que simula o dia a dia de uma equipe de desenvolvimento, com acompanhamento de projetos, produtividade e entregas.": "A Front-End application simulating a development team's workflow, with project, productivity, and delivery tracking.",
-  "Regras de permissões e revisão centralizadas no Front-End, com dados demonstrativos persistidos no navegador.": "Permission and review rules centralized in the Front-End, with demo data stored in the browser.",
-  "Organizar tarefas de uma equipe e diferenciar o trabalho individual, a revisão do Tech Lead e o acesso administrativo.": "Organize team tasks and distinguish individual work, Tech Lead reviews, and administrative access.",
-  "Fluxos por perfil, validação de backups com Zod, transições de status e adaptação de telas densas para dispositivos móveis.": "Role-based flows, backup validation with Zod, status transitions, and adapting dense screens for mobile devices.",
+  "Importação CSV e exportação em CSV, JSON, PNG e PDF":
+    "CSV import and export to CSV, JSON, PNG, and PDF",
+  "Testes automatizados para cálculos e persistência":
+    "Automated tests for calculations and persistence",
+  "Gestão de projetos e tarefas com Kanban, revisão e perfis demonstrativos.":
+    "Project and task management with Kanban, reviews, and demo profiles.",
+  "Aplicação Front-End que simula o dia a dia de uma equipe de desenvolvimento, com acompanhamento de projetos, produtividade e entregas.":
+    "A Front-End application simulating a development team's workflow, with project, productivity, and delivery tracking.",
+  "Regras de permissões e revisão centralizadas no Front-End, com dados demonstrativos persistidos no navegador.":
+    "Permission and review rules centralized in the Front-End, with demo data stored in the browser.",
+  "Organizar tarefas de uma equipe e diferenciar o trabalho individual, a revisão do Tech Lead e o acesso administrativo.":
+    "Organize team tasks and distinguish individual work, Tech Lead reviews, and administrative access.",
+  "Fluxos por perfil, validação de backups com Zod, transições de status e adaptação de telas densas para dispositivos móveis.":
+    "Role-based flows, backup validation with Zod, status transitions, and adapting dense screens for mobile devices.",
   "Criar API e autenticação": "Build an API and authentication",
   "Persistir dados em banco": "Persist data in a database",
   "Adicionar testes automatizados": "Add automated tests",
@@ -289,17 +301,23 @@ const translations: Record<string, string> = {
   "Revisão de entregas conforme o perfil": "Delivery reviews based on user role",
   "Relatórios de produtividade e saúde do projeto": "Productivity and project health reports",
   "Importação e exportação de backup em JSON": "JSON backup import and export",
-  "Loja demonstrativa de artesanato personalizado, do catálogo ao checkout.": "Demo store for personalized crafts, from product browsing to checkout.",
-  "Aplicação Front-End de e-commerce com busca, favoritos, carrinho, personalização de produtos e confirmação de compra demonstrativa.": "Front-End e-commerce application with search, favorites, cart, product customization, and demo order confirmation.",
-  "Rotas com React Router, Context API para carrinho e favoritos e persistência local no navegador.": "React Router pages, Context API for the cart and favorites, and local browser persistence.",
-  "Apresentar um fluxo de compra personalizado para produtos artesanais em telas de computador e celular.": "Present a personalized shopping flow for handmade products on desktop and mobile.",
-  "Estado compartilhado, carrinho que diferencia personalizações, filtros na URL, imagens responsivas e acessibilidade.": "Shared state, a cart that distinguishes customizations, URL filters, responsive images, and accessibility.",
+  "Loja demonstrativa de artesanato personalizado, do catálogo ao checkout.":
+    "Demo store for personalized crafts, from product browsing to checkout.",
+  "Aplicação Front-End de e-commerce com busca, favoritos, carrinho, personalização de produtos e confirmação de compra demonstrativa.":
+    "Front-End e-commerce application with search, favorites, cart, product customization, and demo order confirmation.",
+  "Rotas com React Router, Context API para carrinho e favoritos e persistência local no navegador.":
+    "React Router pages, Context API for the cart and favorites, and local browser persistence.",
+  "Apresentar um fluxo de compra personalizado para produtos artesanais em telas de computador e celular.":
+    "Present a personalized shopping flow for handmade products on desktop and mobile.",
+  "Estado compartilhado, carrinho que diferencia personalizações, filtros na URL, imagens responsivas e acessibilidade.":
+    "Shared state, a cart that distinguishes customizations, URL filters, responsive images, and accessibility.",
   "Conectar API e banco de dados": "Connect an API and database",
   "Implementar autenticação": "Implement authentication",
   "Integrar pagamento e frete": "Integrate payments and shipping",
   "Catálogo, busca e filtros por categoria": "Catalog, search, and category filters",
   "Personalização de produtos e favoritos": "Product customization and favorites",
-  "Carrinho que separa itens com opções diferentes": "Cart that keeps differently customized items separate",
+  "Carrinho que separa itens com opções diferentes":
+    "Cart that keeps differently customized items separate",
   "Checkout demonstrativo com confirmação do pedido": "Demo checkout with order confirmation",
 };
 
@@ -308,7 +326,6 @@ type LanguageContextValue = {
   setLanguage: (language: Language) => void;
   toggleLanguage: () => void;
   t: (text: string) => string;
-
 };
 
 type LanguageContextValue = {
@@ -316,7 +333,6 @@ type LanguageContextValue = {
   setLanguage: (language: Language) => void;
   toggleLanguage: () => void;
   t: (text: string) => string;
-
 };
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
