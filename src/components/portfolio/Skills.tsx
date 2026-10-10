@@ -11,7 +11,11 @@ import {
   SiNodedotjs,
   SiGit,
   SiStyledcomponents,
+  SiGithubcopilot,
+  SiClaude,
+  SiGooglegemini,
 } from "react-icons/si";
+import { LuBot } from "react-icons/lu";
 import type { IconType } from "react-icons";
 import { Section, SectionHeader, Panel } from "./Panel";
 import { useReveal } from "@/hooks/useReveal";
@@ -30,6 +34,10 @@ const ICONS: Record<string, IconType> = {
   "Node.js": SiNodedotjs,
   "Git & GitHub": SiGit,
   "Styled Components": SiStyledcomponents,
+  "GitHub Copilot": SiGithubcopilot,
+  "ChatGPT / Codex": LuBot,
+  Claude: SiClaude,
+  Gemini: SiGooglegemini,
 };
 
 const STATUS_STYLE: Record<SkillStatus, string> = {
@@ -116,7 +124,9 @@ export function Skills() {
                   <p className="mt-4 text-xs leading-relaxed text-muted-foreground">{t(s.desc)}</p>
 
                   <div className="mt-4 border-t border-border/60 pt-3 font-mono text-[11px] text-muted-foreground">
-                    {formatStudyDuration(s.startedAt, language)} {t("de estudo e prática")}
+                    {s.startedAt
+                      ? `${formatStudyDuration(s.startedAt, language)} ${t("de estudo e prática")}`
+                      : t("Ferramenta de IA para apoio ao desenvolvimento")}
                   </div>
                 </div>
               </Panel>

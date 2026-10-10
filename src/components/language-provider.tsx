@@ -142,6 +142,12 @@ const translations: Record<string, string> = {
   "Refino de UX do chat": "Chat UX refinement",
   "Automação de rotinas": "Routine automation",
   "Sincronização multi-dispositivo": "Cross-device synchronization",
+  "Organização de tarefas e rotinas": "Task and routine organization",
+  "Gestão inteligente de tempo": "Intelligent time management",
+  "Integração com serviços de Inteligência Artificial":
+    "Integration with Artificial Intelligence services",
+  "Interface responsiva para acompanhamento da produtividade":
+    "Responsive interface for productivity tracking",
   "Plataforma de gerenciamento de serviços em nuvem com foco em System Design Front-end.":
     "Cloud service management platform focused on Front-End System Design.",
   "Desacoplamento de camadas, componentes genéricos reutilizáveis e gerenciamento eficiente de estado.":
@@ -173,6 +179,16 @@ const translations: Record<string, string> = {
   "Timelines, ScrollTrigger e motion com propósito.":
     "Timelines, ScrollTrigger, and purposeful motion.",
   "Versionamento, branches e colaboração.": "Version control, branches, and collaboration.",
+  "Ferramentas de IA": "AI Tools",
+  "Assistência de código, sugestões e apoio à produtividade.":
+    "Code assistance, suggestions, and productivity support.",
+  "Planejamento, implementação, revisão e resolução de problemas.":
+    "Planning, implementation, review, and problem-solving.",
+  "Análise de código, documentação e apoio na tomada de decisões.":
+    "Code analysis, documentation, and decision-making support.",
+  "Pesquisa, ideação e apoio em tarefas de desenvolvimento.":
+    "Research, ideation, and support for development tasks.",
+  "Ferramenta de IA para apoio ao desenvolvimento": "AI tool supporting the development workflow",
   "de estudo e prática": "of study and practice",
   "P05 · Progressão": "P05 · Progression",
   "Linha de evolução": "Growth timeline",

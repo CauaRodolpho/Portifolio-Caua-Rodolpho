@@ -41,7 +41,7 @@ export const SKILLS: {
   level: number;
   status: SkillStatus;
   category: string;
-  startedAt: string;
+  startedAt?: string;
   desc: string;
 }[] = [
   {
@@ -123,6 +123,34 @@ export const SKILLS: {
     category: "Tooling",
     startedAt: "2026-02-01",
     desc: "Versionamento, branches e colaboração.",
+  },
+  {
+    name: "GitHub Copilot",
+    level: 70,
+    status: "Training",
+    category: "Ferramentas de IA",
+    desc: "Assistência de código, sugestões e apoio à produtividade.",
+  },
+  {
+    name: "ChatGPT / Codex",
+    level: 75,
+    status: "Training",
+    category: "Ferramentas de IA",
+    desc: "Planejamento, implementação, revisão e resolução de problemas.",
+  },
+  {
+    name: "Claude",
+    level: 65,
+    status: "Training",
+    category: "Ferramentas de IA",
+    desc: "Análise de código, documentação e apoio na tomada de decisões.",
+  },
+  {
+    name: "Gemini",
+    level: 65,
+    status: "Training",
+    category: "Ferramentas de IA",
+    desc: "Pesquisa, ideação e apoio em tarefas de desenvolvimento.",
   },
 ];
 
@@ -229,6 +257,12 @@ export const PROJECTS: PortfolioProject[] = [
     learnings:
       "Integração com LLMs, tratamento de estados assíncronos e importância de proteger credenciais fora do navegador.",
     roadmap: ["Refino de UX do chat", "Automação de rotinas", "Sincronização multi-dispositivo"],
+    highlights: [
+      "Organização de tarefas e rotinas",
+      "Gestão inteligente de tempo",
+      "Integração com serviços de Inteligência Artificial",
+      "Interface responsiva para acompanhamento da produtividade",
+    ],
     image: "/projects/chronos.webp",
     gradient: "linear-gradient(135deg, oklch(0.3 0.09 235), oklch(0.72 0.15 205))",
     github: "https://github.com/CauaRodolpho/Chronos.ia",
@@ -296,6 +330,7 @@ export const PROJECTS: PortfolioProject[] = [
       "Relatórios de produtividade e saúde do projeto",
       "Importação e exportação de backup em JSON",
     ],
+    image: "/projects/flowtask.webp",
     gradient: "linear-gradient(135deg, oklch(0.2 0.11 265), oklch(0.58 0.18 225))",
     github: "https://github.com/CauaRodolpho/FlowStack",
     demo: "https://flowtask-caua.rodolfinhom5.chatgpt.site",
