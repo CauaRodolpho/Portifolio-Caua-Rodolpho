@@ -156,7 +156,7 @@ export function Hero({ start }: { start: boolean }) {
       />
       <video
         key={heroVideo}
-        className="absolute inset-0 size-full object-cover object-center motion-reduce:hidden"
+        className="absolute inset-0 size-full object-cover object-[45%_center] motion-reduce:hidden sm:object-center"
         autoPlay
         muted
         loop
@@ -176,7 +176,7 @@ export function Hero({ start }: { start: boolean }) {
 
       <div className="relative mx-auto flex min-h-[calc(100vh-9rem)] w-full max-w-[1500px] flex-col lg:min-h-[780px]">
         <div className="grid flex-1 items-center gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(300px,0.72fr)] lg:gap-[20%] xl:gap-[28%]">
-          <div className="relative z-10 max-w-xl lg:pb-20">
+          <div className="relative z-10 max-w-xl rounded-3xl bg-gradient-to-r from-slate-100/85 via-slate-100/60 to-transparent px-1 py-3 backdrop-blur-[1px] dark:from-[#020a12]/90 dark:via-[#020a12]/65 dark:to-transparent sm:px-3 lg:bg-none lg:px-0 lg:py-0 lg:backdrop-blur-none lg:dark:bg-none lg:pb-20">
             <div
               data-hero-eyebrow
               className="inline-flex items-center gap-2 rounded-full border border-cyan-700/25 bg-white/70 px-4 py-2 shadow-sm backdrop-blur-xl dark:border-cyan-300/30 dark:bg-[#03121d]/68"
@@ -192,7 +192,9 @@ export function Hero({ start }: { start: boolean }) {
               className="mt-5 text-5xl font-semibold leading-[0.84] tracking-[-0.065em] text-slate-950 dark:text-white sm:text-7xl lg:text-[clamp(4.6rem,6vw,7rem)]"
             >
               <span className="block">{splitChars("Cauã")}</span>
-              <span className="text-gradient block pb-2">{splitChars("Rodolpho")}</span>
+              <span className="block pb-2 text-cyan-600 drop-shadow-[0_0_20px_rgba(34,211,238,0.35)] dark:text-cyan-300">
+                {splitChars("Rodolpho")}
+              </span>
             </h1>
 
             <p
@@ -211,11 +213,11 @@ export function Hero({ start }: { start: boolean }) {
               )}
             </p>
 
-            <div className="mt-7 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-wrap gap-2 sm:mt-7 sm:gap-3">
               <a
                 data-hero-cta
                 href="#projects"
-                className="group inline-flex items-center gap-2 rounded-xl bg-cyan-300 px-5 py-3 text-sm font-semibold text-[#021018] shadow-[0_0_32px_-8px_rgba(80,220,255,0.9)] transition-all hover:-translate-y-0.5 hover:bg-cyan-200"
+                className="group inline-flex items-center gap-2 rounded-xl bg-cyan-300 px-4 py-2.5 text-xs font-semibold text-[#021018] shadow-[0_0_32px_-8px_rgba(80,220,255,0.9)] transition-all hover:-translate-y-0.5 hover:bg-cyan-200 sm:px-5 sm:py-3 sm:text-sm"
               >
                 {t("Ver projetos")}
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
@@ -224,7 +226,7 @@ export function Hero({ start }: { start: boolean }) {
                 data-hero-cta
                 href={resumeHref}
                 download={resumeFilename}
-                className="inline-flex items-center gap-2 rounded-xl border border-cyan-800/25 bg-white/75 px-5 py-3 text-sm font-medium backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:border-cyan-700/50 dark:border-cyan-200/30 dark:bg-[#03121d]/70 dark:hover:border-cyan-200/60"
+                className="inline-flex items-center gap-2 rounded-xl border border-cyan-800/25 bg-white/75 px-4 py-2.5 text-xs font-medium backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:border-cyan-700/50 dark:border-cyan-200/30 dark:bg-[#03121d]/70 dark:hover:border-cyan-200/60 sm:px-5 sm:py-3 sm:text-sm"
               >
                 <Download className="size-4 text-cyan-700 dark:text-cyan-300" />
                 {t("Baixar currículo")}
@@ -232,7 +234,7 @@ export function Hero({ start }: { start: boolean }) {
               <a
                 data-hero-cta
                 href="#contact"
-                className="inline-flex items-center gap-2 rounded-xl border border-cyan-800/25 bg-white/75 px-5 py-3 text-sm font-medium backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:border-cyan-700/50 dark:border-cyan-200/30 dark:bg-[#03121d]/70 dark:hover:border-cyan-200/60"
+                className="inline-flex items-center gap-2 rounded-xl border border-cyan-800/25 bg-white/75 px-4 py-2.5 text-xs font-medium backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:border-cyan-700/50 dark:border-cyan-200/30 dark:bg-[#03121d]/70 dark:hover:border-cyan-200/60 sm:px-5 sm:py-3 sm:text-sm"
               >
                 <Mail className="size-4 text-cyan-700 dark:text-cyan-300" />
                 {t("Contato")}
@@ -269,7 +271,7 @@ export function Hero({ start }: { start: boolean }) {
                 href={activeProject.demo ?? activeProject.github}
                 target="_blank"
                 rel="noreferrer"
-                className="group relative min-h-[310px] overflow-hidden rounded-xl border border-cyan-800/15 bg-slate-950 sm:min-h-[380px]"
+                className="group relative min-h-[270px] overflow-hidden rounded-xl border border-cyan-800/15 bg-slate-950 sm:min-h-[380px]"
                 aria-label={`${t("Abrir demonstração do projeto")} ${activeProject.title}`}
               >
                 {activeProject.image && (
@@ -277,7 +279,7 @@ export function Hero({ start }: { start: boolean }) {
                     key={activeProject.title}
                     src={activeProject.image}
                     alt={`${t("Captura de tela do projeto")} ${activeProject.title}`}
-                    className={`absolute inset-0 size-full opacity-75 transition duration-700 group-hover:scale-[1.03] group-hover:opacity-90 ${activeProject.imageFit === "contain" ? "object-contain" : "object-cover"}`}
+                    className="absolute inset-0 size-full object-cover object-center opacity-80 transition duration-700 group-hover:scale-[1.03] group-hover:opacity-95"
                     loading="eager"
                   />
                 )}
