@@ -365,7 +365,7 @@ export const PROJECTS: PortfolioProject[] = [
     image: "https://raw.githubusercontent.com/CauaRodolpho/FlowView/main/docs/flowview-preview.jpg",
     gradient: "linear-gradient(135deg, oklch(0.2 0.11 265), oklch(0.58 0.18 225))",
     github: "https://github.com/CauaRodolpho/FlowView",
-    demo: "https://dashhub-caua.rodolfinhom5.chatgpt.site",
+    demo: "https://flowview-two.vercel.app/",
   },
   {
     kind: "Main Quest",
