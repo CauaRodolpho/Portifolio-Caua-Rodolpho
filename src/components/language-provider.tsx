@@ -174,6 +174,8 @@ const translations: Record<string, string> = {
   "Componentização, estado e composição de UI.":
     "Component architecture, state, and UI composition.",
   "Rotas, renderização híbrida e otimização.": "Routing, hybrid rendering, and optimization.",
+  "Componentes, templates, serviços e arquitetura de aplicações.":
+    "Components, templates, services, and application architecture.",
   "Design tokens e sistemas visuais consistentes.": "Design tokens and consistent visual systems.",
   "Estilização com escopo de componente.": "Component-scoped styling.",
   "Timelines, ScrollTrigger e motion com propósito.":
