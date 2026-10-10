@@ -142,15 +142,17 @@ export function Skills() {
                     <div
                       key={skill.name}
                       title={`${skill.name} — ${t(skill.desc)}`}
-                      className="group/ai flex min-h-28 flex-col items-center justify-center gap-3 px-3 py-4 text-center transition duration-300 hover:-translate-y-1"
+                      className="group/ai flex min-h-24 flex-col items-center justify-center gap-3 px-2 py-3 text-center transition duration-300 hover:-translate-y-1"
                     >
                       {Icon ? (
                         <Icon
-                          className="size-10 text-primary transition duration-300 group-hover/ai:scale-115 group-hover/ai:drop-shadow-[0_0_16px_color-mix(in_oklab,var(--primary)_95%,transparent)]"
+                          className="size-8 text-primary transition duration-300 group-hover/ai:scale-115 group-hover/ai:drop-shadow-[0_0_12px_color-mix(in_oklab,var(--primary)_90%,transparent)]"
                           aria-hidden="true"
                         />
                       ) : null}
-                      <span className="text-xs font-semibold text-foreground">{skill.name}</span>
+                      <span className="text-[11px] font-medium leading-tight text-foreground sm:text-xs">
+                        {skill.name}
+                      </span>
                     </div>
                   );
                 })}
