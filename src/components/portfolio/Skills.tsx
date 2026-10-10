@@ -1,25 +1,26 @@
 import { useRef } from "react";
 import {
-  SiHtml5,
-  SiCss,
-  SiJavascript,
-  SiTypescript,
-  SiReact,
-  SiNextdotjs,
-  SiTailwindcss,
-  SiGreensock,
-  SiNodedotjs,
-  SiGit,
-  SiStyledcomponents,
-  SiGithubcopilot,
   SiClaude,
+  SiCss,
+  SiGit,
+  SiGithubcopilot,
   SiGooglegemini,
+  SiGreensock,
+  SiHtml5,
+  SiJavascript,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiReact,
+  SiStyledcomponents,
+  SiTailwindcss,
+  SiTypescript,
 } from "react-icons/si";
 import { LuBot } from "react-icons/lu";
+import { Code2, Sparkles } from "lucide-react";
 import type { IconType } from "react-icons";
-import { Section, SectionHeader, Panel } from "./Panel";
+import { Panel, Section, SectionHeader } from "./Panel";
 import { useReveal } from "@/hooks/useReveal";
-import { SKILLS, type SkillStatus } from "@/data/portfolio";
+import { SKILLS } from "@/data/portfolio";
 import { useLanguage } from "../language-provider";
 
 const ICONS: Record<string, IconType> = {
@@ -40,44 +41,9 @@ const ICONS: Record<string, IconType> = {
   Gemini: SiGooglegemini,
 };
 
-const STATUS_STYLE: Record<SkillStatus, string> = {
-  Unlocked: "text-success border-success/40 bg-success/10",
-  Training: "text-primary border-primary/40 bg-primary/10",
-  Learning: "text-accent border-accent/40 bg-accent/10",
-  "In Progress": "text-muted-foreground border-border bg-muted/40",
-};
-
-const STATUS_LABEL: Record<SkillStatus, string> = {
-  Unlocked: "Consolidado",
-  Training: "Praticando",
-  Learning: "Estudando",
-  "In Progress": "Em progresso",
-};
-
-function formatStudyDuration(startedAt: string, language: "pt" | "en") {
-  const [startYear, startMonth] = startedAt.split("-").map(Number);
-  const now = new Date();
-  const totalMonths = Math.max(
-    0,
-    (now.getUTCFullYear() - startYear) * 12 + now.getUTCMonth() - (startMonth - 1),
-  );
-  const years = Math.floor(totalMonths / 12);
-  const months = totalMonths % 12;
-
-  if (language === "en") {
-    const parts = [
-      years > 0 ? `${years} ${years === 1 ? "year" : "years"}` : "",
-      months > 0 ? `${months} ${months === 1 ? "month" : "months"}` : "",
-    ].filter(Boolean);
-    return parts.join(" and ") || "Less than 1 month";
-  }
-
-  const parts = [
-    years > 0 ? `${years} ${years === 1 ? "ano" : "anos"}` : "",
-    months > 0 ? `${months} ${months === 1 ? "mês" : "meses"}` : "",
-  ].filter(Boolean);
-  return parts.join(" e ") || "Menos de 1 mês";
-}
+const AI_SKILL_NAMES = new Set(["GitHub Copilot", "ChatGPT / Codex", "Claude", "Gemini"]);
+const DEVELOPMENT_SKILLS = SKILLS.filter((skill) => !AI_SKILL_NAMES.has(skill.name));
+const AI_SKILLS = SKILLS.filter((skill) => AI_SKILL_NAMES.has(skill.name));
 
 export function Skills() {
   const root = useRef<HTMLDivElement>(null);
@@ -90,48 +56,112 @@ export function Skills() {
         <SectionHeader
           code={t("P04 · Árvore de habilidades")}
           title={t("Painel de habilidades")}
-          subtitle={t(
-            "Cada tecnologia é um nó da árvore: nível, tempo de treino e status de domínio.",
-          )}
+          subtitle={
+            language === "pt"
+              ? "Tecnologias que uso para transformar ideias em interfaces, com minhas ferramentas de IA em destaque."
+              : "Technologies I use to turn ideas into interfaces, with my AI tools in the spotlight."
+          }
         />
 
-        <div data-reveal-group className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {SKILLS.map((s) => {
-            const Icon = ICONS[s.name];
-            return (
-              <Panel
-                key={s.name}
-                className="group p-5 hover:-translate-y-1 hover:border-primary/50 hover:shadow-[0_0_36px_-14px_color-mix(in_oklab,var(--primary)_80%,transparent)]"
-              >
-                <div data-reveal-item>
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex items-center gap-3">
-                      <span className="flex size-10 items-center justify-center rounded-lg border border-border/70 bg-surface/60 text-primary transition-transform duration-300 group-hover:scale-110">
-                        {Icon ? <Icon className="size-5" aria-hidden /> : null}
-                      </span>
-                      <div>
-                        <div className="font-display text-base font-semibold">{s.name}</div>
-                        <div className="hud-label mt-0.5">{s.category}</div>
-                      </div>
-                    </div>
-                    <span
-                      className={`rounded-md border px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider ${STATUS_STYLE[s.status]}`}
-                    >
-                      {t(STATUS_LABEL[s.status])}
-                    </span>
-                  </div>
-
-                  <p className="mt-4 text-xs leading-relaxed text-muted-foreground">{t(s.desc)}</p>
-
-                  <div className="mt-4 border-t border-border/60 pt-3 font-mono text-[11px] text-muted-foreground">
-                    {s.startedAt
-                      ? `${formatStudyDuration(s.startedAt, language)} ${t("de estudo e prática")}`
-                      : t("Ferramenta de IA para apoio ao desenvolvimento")}
+        <div
+          data-reveal-group
+          className="grid gap-4 lg:grid-cols-[minmax(0,1.55fr)_minmax(340px,0.75fr)]"
+        >
+          <Panel className="p-4 sm:p-6">
+            <div data-reveal-item>
+              <div className="mb-5 flex items-center justify-between gap-4 border-b border-border/60 pb-4">
+                <div className="flex items-center gap-3">
+                  <span className="flex size-9 items-center justify-center rounded-lg border border-primary/25 bg-primary/10 text-primary">
+                    <Code2 className="size-4" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <h3 className="font-display text-base font-semibold">
+                      {language === "pt" ? "Desenvolvimento" : "Development"}
+                    </h3>
+                    <p className="hud-label mt-0.5">
+                      {language === "pt" ? "Stack principal" : "Core stack"}
+                    </p>
                   </div>
                 </div>
-              </Panel>
-            );
-          })}
+                <span className="font-mono text-[10px] text-muted-foreground">
+                  {String(DEVELOPMENT_SKILLS.length).padStart(2, "0")} TECH
+                </span>
+              </div>
+
+              <div className="grid grid-cols-3 gap-2.5 sm:grid-cols-4 xl:grid-cols-5">
+                {DEVELOPMENT_SKILLS.map((skill) => {
+                  const Icon = ICONS[skill.name];
+                  return (
+                    <div
+                      key={skill.name}
+                      title={`${skill.name} — ${t(skill.desc)}`}
+                      className="group/skill relative flex min-h-28 flex-col items-center justify-center gap-3 overflow-hidden rounded-xl border border-border/70 bg-surface/45 px-2 text-center transition duration-300 hover:-translate-y-1 hover:border-primary/50 hover:bg-primary/[0.07] hover:shadow-[0_0_28px_-14px_color-mix(in_oklab,var(--primary)_85%,transparent)]"
+                    >
+                      <span className="pointer-events-none absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-primary/70 to-transparent opacity-0 transition-opacity group-hover/skill:opacity-100" />
+                      {Icon ? (
+                        <Icon
+                          className="size-7 text-primary transition duration-300 group-hover/skill:scale-110 group-hover/skill:drop-shadow-[0_0_9px_color-mix(in_oklab,var(--primary)_80%,transparent)]"
+                          aria-hidden="true"
+                        />
+                      ) : null}
+                      <span className="text-[11px] font-medium leading-tight text-foreground sm:text-xs">
+                        {skill.name}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </Panel>
+
+          <Panel className="relative overflow-hidden border-primary/35 bg-[radial-gradient(circle_at_50%_0%,color-mix(in_oklab,var(--primary)_18%,transparent),transparent_52%)] p-4 shadow-[0_0_60px_-36px_color-mix(in_oklab,var(--primary)_80%,transparent)] sm:p-6">
+            <div className="pointer-events-none absolute -right-16 -top-16 size-40 rounded-full bg-primary/10 blur-3xl" />
+            <div data-reveal-item className="relative">
+              <div className="mb-5 flex items-center justify-between gap-4 border-b border-primary/20 pb-4">
+                <div className="flex items-center gap-3">
+                  <span className="relative flex size-10 items-center justify-center rounded-xl border border-primary/40 bg-primary/15 text-primary shadow-[0_0_24px_-9px_color-mix(in_oklab,var(--primary)_90%,transparent)]">
+                    <Sparkles className="size-5" aria-hidden="true" />
+                    <span className="absolute -right-1 -top-1 size-2 rounded-full bg-success shadow-[0_0_8px_currentColor]" />
+                  </span>
+                  <div>
+                    <h3 className="font-display text-base font-semibold">
+                      {language === "pt" ? "Ferramentas de IA" : "AI tools"}
+                    </h3>
+                    <p className="hud-label mt-0.5">
+                      {language === "pt" ? "Apoio ao desenvolvimento" : "Development support"}
+                    </p>
+                  </div>
+                </div>
+                <span className="rounded-full border border-primary/30 bg-primary/10 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-primary">
+                  AI
+                </span>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                {AI_SKILLS.map((skill) => {
+                  const Icon = ICONS[skill.name];
+                  return (
+                    <div
+                      key={skill.name}
+                      title={`${skill.name} — ${t(skill.desc)}`}
+                      className="group/ai relative flex min-h-32 flex-col items-center justify-center gap-3 overflow-hidden rounded-xl border border-primary/25 bg-background/35 px-3 text-center transition duration-300 hover:-translate-y-1 hover:border-primary/60 hover:bg-primary/10 hover:shadow-[0_0_32px_-14px_color-mix(in_oklab,var(--primary)_90%,transparent)]"
+                    >
+                      <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,transparent_20%,color-mix(in_oklab,var(--primary)_7%,transparent),transparent_80%)] opacity-0 transition-opacity group-hover/ai:opacity-100" />
+                      {Icon ? (
+                        <Icon
+                          className="relative size-8 text-primary transition duration-300 group-hover/ai:scale-110 group-hover/ai:drop-shadow-[0_0_12px_color-mix(in_oklab,var(--primary)_90%,transparent)]"
+                          aria-hidden="true"
+                        />
+                      ) : null}
+                      <span className="relative text-xs font-semibold text-foreground">
+                        {skill.name}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </Panel>
         </div>
       </Section>
     </div>
