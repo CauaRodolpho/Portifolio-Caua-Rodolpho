@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import {
+  SiAngular,
   SiClaude,
   SiCss,
   SiGit,
@@ -30,6 +31,7 @@ const ICONS: Record<string, IconType> = {
   TypeScript: SiTypescript,
   "React.js": SiReact,
   "Next.js": SiNextdotjs,
+  Angular: SiAngular,
   "Tailwind CSS": SiTailwindcss,
   GSAP: SiGreensock,
   "Node.js": SiNodedotjs,
@@ -63,10 +65,7 @@ export function Skills() {
           }
         />
 
-        <div
-          data-reveal-group
-          className="grid gap-4 lg:grid-cols-[minmax(0,1.55fr)_minmax(340px,0.75fr)]"
-        >
+        <div data-reveal-group className="flex flex-col gap-4">
           <Panel className="p-4 sm:p-6">
             <div data-reveal-item>
               <div className="mb-5 flex items-center justify-between gap-4 border-b border-border/60 pb-4">
@@ -88,7 +87,7 @@ export function Skills() {
                 </span>
               </div>
 
-              <div className="grid grid-cols-3 gap-2.5 sm:grid-cols-4 xl:grid-cols-5">
+              <div className="grid grid-cols-3 gap-2.5 sm:grid-cols-4 lg:grid-cols-6">
                 {DEVELOPMENT_SKILLS.map((skill) => {
                   const Icon = ICONS[skill.name];
                   return (
@@ -137,7 +136,7 @@ export function Skills() {
                 </span>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                 {AI_SKILLS.map((skill) => {
                   const Icon = ICONS[skill.name];
                   return (
