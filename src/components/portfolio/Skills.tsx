@@ -94,12 +94,11 @@ export function Skills() {
                     <div
                       key={skill.name}
                       title={`${skill.name} — ${t(skill.desc)}`}
-                      className="group/skill relative flex min-h-28 flex-col items-center justify-center gap-3 overflow-hidden rounded-xl border border-border/70 bg-surface/45 px-2 text-center transition duration-300 hover:-translate-y-1 hover:border-primary/50 hover:bg-primary/[0.07] hover:shadow-[0_0_28px_-14px_color-mix(in_oklab,var(--primary)_85%,transparent)]"
+                      className="group/skill flex min-h-24 flex-col items-center justify-center gap-3 px-2 py-3 text-center transition duration-300 hover:-translate-y-1"
                     >
-                      <span className="pointer-events-none absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-primary/70 to-transparent opacity-0 transition-opacity group-hover/skill:opacity-100" />
                       {Icon ? (
                         <Icon
-                          className="size-7 text-primary transition duration-300 group-hover/skill:scale-110 group-hover/skill:drop-shadow-[0_0_9px_color-mix(in_oklab,var(--primary)_80%,transparent)]"
+                          className="size-8 text-primary transition duration-300 group-hover/skill:scale-115 group-hover/skill:drop-shadow-[0_0_12px_color-mix(in_oklab,var(--primary)_90%,transparent)]"
                           aria-hidden="true"
                         />
                       ) : null}
@@ -143,18 +142,15 @@ export function Skills() {
                     <div
                       key={skill.name}
                       title={`${skill.name} — ${t(skill.desc)}`}
-                      className="group/ai relative flex min-h-32 flex-col items-center justify-center gap-3 overflow-hidden rounded-xl border border-primary/25 bg-background/35 px-3 text-center transition duration-300 hover:-translate-y-1 hover:border-primary/60 hover:bg-primary/10 hover:shadow-[0_0_32px_-14px_color-mix(in_oklab,var(--primary)_90%,transparent)]"
+                      className="group/ai flex min-h-28 flex-col items-center justify-center gap-3 px-3 py-4 text-center transition duration-300 hover:-translate-y-1"
                     >
-                      <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,transparent_20%,color-mix(in_oklab,var(--primary)_7%,transparent),transparent_80%)] opacity-0 transition-opacity group-hover/ai:opacity-100" />
                       {Icon ? (
                         <Icon
-                          className="relative size-8 text-primary transition duration-300 group-hover/ai:scale-110 group-hover/ai:drop-shadow-[0_0_12px_color-mix(in_oklab,var(--primary)_90%,transparent)]"
+                          className="size-10 text-primary transition duration-300 group-hover/ai:scale-115 group-hover/ai:drop-shadow-[0_0_16px_color-mix(in_oklab,var(--primary)_95%,transparent)]"
                           aria-hidden="true"
                         />
                       ) : null}
-                      <span className="relative text-xs font-semibold text-foreground">
-                        {skill.name}
-                      </span>
+                      <span className="text-xs font-semibold text-foreground">{skill.name}</span>
                     </div>
                   );
                 })}
