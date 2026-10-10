@@ -112,14 +112,12 @@ export function Skills() {
             </div>
           </Panel>
 
-          <Panel className="relative overflow-hidden border-primary/35 bg-[radial-gradient(circle_at_50%_0%,color-mix(in_oklab,var(--primary)_18%,transparent),transparent_52%)] p-4 shadow-[0_0_60px_-36px_color-mix(in_oklab,var(--primary)_80%,transparent)] sm:p-6">
-            <div className="pointer-events-none absolute -right-16 -top-16 size-40 rounded-full bg-primary/10 blur-3xl" />
-            <div data-reveal-item className="relative">
-              <div className="mb-5 flex items-center justify-between gap-4 border-b border-primary/20 pb-4">
+          <Panel className="p-4 sm:p-6">
+            <div data-reveal-item>
+              <div className="mb-5 flex items-center justify-between gap-4 border-b border-border/60 pb-4">
                 <div className="flex items-center gap-3">
-                  <span className="relative flex size-10 items-center justify-center rounded-xl border border-primary/40 bg-primary/15 text-primary shadow-[0_0_24px_-9px_color-mix(in_oklab,var(--primary)_90%,transparent)]">
-                    <Sparkles className="size-5" aria-hidden="true" />
-                    <span className="absolute -right-1 -top-1 size-2 rounded-full bg-success shadow-[0_0_8px_currentColor]" />
+                  <span className="flex size-9 items-center justify-center rounded-lg border border-primary/25 bg-primary/10 text-primary">
+                    <Sparkles className="size-4" aria-hidden="true" />
                   </span>
                   <div>
                     <h3 className="font-display text-base font-semibold">
