@@ -229,6 +229,7 @@ const translations: Record<string, string> = {
     "Technology in Systems Analysis and Development",
   "Graduação voltada ao desenvolvimento de software, análise de sistemas e fundamentos de tecnologia.":
     "A degree focused on software development, systems analysis, and technology foundations.",
+  "Outubro de 2026 — previsão de conclusão em 2029": "October 2026 — expected graduation in 2029",
   "Formações em andamento": "Programs in progress",
   "Conhecimentos que estou desenvolvendo atualmente.": "Knowledge I am currently developing.",
   "Em andamento": "In progress",

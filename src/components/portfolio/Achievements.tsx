@@ -59,7 +59,10 @@ export function Achievements() {
                       <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
                         {t(education.desc)}
                       </p>
-                      <span className="mt-3 inline-block font-mono text-[10px] uppercase tracking-[0.22em] text-accent">
+                      <p className="mt-2 font-mono text-[10px] text-muted-foreground">
+                        {t(education.period)}
+                      </p>
+                      <span className="mt-2 inline-block font-mono text-[10px] uppercase tracking-[0.22em] text-accent">
                         {t("Em andamento")}
                       </span>
                     </div>

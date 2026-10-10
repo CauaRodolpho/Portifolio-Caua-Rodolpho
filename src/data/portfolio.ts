@@ -544,6 +544,7 @@ export const EDUCATION = [
     title: "Tecnologia em Análise e Desenvolvimento de Sistemas",
     institution: "UNINTER",
     state: "Training",
+    period: "Outubro de 2026 — previsão de conclusão em 2029",
     desc: "Graduação voltada ao desenvolvimento de software, análise de sistemas e fundamentos de tecnologia.",
   },
 ] as const;
