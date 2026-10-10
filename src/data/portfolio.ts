@@ -550,13 +550,6 @@ export const EDUCATION = [
 
 export const COURSES_IN_PROGRESS = [
   {
-    title: "Design Thinking",
-    state: "Training",
-    institution: "FIAP",
-    category: "Formação técnica",
-    desc: "Processo de descoberta, definição de problemas e criação de soluções centradas no usuário.",
-  },
-  {
     title: "Formação Angular Developer",
     state: "Training",
     institution: "DIO",
