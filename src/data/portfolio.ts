@@ -49,7 +49,7 @@ export const SKILLS: {
     level: 95,
     status: "Unlocked",
     category: "Core",
-    startedAt: "2026-02-01",
+    startedAt: "2025-12-01",
     desc: "Semântica, acessibilidade e estrutura sólida.",
   },
   {
@@ -57,7 +57,7 @@ export const SKILLS: {
     level: 90,
     status: "Unlocked",
     category: "Core",
-    startedAt: "2026-02-01",
+    startedAt: "2025-12-01",
     desc: "Layout moderno, responsividade e motion.",
   },
   {
@@ -65,7 +65,7 @@ export const SKILLS: {
     level: 80,
     status: "Unlocked",
     category: "Core",
-    startedAt: "2026-04-01",
+    startedAt: "2026-02-01",
     desc: "ES moderno, assincronia e manipulação de dados.",
   },
   {
@@ -73,7 +73,7 @@ export const SKILLS: {
     level: 72,
     status: "Training",
     category: "Language",
-    startedAt: "2026-08-01",
+    startedAt: "2026-06-01",
     desc: "Tipagem estática, generics e segurança de contrato.",
   },
   {
@@ -81,7 +81,7 @@ export const SKILLS: {
     level: 75,
     status: "Training",
     category: "Framework",
-    startedAt: "2026-06-01",
+    startedAt: "2026-04-01",
     desc: "Componentização, estado e composição de UI.",
   },
   {
@@ -89,7 +89,7 @@ export const SKILLS: {
     level: 65,
     status: "Learning",
     category: "Framework",
-    startedAt: "2026-08-01",
+    startedAt: "2026-06-01",
     desc: "Rotas, renderização híbrida e otimização.",
   },
   {
@@ -97,7 +97,7 @@ export const SKILLS: {
     level: 85,
     status: "Training",
     category: "Styling",
-    startedAt: "2026-08-01",
+    startedAt: "2026-06-01",
     desc: "Design tokens e sistemas visuais consistentes.",
   },
   {
@@ -105,7 +105,7 @@ export const SKILLS: {
     level: 65,
     status: "Training",
     category: "Styling",
-    startedAt: "2026-06-01",
+    startedAt: "2026-04-01",
     desc: "Estilização com escopo de componente.",
   },
   {
@@ -113,7 +113,7 @@ export const SKILLS: {
     level: 60,
     status: "Learning",
     category: "Motion",
-    startedAt: "2026-06-01",
+    startedAt: "2026-04-01",
     desc: "Timelines, ScrollTrigger e motion com propósito.",
   },
   {
@@ -121,7 +121,7 @@ export const SKILLS: {
     level: 75,
     status: "Unlocked",
     category: "Tooling",
-    startedAt: "2026-04-01",
+    startedAt: "2026-02-01",
     desc: "Versionamento, branches e colaboração.",
   },
 ];
