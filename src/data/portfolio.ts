@@ -93,6 +93,14 @@ export const SKILLS: {
     desc: "Rotas, renderização híbrida e otimização.",
   },
   {
+    name: "Angular",
+    level: 35,
+    status: "Learning",
+    category: "Framework",
+    startedAt: "2026-10-01",
+    desc: "Componentes, templates, serviços e arquitetura de aplicações.",
+  },
+  {
     name: "Tailwind CSS",
     level: 85,
     status: "Training",
