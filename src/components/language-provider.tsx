@@ -48,8 +48,8 @@ const translations: Record<string, string> = {
   "O AuthFlow ampliou minha experiência com integração Full Stack. Com FlowView, FlowTask e Ateliê AnaCraft, pratiquei diferentes desafios de arquitetura, dados e experiência Front-End.":
     "AuthFlow expanded my experience with Full Stack integration. With FlowView, FlowTask, and Ateliê AnaCraft, I practiced different challenges in architecture, data, and Front-End experience.",
   "Aprendizado atual": "Current learning",
-  "Atualmente estou aprofundando meus conhecimentos na Formação TypeScript Fullstack Developer e em Design Thinking, buscando desenvolver soluções mais completas e centradas nas necessidades do usuário.":
-    "I am currently deepening my knowledge through the TypeScript Fullstack Developer program and Design Thinking, aiming to build more complete, user-centered solutions.",
+  "Atualmente curso Análise e Desenvolvimento de Sistemas na UNINTER e aprofundo meus conhecimentos em Angular, Design Thinking e inglês aplicado à tecnologia.":
+    "I am currently studying Systems Analysis and Development at UNINTER while deepening my knowledge of Angular, Design Thinking, and English for technology.",
   "Direção profissional": "Professional direction",
   "Meu foco atual é consolidar minha base em Front-End e conquistar minha primeira oportunidade na área. No longo prazo, quero evoluir como Desenvolvedor Full Stack, ampliando meus conhecimentos em back-end, APIs e bancos de dados.":
     "My current focus is to consolidate my Front-End foundation and earn my first opportunity in the field. In the long term, I aim to grow as a Full Stack Developer by expanding my knowledge of back-end development, APIs, and databases.",
@@ -75,15 +75,11 @@ const translations: Record<string, string> = {
   "1ª vaga": "First role",
   "1a+": "1y+",
   "1a": "1y",
-  "8 meses": "8 months",
-  "6 meses": "6 months",
-  "4 meses": "4 months",
-  "2 meses": "2 months",
   Outras: "Other",
   "P03 · Registro de projetos": "P03 · Project log",
   "Missões em andamento": "Active missions",
-  "AuthFlow é meu projeto Full Stack de destaque. FlowView, FlowTask e Ateliê AnaCraft mostram diferentes aplicações de Front-End, enquanto Chronos, Stranger Things e Pokedex completam meu portfólio.":
-    "AuthFlow is my flagship Full Stack project. FlowView, FlowTask, and Ateliê AnaCraft showcase different Front-End applications, while Chronos, Stranger Things, and Pokedex complete my portfolio.",
+  "AuthFlow é meu projeto Full Stack de destaque. FlowView, FlowTask e Ateliê AnaCraft mostram diferentes aplicações de Front-End, enquanto Chronos amplia meu contato com produtividade e integrações de IA.":
+    "AuthFlow is my flagship Full Stack project. FlowView, FlowTask, and Ateliê AnaCraft showcase different Front-End applications, while Chronos expands my experience with productivity and AI integrations.",
   "Projetos sincronizados com o GitHub": "Projects synced with GitHub",
   "Sincronizando projetos...": "Syncing projects...",
   "Dados locais ativos": "Local data active",
@@ -157,24 +153,6 @@ const translations: Record<string, string> = {
   "Novas seções da Home": "New home page sections",
   "Seção de planos": "Plans section",
   "Prévia do dashboard": "Dashboard preview",
-  "Landing interativa com animações inspiradas na série, feita com GSAP.":
-    "Interactive landing page with series-inspired animations built with GSAP.",
-  "Timeline de animação controlada por GSAP sobre uma estrutura estática.":
-    "GSAP-controlled animation timeline over a static structure.",
-  "Landing genérica sem narrativa visual ou motion.":
-    "A generic landing page without visual storytelling or motion.",
-  "Coreografia de animação e composição visual temática.":
-    "Animation choreography and themed visual composition.",
-  "Versão mobile refinada": "Refined mobile version",
-  "Aplicação que consome a PokéAPI para listar e exibir dados de Pokémon.":
-    "Application that consumes the PokéAPI to list and display Pokémon data.",
-  "Consumo de API REST pública com renderização dinâmica de cards.":
-    "Public REST API consumption with dynamic card rendering.",
-  "Explorar consumo de APIs REST externas com dados reais.":
-    "Explore external REST APIs using real data.",
-  "Fetch de dados, paginação e exibição de listas dinâmicas.":
-    "Data fetching, pagination, and dynamic list rendering.",
-  "Busca e filtros avançados": "Advanced search and filters",
   "P04 · Árvore de habilidades": "P04 · Skill tree",
   "Painel de habilidades": "Skills dashboard",
   "Cada tecnologia é um nó da árvore: nível, tempo de treino e status de domínio.":
@@ -213,11 +191,11 @@ const translations: Record<string, string> = {
   "Componentização, estados e construção de interfaces tipadas.":
     "Component architecture, state, and typed interface development.",
   "Projetos práticos": "Practical projects",
-  "Pokedex, DevArt e AuthFlow transformaram estudos em entregas reais.":
-    "Pokedex, DevArt, and AuthFlow turned study into real deliverables.",
-  "TypeScript e visão Full Stack": "TypeScript and a Full Stack perspective",
-  "Aprofundamento técnico aliado ao Design Thinking para criar soluções centradas no usuário.":
-    "Technical depth combined with Design Thinking to create user-centered solutions.",
+  "AuthFlow, FlowView, FlowTask e Ateliê AnaCraft transformaram estudos em entregas reais.":
+    "AuthFlow, FlowView, FlowTask, and Ateliê AnaCraft turned study into real deliverables.",
+  "Angular e visão Full Stack": "Angular and a Full Stack perspective",
+  "Graduação em ADS, aprofundamento em Angular e evolução contínua no inglês técnico.":
+    "A Systems Analysis and Development degree, deeper Angular knowledge, and continuous progress in technical English.",
   "Primeira oportunidade Front-End Júnior": "First Junior Front-End opportunity",
   "Aplicar o aprendizado em produtos reais e evoluir junto a um time de tecnologia.":
     "Apply my knowledge to real products and grow alongside a technology team.",
@@ -226,6 +204,13 @@ const translations: Record<string, string> = {
   "Formações que registram minha evolução em JavaScript, React, Inteligência Artificial e desenvolvimento de projetos.":
     "Programs that document my growth in JavaScript, React, Artificial Intelligence, and project development.",
   "Certificação concluída": "Certification completed",
+  "Concluída em": "Completed in",
+  "Formação acadêmica": "Academic education",
+  "Graduação que estou cursando atualmente.": "My current degree program.",
+  "Tecnologia em Análise e Desenvolvimento de Sistemas":
+    "Technology in Systems Analysis and Development",
+  "Graduação voltada ao desenvolvimento de software, análise de sistemas e fundamentos de tecnologia.":
+    "A degree focused on software development, systems analysis, and technology foundations.",
   "Formações em andamento": "Programs in progress",
   "Conhecimentos que estou desenvolvendo atualmente.": "Knowledge I am currently developing.",
   "Em andamento": "In progress",
@@ -235,15 +220,30 @@ const translations: Record<string, string> = {
     "Component architecture and interface development with React.",
   "Fundamentos, DOM, assincronicidade e consumo de APIs.":
     "Fundamentals, the DOM, asynchronous programming, and API consumption.",
-  "Imersão prática de 16 horas concluída em maio de 2026.":
-    "Practical immersion completed in May 2026.",
-  "Imersão de 4 horas concluída em julho de 2026.": "Immersion completed in July 2026.",
-  "Projeto prático inspirado em Stranger Things, concluído em fevereiro de 2026.":
-    "Practical project inspired by Stranger Things, completed in February 2026.",
+  "Formação TypeScript Fullstack Developer": "TypeScript Fullstack Developer Program",
+  "Formação GitHub Copilot": "GitHub Copilot Program",
+  "Formação Angular Developer": "Angular Developer Program",
+  "TypeScript, arquitetura de aplicações, front-end e fundamentos de back-end.":
+    "TypeScript, application architecture, front-end development, and back-end foundations.",
+  "Uso do GitHub Copilot como apoio ao desenvolvimento, revisão e produtividade.":
+    "Using GitHub Copilot to support development, code review, and productivity.",
+  "Imersão prática em desenvolvimento Front-End e construção de projetos.":
+    "Practical immersion in Front-End development and project building.",
+  "Arquitetura web e aplicação de Inteligência Artificial no desenvolvimento.":
+    "Web architecture and the application of Artificial Intelligence in development.",
+  "Desenvolvimento de projetos com foco em interface, animações e apresentação visual.":
+    "Project development focused on interfaces, animations, and visual presentation.",
   "Processo de descoberta, definição de problemas e criação de soluções centradas no usuário.":
     "A process for discovery, problem definition, and creating user-centered solutions.",
-  "Aprofundamento em TypeScript, arquitetura de aplicações, front-end e fundamentos de back-end.":
-    "In-depth TypeScript, application architecture, front-end development, and back-end fundamentals.",
+  "Formação técnica": "Technical training",
+  Inglês: "English",
+  "Inglês para tecnologia": "English for technology",
+  "Desenvolvimento de aplicações com Angular, TypeScript, componentes, serviços e rotas.":
+    "Application development with Angular, TypeScript, components, services, and routing.",
+  "Curso de inglês com desenvolvimento progressivo de leitura, escrita, compreensão auditiva e comunicação.":
+    "English course with progressive development of reading, writing, listening comprehension, and communication.",
+  "Inglês aplicado à tecnologia, com foco em listening, speaking, reading e writing para entrevistas e ambientes profissionais.":
+    "English for technology focused on listening, speaking, reading, and writing for interviews and professional environments.",
   "P07 · Comunicação": "P07 · Communication",
   "Canal de comunicação aberto": "Open communication channel",
   "Aberto a oportunidades Front-End, colaborações e novos projetos freelance.":

@@ -15,7 +15,7 @@ import { Contact } from "@/components/portfolio/Contact";
 const SITE_URL = "https://caua-rodolpho.vercel.app/";
 const TITLE = "Cauã Rodolpho — Desenvolvedor Front-End Júnior";
 const DESC =
-  "Portfólio de Cauã Rodolpho, Desenvolvedor Front-End Júnior em evolução para Full Stack. Conheça o AuthFlow, Chronos, Nexus Cloud e outros projetos em React, TypeScript e Node.js.";
+  "Portfólio de Cauã Rodolpho, Desenvolvedor Front-End Júnior em evolução para Full Stack. Conheça AuthFlow, FlowView, FlowTask, Ateliê AnaCraft e outros projetos em React, TypeScript e Node.js.";
 
 export const Route = createFileRoute("/")({
   head: () => ({

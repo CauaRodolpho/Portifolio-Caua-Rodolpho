@@ -31,12 +31,12 @@ const STORY = [
   {
     title: "Projetos que marcaram a evolução",
     icon: Rocket,
-    text: "O Chronos e o Nexus Cloud fortaleceram minha base em interfaces, TypeScript e arquitetura Front-End. Com o AuthFlow, avancei para uma aplicação Full Stack com autenticação, API, banco de dados e deploy completo.",
+    text: "O AuthFlow ampliou minha experiência com integração Full Stack. Com FlowView, FlowTask e Ateliê AnaCraft, pratiquei diferentes desafios de arquitetura, dados e experiência Front-End.",
   },
   {
     title: "Aprendizado atual",
     icon: BookOpen,
-    text: "Atualmente estou aprofundando meus conhecimentos na Formação TypeScript Fullstack Developer e em Design Thinking, buscando desenvolver soluções mais completas e centradas nas necessidades do usuário.",
+    text: "Atualmente curso Análise e Desenvolvimento de Sistemas na UNINTER e aprofundo meus conhecimentos em Angular, Design Thinking e inglês aplicado à tecnologia.",
   },
   {
     title: "Direção profissional",

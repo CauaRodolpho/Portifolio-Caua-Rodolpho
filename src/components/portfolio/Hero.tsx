@@ -31,7 +31,7 @@ const FEATURED_PROJECTS = [
     description: "Autenticação e gestão Full Stack",
   },
   { name: "Chronos", repository: "Chronos.ia", description: "Produtividade integrada à IA" },
-  { name: "Nexus Cloud", repository: "Nexus-Cloud", description: "Serviços em nuvem e dashboard" },
+  { name: "FlowView", repository: "FlowView", description: "Dashboards personalizáveis" },
 ] as const;
 
 function splitChars(text: string) {

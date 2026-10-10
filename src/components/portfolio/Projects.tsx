@@ -301,7 +301,7 @@ export function Projects() {
           code={t("P03 · Registro de projetos")}
           title={t("Missões em andamento")}
           subtitle={t(
-            "AuthFlow é meu projeto Full Stack de destaque. FlowView, FlowTask e Ateliê AnaCraft mostram diferentes aplicações de Front-End, enquanto Chronos, Stranger Things e Pokedex completam meu portfólio.",
+            "AuthFlow é meu projeto Full Stack de destaque. FlowView, FlowTask e Ateliê AnaCraft mostram diferentes aplicações de Front-End, enquanto Chronos amplia meu contato com produtividade e integrações de IA.",
           )}
         />
         <div className="mb-5 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">

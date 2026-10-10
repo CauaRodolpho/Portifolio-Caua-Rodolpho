@@ -46,10 +46,35 @@ const STATUS_LABEL: Record<SkillStatus, string> = {
   "In Progress": "Em progresso",
 };
 
+function formatStudyDuration(startedAt: string, language: "pt" | "en") {
+  const [startYear, startMonth] = startedAt.split("-").map(Number);
+  const now = new Date();
+  const totalMonths = Math.max(
+    0,
+    (now.getUTCFullYear() - startYear) * 12 + now.getUTCMonth() - (startMonth - 1),
+  );
+  const years = Math.floor(totalMonths / 12);
+  const months = totalMonths % 12;
+
+  if (language === "en") {
+    const parts = [
+      years > 0 ? `${years} ${years === 1 ? "year" : "years"}` : "",
+      months > 0 ? `${months} ${months === 1 ? "month" : "months"}` : "",
+    ].filter(Boolean);
+    return parts.join(" and ") || "Less than 1 month";
+  }
+
+  const parts = [
+    years > 0 ? `${years} ${years === 1 ? "ano" : "anos"}` : "",
+    months > 0 ? `${months} ${months === 1 ? "mês" : "meses"}` : "",
+  ].filter(Boolean);
+  return parts.join(" e ") || "Menos de 1 mês";
+}
+
 export function Skills() {
   const root = useRef<HTMLDivElement>(null);
   useReveal(root);
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
 
   return (
     <div ref={root}>
@@ -91,7 +116,7 @@ export function Skills() {
                   <p className="mt-4 text-xs leading-relaxed text-muted-foreground">{t(s.desc)}</p>
 
                   <div className="mt-4 border-t border-border/60 pt-3 font-mono text-[11px] text-muted-foreground">
-                    {t(s.time)} {t("de estudo e prática")}
+                    {formatStudyDuration(s.startedAt, language)} {t("de estudo e prática")}
                   </div>
                 </div>
               </Panel>

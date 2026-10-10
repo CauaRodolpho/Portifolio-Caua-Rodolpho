@@ -41,7 +41,7 @@ export const SKILLS: {
   level: number;
   status: SkillStatus;
   category: string;
-  time: string;
+  startedAt: string;
   desc: string;
 }[] = [
   {
@@ -49,7 +49,7 @@ export const SKILLS: {
     level: 95,
     status: "Unlocked",
     category: "Core",
-    time: "8 meses",
+    startedAt: "2026-02-01",
     desc: "Semântica, acessibilidade e estrutura sólida.",
   },
   {
@@ -57,7 +57,7 @@ export const SKILLS: {
     level: 90,
     status: "Unlocked",
     category: "Core",
-    time: "8 meses",
+    startedAt: "2026-02-01",
     desc: "Layout moderno, responsividade e motion.",
   },
   {
@@ -65,7 +65,7 @@ export const SKILLS: {
     level: 80,
     status: "Unlocked",
     category: "Core",
-    time: "6 meses",
+    startedAt: "2026-04-01",
     desc: "ES moderno, assincronia e manipulação de dados.",
   },
   {
@@ -73,7 +73,7 @@ export const SKILLS: {
     level: 72,
     status: "Training",
     category: "Language",
-    time: "2 meses",
+    startedAt: "2026-08-01",
     desc: "Tipagem estática, generics e segurança de contrato.",
   },
   {
@@ -81,7 +81,7 @@ export const SKILLS: {
     level: 75,
     status: "Training",
     category: "Framework",
-    time: "4 meses",
+    startedAt: "2026-06-01",
     desc: "Componentização, estado e composição de UI.",
   },
   {
@@ -89,7 +89,7 @@ export const SKILLS: {
     level: 65,
     status: "Learning",
     category: "Framework",
-    time: "2 meses",
+    startedAt: "2026-08-01",
     desc: "Rotas, renderização híbrida e otimização.",
   },
   {
@@ -97,7 +97,7 @@ export const SKILLS: {
     level: 85,
     status: "Training",
     category: "Styling",
-    time: "2 meses",
+    startedAt: "2026-08-01",
     desc: "Design tokens e sistemas visuais consistentes.",
   },
   {
@@ -105,7 +105,7 @@ export const SKILLS: {
     level: 65,
     status: "Training",
     category: "Styling",
-    time: "4 meses",
+    startedAt: "2026-06-01",
     desc: "Estilização com escopo de componente.",
   },
   {
@@ -113,7 +113,7 @@ export const SKILLS: {
     level: 60,
     status: "Learning",
     category: "Motion",
-    time: "4 meses",
+    startedAt: "2026-06-01",
     desc: "Timelines, ScrollTrigger e motion com propósito.",
   },
   {
@@ -121,7 +121,7 @@ export const SKILLS: {
     level: 75,
     status: "Unlocked",
     category: "Tooling",
-    time: "6 meses",
+    startedAt: "2026-04-01",
     desc: "Versionamento, branches e colaboração.",
   },
 ];
@@ -341,36 +341,6 @@ export const PROJECTS: PortfolioProject[] = [
     github: "https://github.com/CauaRodolpho/Loja-Atelie",
     demo: "https://loja-atelie-phi.vercel.app/",
   },
-  {
-    kind: "Side Quest",
-    title: "DevArt — Stranger Things",
-    tagline: "Landing interativa com animações inspiradas na série, feita com GSAP.",
-    difficulty: "B",
-    status: "Completed",
-    tech: ["HTML", "CSS", "JavaScript", "GSAP"],
-    architecture: "Timeline de animação controlada por GSAP sobre uma estrutura estática.",
-    problem: "Landing genérica sem narrativa visual ou motion.",
-    learnings: "Coreografia de animação e composição visual temática.",
-    roadmap: ["Versão mobile refinada"],
-    image: "/projects/devart-stranger-things.webp",
-    gradient: "linear-gradient(135deg, oklch(0.28 0.09 265), oklch(0.68 0.16 250))",
-    github: "https://github.com/CauaRodolpho/DevArt-Strangers-things",
-  },
-  {
-    kind: "Side Quest",
-    title: "Pokedex",
-    tagline: "Aplicação que consome a PokéAPI para listar e exibir dados de Pokémon.",
-    difficulty: "A",
-    status: "Completed",
-    tech: ["HTML", "CSS", "PokéAPI"],
-    architecture: "Consumo de API REST pública com renderização dinâmica de cards.",
-    problem: "Explorar consumo de APIs REST externas com dados reais.",
-    learnings: "Fetch de dados, paginação e exibição de listas dinâmicas.",
-    roadmap: ["Busca e filtros avançados"],
-    image: "/projects/pokedex.webp",
-    gradient: "linear-gradient(135deg, oklch(0.32 0.08 210), oklch(0.75 0.13 195))",
-    github: "https://github.com/CauaRodolpho/Pokedex",
-  },
 ];
 
 export const TIMELINE = [
@@ -392,12 +362,12 @@ export const TIMELINE = [
   {
     level: "Level 4",
     title: "Projetos práticos",
-    desc: "Pokedex, DevArt e AuthFlow transformaram estudos em entregas reais.",
+    desc: "AuthFlow, FlowView, FlowTask e Ateliê AnaCraft transformaram estudos em entregas reais.",
   },
   {
     level: "Current",
-    title: "TypeScript e visão Full Stack",
-    desc: "Aprofundamento técnico aliado ao Design Thinking para criar soluções centradas no usuário.",
+    title: "Angular e visão Full Stack",
+    desc: "Graduação em ADS, aprofundamento em Angular e evolução contínua no inglês técnico.",
   },
   {
     level: "Next",
@@ -410,32 +380,64 @@ export const ACHIEVEMENTS = [
   {
     title: "Santander 2026 - AI React Front-End",
     state: "Unlocked",
+    institution: "DIO",
     desc: "Formação em React Front-End com aplicação de Inteligência Artificial.",
   },
   {
     title: "Formação React Developer - DIO",
     state: "Unlocked",
+    institution: "DIO",
     desc: "Componentização e desenvolvimento de interfaces com React.",
   },
   {
     title: "Formação JavaScript Developer - DIO",
     state: "Unlocked",
+    institution: "DIO",
     desc: "Fundamentos, DOM, assincronicidade e consumo de APIs.",
+  },
+  {
+    title: "Formação TypeScript Fullstack Developer",
+    state: "Unlocked",
+    institution: "DIO",
+    completedAt: "2026-09",
+    desc: "TypeScript, arquitetura de aplicações, front-end e fundamentos de back-end.",
+  },
+  {
+    title: "Formação GitHub Copilot",
+    state: "Unlocked",
+    institution: "DIO",
+    completedAt: "2026-10",
+    desc: "Uso do GitHub Copilot como apoio ao desenvolvimento, revisão e produtividade.",
   },
   {
     title: "Imersão Dev do Futuro - Dev em Dobro",
     state: "Unlocked",
-    desc: "Imersão prática de 16 horas concluída em maio de 2026.",
+    institution: "Dev em Dobro",
+    completedAt: "2026-05",
+    desc: "Imersão prática em desenvolvimento Front-End e construção de projetos.",
   },
   {
     title: "Imersão Arquitetura Web com IA - Alura",
     state: "Unlocked",
-    desc: "Imersão de 4 horas concluída em julho de 2026.",
+    institution: "Alura",
+    completedAt: "2026-07",
+    desc: "Arquitetura web e aplicação de Inteligência Artificial no desenvolvimento.",
   },
   {
     title: "DevArt: Projetos de Alto Valor",
     state: "Unlocked",
-    desc: "Projeto prático inspirado em Stranger Things, concluído em fevereiro de 2026.",
+    institution: "Dev em Dobro",
+    completedAt: "2026-02",
+    desc: "Desenvolvimento de projetos com foco em interface, animações e apresentação visual.",
+  },
+] as const;
+
+export const EDUCATION = [
+  {
+    title: "Tecnologia em Análise e Desenvolvimento de Sistemas",
+    institution: "UNINTER",
+    state: "Training",
+    desc: "Graduação voltada ao desenvolvimento de software, análise de sistemas e fundamentos de tecnologia.",
   },
 ] as const;
 
@@ -443,18 +445,36 @@ export const COURSES_IN_PROGRESS = [
   {
     title: "Design Thinking",
     state: "Training",
+    institution: "FIAP",
+    category: "Formação técnica",
     desc: "Processo de descoberta, definição de problemas e criação de soluções centradas no usuário.",
   },
   {
-    title: "Formação TypeScript Fullstack Developer",
+    title: "Formação Angular Developer",
     state: "Training",
-    desc: "Aprofundamento em TypeScript, arquitetura de aplicações, front-end e fundamentos de back-end.",
+    institution: "DIO",
+    category: "Formação técnica",
+    desc: "Desenvolvimento de aplicações com Angular, TypeScript, componentes, serviços e rotas.",
+  },
+  {
+    title: "New U-best",
+    state: "Training",
+    institution: "UNINTER",
+    category: "Inglês",
+    desc: "Curso de inglês com desenvolvimento progressivo de leitura, escrita, compreensão auditiva e comunicação.",
+  },
+  {
+    title: "English4Tech",
+    state: "Training",
+    institution: "DIO",
+    category: "Inglês para tecnologia",
+    desc: "Inglês aplicado à tecnologia, com foco em listening, speaking, reading e writing para entrevistas e ambientes profissionais.",
   },
 ] as const;
 
 export const STATS = [
   { label: "Projetos principais", value: "5" },
-  { label: "Certificações", value: "6" },
+  { label: "Certificações", value: "8" },
   { label: "Tecnologias", value: "10" },
   { label: "Objetivo", value: "1ª vaga" },
 ];

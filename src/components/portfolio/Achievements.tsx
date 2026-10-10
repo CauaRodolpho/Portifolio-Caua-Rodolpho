@@ -1,14 +1,23 @@
 import { useRef } from "react";
-import { Award, BookOpen } from "lucide-react";
+import { Award, BookOpen, GraduationCap } from "lucide-react";
 import { Section, SectionHeader, Panel } from "./Panel";
 import { useReveal } from "@/hooks/useReveal";
-import { ACHIEVEMENTS, COURSES_IN_PROGRESS } from "@/data/portfolio";
+import { ACHIEVEMENTS, COURSES_IN_PROGRESS, EDUCATION } from "@/data/portfolio";
 import { useLanguage } from "../language-provider";
+
+function formatCompletionDate(value: string, language: "pt" | "en") {
+  const [year, month] = value.split("-").map(Number);
+  return new Intl.DateTimeFormat(language === "pt" ? "pt-BR" : "en-US", {
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(Date.UTC(year, month - 1, 1)));
+}
 
 export function Achievements() {
   const root = useRef<HTMLDivElement>(null);
   useReveal(root);
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
 
   return (
     <div ref={root}>
@@ -21,6 +30,46 @@ export function Achievements() {
           )}
         />
 
+        <div className="mb-8">
+          <div className="mb-4 flex items-center gap-3">
+            <span className="flex size-9 items-center justify-center rounded-lg border border-accent/40 bg-accent/10 text-accent">
+              <GraduationCap className="size-4" />
+            </span>
+            <div>
+              <h3 className="font-display text-base font-semibold">{t("Formação acadêmica")}</h3>
+              <p className="text-xs text-muted-foreground">
+                {t("Graduação que estou cursando atualmente.")}
+              </p>
+            </div>
+          </div>
+
+          <div data-reveal-group className="grid gap-3">
+            {EDUCATION.map((education) => (
+              <div key={education.title} data-reveal-item>
+                <Panel className="border-accent/30 p-5 transition-all hover:-translate-y-1 hover:border-accent/60">
+                  <div className="flex items-start gap-3">
+                    <span className="mt-1 size-2 shrink-0 animate-pulse rounded-full bg-accent shadow-[0_0_12px_currentColor]" />
+                    <div>
+                      <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
+                        {education.institution}
+                      </span>
+                      <h4 className="mt-1 font-display text-sm font-semibold">
+                        {t(education.title)}
+                      </h4>
+                      <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                        {t(education.desc)}
+                      </p>
+                      <span className="mt-3 inline-block font-mono text-[10px] uppercase tracking-[0.22em] text-accent">
+                        {t("Em andamento")}
+                      </span>
+                    </div>
+                  </div>
+                </Panel>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <div data-reveal-group className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {ACHIEVEMENTS.map((a) => {
             return (
@@ -31,12 +80,17 @@ export function Achievements() {
                       <Award className="size-4" />
                     </span>
                     <div>
-                      <h3 className="font-display text-sm font-semibold">{a.title}</h3>
+                      <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-success">
+                        {a.institution}
+                      </span>
+                      <h3 className="font-display text-sm font-semibold">{t(a.title)}</h3>
                       <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
                         {t(a.desc)}
                       </p>
                       <span className="mt-3 inline-block font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-                        {t("Certificação concluída")}
+                        {"completedAt" in a
+                          ? `${t("Concluída em")} ${formatCompletionDate(a.completedAt, language)}`
+                          : t("Certificação concluída")}
                       </span>
                     </div>
                   </div>
@@ -68,7 +122,10 @@ export function Achievements() {
                   <div className="flex items-start gap-3">
                     <span className="mt-1 size-2 shrink-0 animate-pulse rounded-full bg-primary shadow-[0_0_12px_currentColor]" />
                     <div>
-                      <h4 className="font-display text-sm font-semibold">{course.title}</h4>
+                      <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
+                        {t(course.category)} · {course.institution}
+                      </span>
+                      <h4 className="font-display text-sm font-semibold">{t(course.title)}</h4>
                       <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
                         {t(course.desc)}
                       </p>
