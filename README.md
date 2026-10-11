@@ -7,7 +7,7 @@
 
 Portfólio pessoal com projetos reais, integração com GitHub, identidade visual inspirada em interfaces de games e suporte aos idiomas português e inglês.
 
-[Ver portfólio](https://caua-rodolpho.vercel.app/) · [LinkedIn](https://www.linkedin.com/in/cau%C3%A3-rodolpho/) · [GitHub](https://github.com/CauaRodolpho)
+[Ver portfólio](https://portifolio-caua-rodolpho-hazel.vercel.app/) · [LinkedIn](https://www.linkedin.com/in/cau%C3%A3-rodolpho/) · [GitHub](https://github.com/CauaRodolpho)
 
 </div>
 
@@ -59,24 +59,24 @@ Além do conteúdo local, o site consulta dados públicos do GitHub para exibir 
 | ---------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
 | **AuthFlow**                 | Aplicação Full Stack de autenticação e gestão de usuários com JWT, bcrypt, Prisma e MongoDB. | [Demo](https://authflow-web-pink.vercel.app/) · [Código](https://github.com/CauaRodolpho/authflow-fullstack) |
 | **Chronos**                  | Aplicação de produtividade e gestão de tempo integrada a serviços de IA.                     | [Demo](https://chronosai-one.vercel.app/) · [Código](https://github.com/CauaRodolpho/Chronos.ia)             |
-| **Nexus Cloud**              | Plataforma de serviços em nuvem com arquitetura modular de Front-End.                        | [Demo](https://nexus-cloud-lyart.vercel.app/) · [Código](https://github.com/CauaRodolpho/Nexus-Cloud)        |
-| **DevArt — Stranger Things** | Landing page temática e interativa com animações controladas por GSAP.                       | [Código](https://github.com/CauaRodolpho/DevArt-Strangers-things)                                            |
-| **Pokedex**                  | Aplicação que consome a PokéAPI para renderizar informações de Pokémon.                      | [Código](https://github.com/CauaRodolpho/Pokedex)                                                            |
+| **FlowView**                 | Construtor de dashboards com indicadores, gráficos, importação de dados e exportações.       | [Demo](https://flowview-two.vercel.app/) · [Código](https://github.com/CauaRodolpho/FlowView)               |
+| **FlowTask**                 | Gestão de projetos e tarefas com Kanban, perfis demonstrativos e fluxo de revisão.           | [Demo](https://flowstack-ivory.vercel.app/) · [Código](https://github.com/CauaRodolpho/FlowStack)           |
+| **Ateliê AnaCraft**          | E-commerce demonstrativo com catálogo, personalização, favoritos, carrinho e checkout.       | [Demo](https://loja-atelie-phi.vercel.app/) · [Código](https://github.com/CauaRodolpho/Loja-Atelie)         |
 
 ## Como executar localmente
 
 ### Requisitos
 
-* Node.js 20 ou superior.
-* npm.
+* Node.js 22.12 ou superior.
+* pnpm.
 
 ### Instalação
 
 ```bash
-git clone https://github.com/CauaRodolpho/Portifolio.git
-cd Portifolio
-npm install
-npm run dev
+git clone https://github.com/CauaRodolpho/Portifolio-Caua-Rodolpho.git
+cd Portifolio-Caua-Rodolpho
+pnpm install
+pnpm dev
 ```
 
 Depois, abra http://localhost:5173 no navegador.
@@ -84,18 +84,18 @@ Depois, abra http://localhost:5173 no navegador.
 ### Comandos disponíveis
 
 ```bash
-npm run dev
-npm run build
-npm run preview
-npm run lint
-npm run format
+pnpm dev
+pnpm build
+pnpm preview
+pnpm lint
+pnpm format
 ```
 
-* `npm run dev`: inicia o ambiente de desenvolvimento.
-* `npm run build`: gera o build de produção.
-* `npm run preview`: visualiza o build localmente.
-* `npm run lint`: analisa a qualidade do código.
-* `npm run format`: formata os arquivos com Prettier.
+* `pnpm dev`: inicia o ambiente de desenvolvimento.
+* `pnpm build`: gera o build de produção.
+* `pnpm preview`: visualiza o build localmente.
+* `pnpm lint`: analisa a qualidade do código.
+* `pnpm format`: formata os arquivos com Prettier.
 
 ## Estrutura principal
 
