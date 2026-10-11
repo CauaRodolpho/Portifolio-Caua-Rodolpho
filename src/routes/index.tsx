@@ -12,7 +12,7 @@ import { Timeline } from "@/components/portfolio/Timeline";
 import { Achievements } from "@/components/portfolio/Achievements";
 import { Contact } from "@/components/portfolio/Contact";
 
-const SITE_URL = "https://caua-rodolpho.vercel.app/";
+const SITE_URL = "https://portifolio-caua-rodolpho-hazel.vercel.app/";
 const TITLE = "Cauã Rodolpho — Desenvolvedor Front-End Júnior";
 const DESC =
   "Portfólio de Cauã Rodolpho, Desenvolvedor Front-End Júnior em evolução para Full Stack. Conheça AuthFlow, FlowView, FlowTask, Ateliê AnaCraft e outros projetos em React, TypeScript e Node.js.";
