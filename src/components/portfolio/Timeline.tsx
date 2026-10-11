@@ -58,6 +58,9 @@ export function Timeline() {
                     </div>
                     <h3 className="mt-2 font-display text-lg font-semibold">{tr(t.title)}</h3>
                     <p className="mt-1.5 text-sm text-muted-foreground">{tr(t.desc)}</p>
+                    <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.18em] text-primary/80">
+                      {tr(t.period)}
+                    </p>
                   </Panel>
                 </li>
               );

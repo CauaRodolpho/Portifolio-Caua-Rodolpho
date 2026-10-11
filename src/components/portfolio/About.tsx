@@ -36,7 +36,7 @@ const STORY = [
   {
     title: "Aprendizado atual",
     icon: BookOpen,
-    text: "Atualmente curso Análise e Desenvolvimento de Sistemas na UNINTER e aprofundo meus conhecimentos em Angular, Design Thinking e inglês aplicado à tecnologia.",
+    text: "Atualmente curso Análise e Desenvolvimento de Sistemas na UNINTER e aprofundo meus conhecimentos em Angular e inglês aplicado à tecnologia.",
   },
   {
     title: "Direção profissional",

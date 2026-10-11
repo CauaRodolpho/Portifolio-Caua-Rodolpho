@@ -48,8 +48,8 @@ const translations: Record<string, string> = {
   "O AuthFlow ampliou minha experiência com integração Full Stack. Com FlowView, FlowTask e Ateliê AnaCraft, pratiquei diferentes desafios de arquitetura, dados e experiência Front-End.":
     "AuthFlow expanded my experience with Full Stack integration. With FlowView, FlowTask, and Ateliê AnaCraft, I practiced different challenges in architecture, data, and Front-End experience.",
   "Aprendizado atual": "Current learning",
-  "Atualmente curso Análise e Desenvolvimento de Sistemas na UNINTER e aprofundo meus conhecimentos em Angular, Design Thinking e inglês aplicado à tecnologia.":
-    "I am currently studying Systems Analysis and Development at UNINTER while deepening my knowledge of Angular, Design Thinking, and English for technology.",
+  "Atualmente curso Análise e Desenvolvimento de Sistemas na UNINTER e aprofundo meus conhecimentos em Angular e inglês aplicado à tecnologia.":
+    "I am currently studying Systems Analysis and Development at UNINTER while deepening my knowledge of Angular and English for technology.",
   "Direção profissional": "Professional direction",
   "Meu foco atual é consolidar minha base em Front-End e conquistar minha primeira oportunidade na área. No longo prazo, quero evoluir como Desenvolvedor Full Stack, ampliando meus conhecimentos em back-end, APIs e bancos de dados.":
     "My current focus is to consolidate my Front-End foundation and earn my first opportunity in the field. In the long term, I aim to grow as a Full Stack Developer by expanding my knowledge of back-end development, APIs, and databases.",
@@ -202,21 +202,33 @@ const translations: Record<string, string> = {
   Fundamentos: "Fundamentals",
   "HTML, CSS, semântica, responsividade e acessibilidade.":
     "HTML, CSS, semantics, responsiveness, and accessibility.",
-  "JavaScript e APIs": "JavaScript and APIs",
-  "DOM, eventos, assincronicidade e consumo de APIs REST.":
-    "DOM, events, asynchronous programming, and REST API consumption.",
-  "React e TypeScript": "React and TypeScript",
-  "Componentização, estados e construção de interfaces tipadas.":
-    "Component architecture, state, and typed interface development.",
+  "Formação JavaScript Developer": "JavaScript Developer Program",
+  "Conclusão da formação da DIO com foco em DOM, eventos, assincronicidade, orientação a objetos e consumo de APIs REST.":
+    "Completed the DIO program focused on the DOM, events, asynchronous programming, object-oriented programming, and REST API consumption.",
+  "Fevereiro de 2026": "February 2026",
+  "Aprofundamento em componentes, estados, consumo de APIs e construção de interfaces modernas com React.":
+    "Deeper study of components, state, API consumption, and modern interface development with React.",
+  "Junho de 2026": "June 2026",
+  "Bootcamp da DIO com React, TypeScript e aplicação de Inteligência Artificial em um projeto prático.":
+    "DIO bootcamp covering React, TypeScript, and the application of Artificial Intelligence in a practical project.",
+  "Agosto de 2026": "August 2026",
+  "Conclusão da formação em TypeScript, arquitetura de aplicações e fundamentos de desenvolvimento front-end e back-end.":
+    "Completed the program in TypeScript, application architecture, and front-end and back-end development foundations.",
+  "Setembro de 2026": "September 2026",
   "Projetos práticos": "Practical projects",
   "AuthFlow, FlowView, FlowTask e Ateliê AnaCraft transformaram estudos em entregas reais.":
     "AuthFlow, FlowView, FlowTask, and Ateliê AnaCraft turned study into real deliverables.",
+  "IA como ferramenta de desenvolvimento": "AI as a development tool",
+  "Conclusão da Formação GitHub Copilot e evolução no uso de GitHub Copilot, ChatGPT/Codex, Claude e Gemini para estudar, planejar, revisar código e resolver problemas.":
+    "Completed the GitHub Copilot Program and advanced my use of GitHub Copilot, ChatGPT/Codex, Claude, and Gemini for learning, planning, code review, and problem-solving.",
+  "Outubro de 2026": "October 2026",
   "Angular e visão Full Stack": "Angular and a Full Stack perspective",
   "Graduação em ADS, aprofundamento em Angular e evolução contínua no inglês técnico.":
     "A Systems Analysis and Development degree, deeper Angular knowledge, and continuous progress in technical English.",
   "Primeira oportunidade Front-End Júnior": "First Junior Front-End opportunity",
   "Aplicar o aprendizado em produtos reais e evoluir junto a um time de tecnologia.":
     "Apply my knowledge to real products and grow alongside a technology team.",
+  "Próximo objetivo": "Next goal",
   "P06 · Conquistas": "P06 · Achievements",
   "Cursos e certificações": "Courses and certifications",
   "Formações que registram minha evolução em JavaScript, React, Inteligência Artificial e desenvolvimento de projetos.":
@@ -252,8 +264,6 @@ const translations: Record<string, string> = {
     "Web architecture and the application of Artificial Intelligence in development.",
   "Desenvolvimento de projetos com foco em interface, animações e apresentação visual.":
     "Project development focused on interfaces, animations, and visual presentation.",
-  "Processo de descoberta, definição de problemas e criação de soluções centradas no usuário.":
-    "A process for discovery, problem definition, and creating user-centered solutions.",
   "Formação técnica": "Technical training",
   Inglês: "English",
   "Inglês para tecnologia": "English for technology",
