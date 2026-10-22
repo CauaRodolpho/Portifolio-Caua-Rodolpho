@@ -494,9 +494,15 @@ export const TIMELINE = [
     period: "Outubro de 2026",
   },
   {
+    level: "Level 8",
+    title: "Formação Angular Developer",
+    desc: "Conclusão da formação da DIO com 37 horas de estudos em Angular, TypeScript, componentes, serviços, rotas e arquitetura de aplicações.",
+    period: "Outubro de 2026",
+  },
+  {
     level: "Current",
-    title: "Angular e visão Full Stack",
-    desc: "Graduação em ADS, aprofundamento em Angular e evolução contínua no inglês técnico.",
+    title: "Node.js e visão Full Stack",
+    desc: "Graduação em ADS, Formação Node.js Fundamentals e evolução contínua no inglês técnico.",
     period: "Em andamento",
   },
   {
@@ -544,6 +550,13 @@ export const ACHIEVEMENTS = [
     desc: "Uso do GitHub Copilot como apoio ao desenvolvimento, revisão e produtividade.",
   },
   {
+    title: "Formação Angular Developer",
+    state: "Unlocked",
+    institution: "DIO",
+    completedAt: "2026-10",
+    desc: "Formação de 37 horas em Angular, TypeScript, componentes, serviços, rotas e arquitetura de aplicações.",
+  },
+  {
     title: "Imersão Dev do Futuro - Dev em Dobro",
     state: "Unlocked",
     institution: "Dev em Dobro",
@@ -578,11 +591,11 @@ export const EDUCATION = [
 
 export const COURSES_IN_PROGRESS = [
   {
-    title: "Formação Angular Developer",
+    title: "Formação Node.js Fundamentals",
     state: "Training",
     institution: "DIO",
-    category: "Formação técnica",
-    desc: "Desenvolvimento de aplicações com Angular, TypeScript, componentes, serviços e rotas.",
+    category: "Back-end",
+    desc: "Fundamentos de Node.js, criação de APIs, módulos, desenvolvimento assíncrono e organização de aplicações back-end.",
   },
   {
     title: "New U-best",
@@ -602,7 +615,7 @@ export const COURSES_IN_PROGRESS = [
 
 export const STATS = [
   { label: "Projetos principais", value: "5" },
-  { label: "Certificações", value: "8" },
+  { label: "Certificações", value: "9" },
   { label: "Tecnologias", value: "10" },
   { label: "Objetivo", value: "1ª vaga" },
 ];

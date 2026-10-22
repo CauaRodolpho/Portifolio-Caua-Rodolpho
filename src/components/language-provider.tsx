@@ -48,8 +48,8 @@ const translations: Record<string, string> = {
   "O AuthFlow ampliou minha experiência com integração Full Stack. Com FlowView, FlowTask e Ateliê AnaCraft, pratiquei diferentes desafios de arquitetura, dados e experiência Front-End.":
     "AuthFlow expanded my experience with Full Stack integration. With FlowView, FlowTask, and Ateliê AnaCraft, I practiced different challenges in architecture, data, and Front-End experience.",
   "Aprendizado atual": "Current learning",
-  "Atualmente curso Análise e Desenvolvimento de Sistemas na UNINTER e aprofundo meus conhecimentos em Angular e inglês aplicado à tecnologia.":
-    "I am currently studying Systems Analysis and Development at UNINTER while deepening my knowledge of Angular and English for technology.",
+  "Atualmente curso Análise e Desenvolvimento de Sistemas na UNINTER, a Formação Node.js Fundamentals e inglês aplicado à tecnologia.":
+    "I am currently studying Systems Analysis and Development at UNINTER, the Node.js Fundamentals Program, and English for technology.",
   "Direção profissional": "Professional direction",
   "Meu foco atual é consolidar minha base em Front-End e conquistar minha primeira oportunidade na área. No longo prazo, quero evoluir como Desenvolvedor Full Stack, ampliando meus conhecimentos em back-end, APIs e bancos de dados.":
     "My current focus is to consolidate my Front-End foundation and earn my first opportunity in the field. In the long term, I aim to grow as a Full Stack Developer by expanding my knowledge of back-end development, APIs, and databases.",
@@ -222,9 +222,9 @@ const translations: Record<string, string> = {
   "Conclusão da Formação GitHub Copilot e evolução no uso de GitHub Copilot, ChatGPT/Codex, Claude e Gemini para estudar, planejar, revisar código e resolver problemas.":
     "Completed the GitHub Copilot Program and advanced my use of GitHub Copilot, ChatGPT/Codex, Claude, and Gemini for learning, planning, code review, and problem-solving.",
   "Outubro de 2026": "October 2026",
-  "Angular e visão Full Stack": "Angular and a Full Stack perspective",
-  "Graduação em ADS, aprofundamento em Angular e evolução contínua no inglês técnico.":
-    "A Systems Analysis and Development degree, deeper Angular knowledge, and continuous progress in technical English.",
+  "Node.js e visão Full Stack": "Node.js and a Full Stack perspective",
+  "Graduação em ADS, Formação Node.js Fundamentals e evolução contínua no inglês técnico.":
+    "A Systems Analysis and Development degree, the Node.js Fundamentals Program, and continuous progress in technical English.",
   "Primeira oportunidade Front-End Júnior": "First Junior Front-End opportunity",
   "Aplicar o aprendizado em produtos reais e evoluir junto a um time de tecnologia.":
     "Apply my knowledge to real products and grow alongside a technology team.",
@@ -254,6 +254,7 @@ const translations: Record<string, string> = {
   "Formação TypeScript Fullstack Developer": "TypeScript Fullstack Developer Program",
   "Formação GitHub Copilot": "GitHub Copilot Program",
   "Formação Angular Developer": "Angular Developer Program",
+  "Formação Node.js Fundamentals": "Node.js Fundamentals Program",
   "TypeScript, arquitetura de aplicações, front-end e fundamentos de back-end.":
     "TypeScript, application architecture, front-end development, and back-end foundations.",
   "Uso do GitHub Copilot como apoio ao desenvolvimento, revisão e produtividade.":
@@ -269,6 +270,13 @@ const translations: Record<string, string> = {
   "Inglês para tecnologia": "English for technology",
   "Desenvolvimento de aplicações com Angular, TypeScript, componentes, serviços e rotas.":
     "Application development with Angular, TypeScript, components, services, and routing.",
+  "Conclusão da formação da DIO com 37 horas de estudos em Angular, TypeScript, componentes, serviços, rotas e arquitetura de aplicações.":
+    "Completed the 37-hour DIO program covering Angular, TypeScript, components, services, routing, and application architecture.",
+  "Formação de 37 horas em Angular, TypeScript, componentes, serviços, rotas e arquitetura de aplicações.":
+    "A 37-hour program covering Angular, TypeScript, components, services, routing, and application architecture.",
+  "Fundamentos de Node.js, criação de APIs, módulos, desenvolvimento assíncrono e organização de aplicações back-end.":
+    "Node.js fundamentals, API development, modules, asynchronous programming, and back-end application organization.",
+  "Back-end": "Back-end",
   "Curso de inglês com desenvolvimento progressivo de leitura, escrita, compreensão auditiva e comunicação.":
     "English course with progressive development of reading, writing, listening comprehension, and communication.",
   "Inglês aplicado à tecnologia, com foco em listening, speaking, reading e writing para entrevistas e ambientes profissionais.":
