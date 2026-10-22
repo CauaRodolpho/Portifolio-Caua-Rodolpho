@@ -270,10 +270,10 @@ const translations: Record<string, string> = {
   "Inglês para tecnologia": "English for technology",
   "Desenvolvimento de aplicações com Angular, TypeScript, componentes, serviços e rotas.":
     "Application development with Angular, TypeScript, components, services, and routing.",
-  "Conclusão da formação da DIO com 37 horas de estudos em Angular, TypeScript, componentes, serviços, rotas e arquitetura de aplicações.":
-    "Completed the 37-hour DIO program covering Angular, TypeScript, components, services, routing, and application architecture.",
-  "Formação de 37 horas em Angular, TypeScript, componentes, serviços, rotas e arquitetura de aplicações.":
-    "A 37-hour program covering Angular, TypeScript, components, services, routing, and application architecture.",
+  "Conclusão da formação da DIO com estudos em Angular, TypeScript, componentes, serviços, rotas e arquitetura de aplicações.":
+    "Completed the DIO program covering Angular, TypeScript, components, services, routing, and application architecture.",
+  "Formação em Angular, TypeScript, componentes, serviços, rotas e arquitetura de aplicações.":
+    "A program covering Angular, TypeScript, components, services, routing, and application architecture.",
   "Fundamentos de Node.js, criação de APIs, módulos, desenvolvimento assíncrono e organização de aplicações back-end.":
     "Node.js fundamentals, API development, modules, asynchronous programming, and back-end application organization.",
   "Back-end": "Back-end",

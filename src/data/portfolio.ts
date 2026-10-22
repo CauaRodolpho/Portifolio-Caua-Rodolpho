@@ -496,7 +496,7 @@ export const TIMELINE = [
   {
     level: "Level 8",
     title: "Formação Angular Developer",
-    desc: "Conclusão da formação da DIO com 37 horas de estudos em Angular, TypeScript, componentes, serviços, rotas e arquitetura de aplicações.",
+    desc: "Conclusão da formação da DIO com estudos em Angular, TypeScript, componentes, serviços, rotas e arquitetura de aplicações.",
     period: "Outubro de 2026",
   },
   {
@@ -554,7 +554,7 @@ export const ACHIEVEMENTS = [
     state: "Unlocked",
     institution: "DIO",
     completedAt: "2026-10",
-    desc: "Formação de 37 horas em Angular, TypeScript, componentes, serviços, rotas e arquitetura de aplicações.",
+    desc: "Formação em Angular, TypeScript, componentes, serviços, rotas e arquitetura de aplicações.",
   },
   {
     title: "Imersão Dev do Futuro - Dev em Dobro",
