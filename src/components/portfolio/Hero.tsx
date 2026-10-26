@@ -15,7 +15,7 @@ import {
   UserRound,
 } from "lucide-react";
 import {
-  SiGreensock,
+  SiAngular,
   SiNextdotjs,
   SiNodedotjs,
   SiReact,
@@ -33,7 +33,7 @@ const CORE_SKILLS = [
   { name: "TypeScript", Icon: SiTypescript },
   { name: "Next.js", Icon: SiNextdotjs },
   { name: "Tailwind", Icon: SiTailwindcss },
-  { name: "GSAP", Icon: SiGreensock },
+  { name: "Angular", Icon: SiAngular },
   { name: "Node.js", Icon: SiNodedotjs },
 ] as const;
 
