@@ -19,6 +19,36 @@ export function Timeline() {
   const routeMarker = useRef<SVGGElement>(null);
   const routeId = useId().replace(/:/g, "");
   const { language, t: tr } = useLanguage();
+  const copy =
+    language === "pt"
+      ? {
+          code: "P05 · Mapa de progressão",
+          title: "Trilha de evolução",
+          subtitle:
+            "Cada checkpoint representa uma habilidade conquistada, um projeto construído e um novo desafio desbloqueado.",
+          map: "Mapa da jornada",
+          summary: "9 checkpoints alcançados · 1 próxima missão",
+          progress: "Progresso em andamento",
+          checkpoint: "Checkpoint",
+          completed: "Concluído",
+          current: "Em andamento",
+          locked: "Bloqueado",
+          continues: "A jornada continua",
+        }
+      : {
+          code: "P05 · Progress map",
+          title: "Growth trail",
+          subtitle:
+            "Each checkpoint represents a skill earned, a project built, and a new challenge unlocked.",
+          map: "Journey map",
+          summary: "9 checkpoints reached · 1 next mission",
+          progress: "Progress in motion",
+          checkpoint: "Checkpoint",
+          completed: "Completed",
+          current: "In progress",
+          locked: "Locked",
+          continues: "The journey continues",
+        };
 
   useEffect(() => {
     const element = root.current;
@@ -88,13 +118,7 @@ export function Timeline() {
   return (
     <div ref={root}>
       <Section id="timeline" className="overflow-hidden">
-        <SectionHeader
-          code={tr("P05 · Mapa de progressão")}
-          title={tr("Trilha de evolução")}
-          subtitle={tr(
-            "Cada checkpoint representa uma habilidade conquistada, um projeto construído e um novo desafio desbloqueado.",
-          )}
-        />
+        <SectionHeader code={copy.code} title={copy.title} subtitle={copy.subtitle} />
 
         <div className="mb-10 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-primary/15 bg-primary/[0.035] px-5 py-4">
           <div className="flex items-center gap-3">
@@ -102,14 +126,14 @@ export function Timeline() {
               <Route className="size-5" aria-hidden="true" />
             </span>
             <div>
-              <p className="font-display text-sm font-semibold">{tr("Mapa da jornada")}</p>
+              <p className="font-display text-sm font-semibold">{copy.map}</p>
               <p className="mt-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-muted-foreground">
-                {tr("9 checkpoints alcançados · 1 próxima missão")}
+                {copy.summary}
               </p>
             </div>
           </div>
           <span className="rounded-full border border-success/30 bg-success/10 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.18em] text-success">
-            {tr("Progresso em andamento")}
+            {copy.progress}
           </span>
         </div>
 
@@ -179,11 +203,7 @@ export function Timeline() {
               const future = item.level === "Next";
               const current = item.level === "Current";
               const even = index % 2 === 0;
-              const status = future
-                ? tr("Bloqueado")
-                : current
-                  ? tr("Em andamento")
-                  : tr("Concluído");
+              const status = future ? copy.locked : current ? copy.current : copy.completed;
               return (
                 <li
                   key={item.title}
@@ -223,7 +243,7 @@ export function Timeline() {
                     >
                       <div className="flex flex-wrap items-center justify-between gap-3">
                         <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-primary">
-                          {tr("Checkpoint")} {String(index + 1).padStart(2, "0")}
+                          {copy.checkpoint} {String(index + 1).padStart(2, "0")}
                         </span>
                         <span
                           className={`rounded-full border px-2.5 py-1 font-mono text-[8px] uppercase tracking-[0.16em] ${future ? "border-border text-muted-foreground" : current ? "border-primary/35 bg-primary/10 text-primary" : "border-success/30 bg-success/10 text-success"}`}
@@ -256,7 +276,7 @@ export function Timeline() {
               <span className="relative inline-flex size-2.5 rounded-full bg-primary" />
             </span>
             <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-primary">
-              {language === "pt" ? "A jornada continua" : "The journey continues"}
+              {copy.continues}
             </span>
           </div>
         </div>
