@@ -1,332 +1,544 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import gsap from "gsap";
 import {
+  ArrowLeft,
+  ArrowRight,
   ArrowUpRight,
   BookOpen,
-  CalendarDays,
   CheckCircle2,
-  GitFork,
+  ChevronLeft,
+  ChevronRight,
   Github,
   Layers,
+  Maximize2,
   Route,
   Server,
   Sparkles,
-  Star,
   Target,
+  X,
 } from "lucide-react";
 import { Section, SectionHeader, Panel } from "./Panel";
-import { useReveal } from "@/hooks/useReveal";
-import {
-  getRepositoryByUrl,
-  type GitHubRepository,
-  useGitHubPortfolio,
-} from "@/hooks/useGitHubPortfolio";
+import { getRepositoryByUrl, useGitHubPortfolio } from "@/hooks/useGitHubPortfolio";
 import { PROJECTS } from "@/data/portfolio";
 import { useLanguage } from "../language-provider";
 
-function QuestCard({
-  p,
-  main,
-  repository,
-}: {
-  p: (typeof PROJECTS)[number];
-  main?: boolean;
-  repository?: GitHubRepository;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
+type Project = (typeof PROJECTS)[number];
+
+function ProjectModal({ project, onClose }: { project: Project; onClose: () => void }) {
+  const dialog = useRef<HTMLDivElement>(null);
+  const [slide, setSlide] = useState(0);
   const { language, t } = useLanguage();
-  const demoUrl = ("demo" in p ? p.demo : undefined) || repository?.homepage;
-  const repositoryUrl = repository?.html_url ?? p.github;
-  const updatedAt = repository
-    ? new Intl.DateTimeFormat(language === "pt" ? "pt-BR" : "en-US", {
-        month: "short",
-        year: "numeric",
-      }).format(new Date(repository.pushed_at))
-    : null;
+  const demoUrl = "demo" in project ? project.demo : undefined;
+  const slides = useMemo(
+    () => [
+      { type: "image", label: "Interface" },
+      { type: "architecture", label: language === "pt" ? "Arquitetura" : "Architecture" },
+      { type: "features", label: language === "pt" ? "Funcionalidades" : "Features" },
+    ],
+    [language],
+  );
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if (window.matchMedia("(pointer: coarse)").matches) return;
-    const onMove = (e: MouseEvent) => {
-      const r = el.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - 0.5;
-      const y = (e.clientY - r.top) / r.height - 0.5;
-      gsap.to(el, {
-        rotationY: x * 6,
-        rotationX: -y * 6,
-        transformPerspective: 1200,
-        duration: 0.6,
-        ease: "power2.out",
-      });
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+      if (event.key === "ArrowRight") setSlide((value) => (value + 1) % slides.length);
+      if (event.key === "ArrowLeft")
+        setSlide((value) => (value - 1 + slides.length) % slides.length);
     };
-    const onLeave = () =>
-      gsap.to(el, { rotationY: 0, rotationX: 0, duration: 0.8, ease: "power3.out" });
-    el.addEventListener("mousemove", onMove);
-    el.addEventListener("mouseleave", onLeave);
+    window.addEventListener("keydown", onKeyDown);
+    dialog.current?.focus();
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      gsap.fromTo(
+        dialog.current,
+        { y: 28, scale: 0.97, opacity: 0 },
+        { y: 0, scale: 1, opacity: 1, duration: 0.45, ease: "power3.out" },
+      );
+    }
     return () => {
-      el.removeEventListener("mousemove", onMove);
-      el.removeEventListener("mouseleave", onLeave);
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
     };
-  }, []);
+  }, [onClose, slides.length]);
 
-  return (
-    <div data-reveal-item className={main ? "lg:col-span-2" : ""}>
-      <Panel className="group h-full overflow-hidden hover:border-primary/50 hover:shadow-[0_0_50px_-20px_color-mix(in_oklab,var(--primary)_80%,transparent)]">
-        <div ref={ref} style={{ transformStyle: "preserve-3d" }}>
-          <div
-            className={`relative overflow-hidden ${main ? "aspect-[16/9] sm:aspect-[21/8]" : "aspect-[16/9]"}`}
-            style={{ background: p.gradient }}
-          >
-            {p.image && (
-              <img
-                src={p.image}
-                alt={`${t("Captura de tela do projeto")} ${p.title}`}
-                loading="lazy"
-                className={`absolute inset-0 size-full transition-transform duration-700 group-hover:scale-[1.03] ${
-                  p.imageFit === "contain" ? "object-contain" : "object-cover"
-                }`}
-                onError={(event) => {
-                  event.currentTarget.style.display = "none";
-                }}
-              />
-            )}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-black/20" />
-            <div className="absolute inset-0 grid-bg opacity-40 mix-blend-overlay" />
-            <div className="absolute inset-0 scanlines opacity-25" />
-            <div className="absolute left-4 top-4 flex items-center gap-2">
-              <span className="rounded-md border border-white/25 bg-black/25 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.2em] text-white backdrop-blur-md">
-                {t(p.kind)}
-              </span>
-              <span className="rounded-md border border-white/25 bg-black/25 px-2 py-0.5 font-mono text-[10px] text-white backdrop-blur-md">
-                Rank {p.difficulty}
-              </span>
-            </div>
-            <div className="absolute right-4 top-4 flex size-9 items-center justify-center rounded-full border border-white/25 bg-black/25 backdrop-blur-md transition group-hover:bg-black/40">
-              <ArrowUpRight className="size-4 text-white" />
-            </div>
-            <div className="absolute bottom-4 left-4">
-              <div className="font-display text-3xl font-bold text-white/95 sm:text-4xl">
-                {p.title}
-              </div>
-            </div>
-          </div>
+  return createPortal(
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 p-3 backdrop-blur-md sm:p-6"
+      role="presentation"
+      onMouseDown={(event) => event.currentTarget === event.target && onClose()}
+    >
+      <div
+        ref={dialog}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="project-modal-title"
+        tabIndex={-1}
+        className="hud-panel hud-corner relative max-h-[94vh] w-full max-w-6xl overflow-x-hidden overflow-y-auto border-primary/35 bg-background shadow-[0_30px_120px_-30px_color-mix(in_oklab,var(--primary)_55%,transparent)] outline-none"
+      >
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label={language === "pt" ? "Fechar especificações" : "Close specifications"}
+          className="sticky right-4 top-4 z-30 ml-auto mr-4 mt-4 flex size-10 items-center justify-center rounded-full border border-border bg-background/90 text-muted-foreground backdrop-blur transition hover:border-primary/50 hover:text-primary"
+        >
+          <X className="size-5" />
+        </button>
 
-          <div className="p-6 sm:p-7">
-            <p className="text-sm text-muted-foreground">{t(p.tagline)}</p>
-
-            {p.description && (
-              <p className="mt-3 max-w-4xl text-xs leading-relaxed text-muted-foreground">
-                {t(p.description)}
-              </p>
-            )}
-
-            <div className="mt-4 flex flex-wrap gap-1.5">
-              {p.demoAvailable && (
-                <span className="rounded-md border border-success/35 bg-success/10 px-2 py-0.5 font-mono text-[10px] text-success">
-                  {t("Acesso demo disponível")}
-                </span>
-              )}
-              {p.tech.map((t) => (
-                <span
-                  key={t}
-                  className="rounded-md border border-border/70 bg-surface/50 px-2 py-0.5 font-mono text-[10px] text-muted-foreground"
-                >
-                  {t}
-                </span>
-              ))}
-              {repository?.language && !p.tech.includes(repository.language) && (
-                <span className="rounded-md border border-primary/30 bg-primary/10 px-2 py-0.5 font-mono text-[10px] text-primary">
-                  GitHub: {repository.language}
-                </span>
-              )}
-            </div>
-
-            {repository && (
-              <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[10px] text-muted-foreground">
-                <span className="inline-flex items-center gap-1.5">
-                  <Star className="size-3 text-primary" /> {repository.stargazers_count}{" "}
-                  {t("estrelas")}
-                </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <GitFork className="size-3 text-primary" /> {repository.forks_count} forks
-                </span>
-                {updatedAt && (
-                  <span className="inline-flex items-center gap-1.5">
-                    <CalendarDays className="size-3 text-primary" /> {t("Atualizado em")}{" "}
-                    {updatedAt}
-                  </span>
+        <div className="grid gap-8 px-5 pb-8 pt-1 sm:px-8 lg:grid-cols-[1.08fr_.92fr] lg:px-10">
+          <div>
+            <div className="relative overflow-hidden rounded-2xl border border-border bg-surface/40">
+              <div className="relative aspect-[16/10]" style={{ background: project.gradient }}>
+                {slide === 0 && (
+                  <>
+                    {project.image && (
+                      <img
+                        src={project.image}
+                        alt={`${t("Captura de tela do projeto")} ${project.title}`}
+                        className={`absolute inset-0 size-full ${project.imageFit === "contain" ? "object-contain" : "object-cover"}`}
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10" />
+                  </>
                 )}
-              </div>
-            )}
-
-            {p.highlights && (
-              <div className="mt-6 rounded-xl border border-primary/20 bg-primary/[0.04] p-4 sm:p-5">
-                <div className="hud-label mb-3 flex items-center gap-1.5">
-                  <CheckCircle2 className="size-3 text-primary" />{" "}
-                  {t("Funcionalidades em destaque")}
-                </div>
-                <ul className="grid gap-x-6 gap-y-2 sm:grid-cols-2">
-                  {p.highlights.map((highlight) => (
-                    <li
-                      key={highlight}
-                      className="flex items-start gap-2 text-xs leading-relaxed text-muted-foreground"
-                    >
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary shadow-[0_0_8px_currentColor]" />
-                      {t(highlight)}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            <dl className="mt-6 grid gap-4 sm:grid-cols-2">
-              <div>
-                <dt className="hud-label flex items-center gap-1.5">
-                  <Layers className="size-3 text-primary" /> {t("Arquitetura")}
-                </dt>
-                <dd className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                  {t(p.architecture)}
-                </dd>
-              </div>
-              <div>
-                <dt className="hud-label flex items-center gap-1.5">
-                  <Target className="size-3 text-primary" /> {t("Problema resolvido")}
-                </dt>
-                <dd className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                  {t(p.problem)}
-                </dd>
-              </div>
-              <div>
-                <dt className="hud-label flex items-center gap-1.5">
-                  <Sparkles className="size-3 text-primary" /> {t("Aprendizados")}
-                </dt>
-                <dd className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                  {t(p.learnings)}
-                </dd>
-              </div>
-              <div>
-                <dt className="hud-label flex items-center gap-1.5">
-                  <Route className="size-3 text-primary" /> Roadmap
-                </dt>
-                <dd className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                  {p.roadmap.map((item) => t(item)).join(" · ")}
-                </dd>
-              </div>
-            </dl>
-
-            {p.origin && (
-              <div className="mt-6 rounded-xl border border-border/70 bg-surface/45 p-4 sm:p-5">
-                <div className="hud-label flex items-center gap-1.5">
-                  <BookOpen className="size-3 text-primary" /> {t("Origem e evolução")}
-                </div>
-                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{t(p.origin)}</p>
-                {p.originLinks && (
-                  <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2">
-                    {p.originLinks.map((link) => (
-                      <a
-                        key={link.url}
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 font-mono text-[10px] text-primary transition-colors hover:text-foreground"
-                      >
-                        <ArrowUpRight className="size-3.5" /> {t(link.label)}
-                      </a>
-                    ))}
+                {slide === 1 && (
+                  <div className="absolute inset-0 flex flex-col justify-between p-6 sm:p-8">
+                    <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-white/75">
+                      <Layers className="size-4" /> {slides[1].label}
+                    </div>
+                    <p className="max-w-xl text-lg font-medium leading-relaxed text-white sm:text-2xl">
+                      {t(project.architecture)}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tech.slice(0, 7).map((tech) => (
+                        <span
+                          key={tech}
+                          className="rounded-full border border-white/25 bg-black/20 px-3 py-1 font-mono text-[10px] text-white backdrop-blur"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {slide === 2 && (
+                  <div className="absolute inset-0 flex flex-col p-6 sm:p-8">
+                    <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-white/75">
+                      <CheckCircle2 className="size-4" /> {slides[2].label}
+                    </div>
+                    <div className="my-auto grid gap-3 sm:grid-cols-2">
+                      {(project.highlights ?? [project.problem, project.learnings])
+                        .slice(0, 6)
+                        .map((item) => (
+                          <div
+                            key={item}
+                            className="rounded-xl border border-white/20 bg-black/20 p-3 text-xs leading-relaxed text-white/90 backdrop-blur-sm sm:text-sm"
+                          >
+                            {t(item)}
+                          </div>
+                        ))}
+                    </div>
                   </div>
                 )}
               </div>
-            )}
+              <button
+                type="button"
+                onClick={() => setSlide((value) => (value - 1 + slides.length) % slides.length)}
+                aria-label={language === "pt" ? "Visual anterior" : "Previous visual"}
+                className="absolute left-3 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur transition hover:bg-black/60"
+              >
+                <ChevronLeft className="size-5" />
+              </button>
+              <button
+                type="button"
+                onClick={() => setSlide((value) => (value + 1) % slides.length)}
+                aria-label={language === "pt" ? "Próximo visual" : "Next visual"}
+                className="absolute right-3 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur transition hover:bg-black/60"
+              >
+                <ChevronRight className="size-5" />
+              </button>
+            </div>
+            <div
+              className="mt-3 flex justify-center gap-2"
+              role="tablist"
+              aria-label={language === "pt" ? "Visuais do projeto" : "Project visuals"}
+            >
+              {slides.map((item, index) => (
+                <button
+                  key={item.type}
+                  type="button"
+                  onClick={() => setSlide(index)}
+                  aria-label={item.label}
+                  aria-selected={slide === index}
+                  className={`h-1.5 rounded-full transition-all ${slide === index ? "w-8 bg-primary" : "w-3 bg-border hover:bg-muted-foreground"}`}
+                />
+              ))}
+            </div>
+          </div>
 
-            <div className="mt-6 flex flex-col gap-4 border-t border-border/60 pt-4 sm:flex-row sm:items-center sm:justify-between">
-              <span className="font-mono text-[11px] text-primary">Status: {t(p.status)}</span>
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
-                {demoUrl && (
-                  <a
-                    href={demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${t("Abrir demonstração do projeto")} ${p.title}`}
-                    className={
-                      p.featured
-                        ? "inline-flex items-center gap-1.5 rounded-lg border border-primary/40 bg-primary/10 px-3 py-2 font-mono text-[11px] text-primary transition-all hover:-translate-y-0.5 hover:border-primary/70 hover:bg-primary/15"
-                        : "inline-flex items-center gap-1.5 font-mono text-[11px] text-muted-foreground transition-colors hover:text-foreground"
-                    }
+          <div className="flex flex-col">
+            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-primary">
+              {t(project.kind)} · Rank {project.difficulty}
+            </span>
+            <h3
+              id="project-modal-title"
+              className="mt-3 font-display text-3xl font-bold sm:text-4xl"
+            >
+              {project.title}
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              {t(project.description ?? project.tagline)}
+            </p>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              <Info
+                icon={<Target className="size-3.5" />}
+                label={t("Problema resolvido")}
+                text={t(project.problem)}
+              />
+              <Info
+                icon={<Sparkles className="size-3.5" />}
+                label={t("Aprendizados")}
+                text={t(project.learnings)}
+              />
+            </div>
+            {project.origin && (
+              <div className="mt-4 rounded-xl border border-primary/20 bg-primary/[0.04] p-4">
+                <div className="hud-label flex items-center gap-2">
+                  <BookOpen className="size-3.5 text-primary" />{" "}
+                  {language === "pt" ? "Como foi criado" : "How it was built"}
+                </div>
+                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                  {t(project.origin)}
+                </p>
+              </div>
+            )}
+            <div className="mt-5">
+              <div className="hud-label mb-2 flex items-center gap-2">
+                <Layers className="size-3.5 text-primary" /> Stack
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {project.tech.map((tech) => (
+                  <span
+                    key={tech}
+                    className="rounded-md border border-border bg-surface/50 px-2 py-1 font-mono text-[9px] text-muted-foreground"
                   >
-                    <ArrowUpRight className="size-3.5" />
-                    {p.featured ? t("Ver demonstração") : "Demo"}
-                  </a>
-                )}
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="mt-5 rounded-xl border border-border bg-surface/30 p-4">
+              <div className="hud-label flex items-center gap-2">
+                <Route className="size-3.5 text-primary" /> Roadmap
+              </div>
+              <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                {project.roadmap.map((item) => t(item)).join(" · ")}
+              </p>
+            </div>
+            <div className="mt-auto flex flex-wrap gap-3 pt-7">
+              {demoUrl && (
                 <a
-                  href={repositoryUrl}
+                  href={demoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`${t("Abrir repositório do projeto")} ${p.title} ${language === "pt" ? "no GitHub" : "on GitHub"}`}
-                  className="inline-flex items-center gap-1.5 font-mono text-[11px] text-muted-foreground transition-colors hover:text-foreground"
+                  className="inline-flex items-center gap-2 rounded-lg border border-primary/45 bg-primary/10 px-4 py-2.5 font-mono text-xs text-primary transition hover:-translate-y-0.5 hover:bg-primary/15"
                 >
-                  <Github className="size-3.5" /> {p.featured ? t("Ver código") : t("Repositório")}
+                  <ArrowUpRight className="size-4" />{" "}
+                  {language === "pt" ? "Ver demonstração" : "View demo"}
                 </a>
-                {p.api && (
-                  <a
-                    href={p.api}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${t("Consultar status da API do projeto")} ${p.title}`}
-                    className="inline-flex items-center gap-1.5 font-mono text-[11px] text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    <Server className="size-3.5" /> {t("Status da API")}
-                  </a>
-                )}
-              </div>
+              )}
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg border border-border px-4 py-2.5 font-mono text-xs text-muted-foreground transition hover:border-primary/40 hover:text-foreground"
+              >
+                <Github className="size-4" /> {language === "pt" ? "Ver código" : "View code"}
+              </a>
+              {project.api && (
+                <a
+                  href={project.api}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-2 py-2.5 font-mono text-xs text-muted-foreground transition hover:text-foreground"
+                >
+                  <Server className="size-4" /> API
+                </a>
+              )}
             </div>
           </div>
         </div>
-      </Panel>
+      </div>
+    </div>,
+    document.body,
+  );
+}
+
+function Info({ icon, label, text }: { icon: React.ReactNode; label: string; text: string }) {
+  return (
+    <div className="rounded-xl border border-border bg-surface/35 p-4">
+      <div className="hud-label flex items-center gap-2 text-primary">
+        {icon} {label}
+      </div>
+      <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{text}</p>
     </div>
   );
 }
 
 export function Projects() {
-  const root = useRef<HTMLDivElement>(null);
-  useReveal(root);
+  const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const [active, setActive] = useState(0);
+  const [selected, setSelected] = useState<Project | null>(null);
+  const [compact, setCompact] = useState(false);
+  const dragStart = useRef<number | null>(null);
   const { data: githubData, loading: githubLoading } = useGitHubPortfolio();
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
+
+  const positionOf = useCallback(
+    (index: number) => {
+      let value = index - active;
+      if (value > PROJECTS.length / 2) value -= PROJECTS.length;
+      if (value < -PROJECTS.length / 2) value += PROJECTS.length;
+      return value;
+    },
+    [active],
+  );
+  const move = useCallback(
+    (direction: number) =>
+      setActive((value) => (value + direction + PROJECTS.length) % PROJECTS.length),
+    [],
+  );
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+    const update = () => setCompact(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    cardRefs.current.forEach((card, index) => {
+      if (!card) return;
+      const position = positionOf(index);
+      const distance = Math.abs(position);
+      const visible = distance <= (compact ? 1 : 2);
+      gsap.to(card, {
+        xPercent: -50 + (compact ? position * 86 : position * 66),
+        scale: position === 0 ? 1 : compact ? 0.8 : Math.max(0.66, 0.84 - (distance - 1) * 0.12),
+        rotationY: compact ? 0 : position * -18,
+        z: compact ? 0 : distance * -150,
+        opacity: visible ? (position === 0 ? 1 : compact ? 0.42 : distance === 1 ? 0.58 : 0.18) : 0,
+        filter: position === 0 ? "blur(0px)" : `blur(${distance * 1.5}px)`,
+        zIndex: 20 - distance,
+        pointerEvents: visible ? "auto" : "none",
+        duration: reduced ? 0 : 0.72,
+        ease: "power3.inOut",
+      });
+    });
+  }, [active, compact, positionOf]);
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (selected) return;
+      if (event.key === "ArrowRight") move(1);
+      if (event.key === "ArrowLeft") move(-1);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [move, selected]);
+
+  const activeProject = PROJECTS[active];
+  const repository = githubData
+    ? getRepositoryByUrl(githubData.repositories, activeProject.github)
+    : undefined;
+  const demoUrl =
+    ("demo" in activeProject ? activeProject.demo : undefined) || repository?.homepage;
 
   return (
-    <div ref={root}>
-      <Section id="projects">
+    <>
+      <Section id="projects" className="overflow-hidden">
         <SectionHeader
-          code={t("P03 · Registro de projetos")}
-          title={t("Missões em andamento")}
-          subtitle={t(
-            "AuthFlow é meu projeto Full Stack de destaque. FlowView, FlowTask e Ateliê AnaCraft mostram diferentes aplicações de Front-End, enquanto Chronos amplia meu contato com produtividade e integrações de IA.",
-          )}
+          code={language === "pt" ? "P03 · Arquivo de projetos" : "P03 · Project archive"}
+          title={language === "pt" ? "Projetos em órbita" : "Projects in orbit"}
+          subtitle={
+            language === "pt"
+              ? "Navegue pelas aplicações, selecione uma missão e abra as especificações para conhecer as decisões, funcionalidades e aprendizados por trás de cada projeto."
+              : "Navigate through the applications, select a mission and open its specifications to explore the decisions, features and lessons behind each project."
+          }
         />
-        <div className="mb-5 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-          <span
-            className={`size-1.5 rounded-full ${githubData ? "bg-success" : "bg-muted-foreground"}`}
-          />
-          {githubData
-            ? t("Projetos sincronizados com o GitHub")
-            : githubLoading
-              ? t("Sincronizando projetos...")
-              : t("Dados locais ativos")}
-        </div>
-        <div data-reveal-group className="grid gap-4 lg:grid-cols-2">
-          {PROJECTS.map((p, i) => (
-            <QuestCard
-              key={p.title}
-              p={p}
-              main={i === 0}
-              repository={
-                githubData ? getRepositoryByUrl(githubData.repositories, p.github) : undefined
-              }
+        <div className="mb-5 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+            <span
+              className={`size-1.5 rounded-full ${githubData ? "bg-success" : "bg-muted-foreground"}`}
             />
-          ))}
+            {githubData
+              ? t("Projetos sincronizados com o GitHub")
+              : githubLoading
+                ? t("Sincronizando projetos...")
+                : t("Dados locais ativos")}
+          </div>
+          <span className="font-mono text-[10px] tracking-[0.2em] text-primary">
+            {String(active + 1).padStart(2, "0")} / {String(PROJECTS.length).padStart(2, "0")}
+          </span>
+        </div>
+
+        <div
+          className="relative h-[460px] perspective-[1400px] sm:h-[510px] lg:h-[540px]"
+          onPointerDown={(event) => {
+            dragStart.current = event.clientX;
+          }}
+          onPointerUp={(event) => {
+            if (dragStart.current === null) return;
+            const distance = event.clientX - dragStart.current;
+            if (Math.abs(distance) > 45) move(distance < 0 ? 1 : -1);
+            dragStart.current = null;
+          }}
+        >
+          {PROJECTS.map((item, index) => {
+            const isActive = index === active;
+            return (
+              <div
+                key={item.title}
+                ref={(node) => {
+                  cardRefs.current[index] = node;
+                }}
+                className="absolute left-1/2 top-0 w-[88%] max-w-[760px] -translate-x-1/2 cursor-pointer will-change-transform sm:w-[72%]"
+                style={{ transformStyle: "preserve-3d" }}
+                onClick={() => !isActive && setActive(index)}
+                aria-hidden={!isActive}
+              >
+                <Panel
+                  className={`group overflow-hidden transition-colors ${isActive ? "border-primary/45 shadow-[0_28px_100px_-45px_color-mix(in_oklab,var(--primary)_70%,transparent)]" : "border-border/70"}`}
+                >
+                  <div
+                    className="relative aspect-[16/8.2] overflow-hidden"
+                    style={{ background: item.gradient }}
+                  >
+                    {item.image && (
+                      <img
+                        src={item.image}
+                        alt=""
+                        className={`absolute inset-0 size-full transition-transform duration-700 group-hover:scale-[1.025] ${item.imageFit === "contain" ? "object-contain" : "object-cover"}`}
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-black/25" />
+                    <div className="absolute inset-0 grid-bg opacity-25 mix-blend-overlay" />
+                    <div className="absolute left-4 top-4 flex gap-2">
+                      <span className="rounded-md border border-white/25 bg-black/30 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-white backdrop-blur">
+                        {t(item.kind)}
+                      </span>
+                      <span className="rounded-md border border-white/25 bg-black/30 px-2 py-1 font-mono text-[9px] text-white backdrop-blur">
+                        Rank {item.difficulty}
+                      </span>
+                    </div>
+                    <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-4">
+                      <div>
+                        <p className="font-display text-2xl font-bold text-white sm:text-4xl">
+                          {item.title}
+                        </p>
+                        <p className="mt-1 hidden max-w-xl text-xs text-white/70 sm:block">
+                          {t(item.tagline)}
+                        </p>
+                      </div>
+                      <span className="rounded-full border border-white/25 bg-black/30 px-3 py-1 font-mono text-[9px] text-white backdrop-blur">
+                        {t(item.status)}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-4 sm:p-6">
+                    <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                      {t(item.description ?? item.tagline)}
+                    </p>
+                    <div className="mt-4 flex flex-wrap gap-1.5">
+                      {item.tech.slice(0, compact ? 4 : 7).map((tech) => (
+                        <span
+                          key={tech}
+                          className="rounded-md border border-border bg-surface/50 px-2 py-0.5 font-mono text-[9px] text-muted-foreground"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    {isActive && (
+                      <div className="mt-5 flex flex-wrap items-center gap-3 border-t border-border/60 pt-4">
+                        <button
+                          type="button"
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            setSelected(item);
+                          }}
+                          className="inline-flex items-center gap-2 rounded-lg border border-primary/45 bg-primary/10 px-3 py-2 font-mono text-[10px] text-primary transition hover:-translate-y-0.5 hover:bg-primary/15 sm:text-xs"
+                        >
+                          <Maximize2 className="size-3.5" />{" "}
+                          {language === "pt" ? "Ver especificações" : "View specifications"}
+                        </button>
+                        {demoUrl && (
+                          <a
+                            href={demoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(event) => event.stopPropagation()}
+                            className="inline-flex items-center gap-1.5 font-mono text-[10px] text-muted-foreground transition hover:text-foreground sm:text-xs"
+                          >
+                            <ArrowUpRight className="size-3.5" /> Demo
+                          </a>
+                        )}
+                        <a
+                          href={item.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(event) => event.stopPropagation()}
+                          className="inline-flex items-center gap-1.5 font-mono text-[10px] text-muted-foreground transition hover:text-foreground sm:text-xs"
+                        >
+                          <Github className="size-3.5" /> GitHub
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                </Panel>
+              </div>
+            );
+          })}
+        </div>
+        <div className="relative z-30 mt-4 flex items-center justify-center gap-4">
+          <button
+            type="button"
+            onClick={() => move(-1)}
+            aria-label={language === "pt" ? "Projeto anterior" : "Previous project"}
+            className="flex size-11 items-center justify-center rounded-full border border-border bg-surface/50 text-muted-foreground transition hover:-translate-x-0.5 hover:border-primary/50 hover:text-primary"
+          >
+            <ArrowLeft className="size-4" />
+          </button>
+          <div
+            className="flex gap-2"
+            role="tablist"
+            aria-label={language === "pt" ? "Selecionar projeto" : "Select project"}
+          >
+            {PROJECTS.map((item, index) => (
+              <button
+                key={item.title}
+                type="button"
+                onClick={() => setActive(index)}
+                aria-label={item.title}
+                aria-selected={index === active}
+                className={`h-1.5 rounded-full transition-all ${index === active ? "w-8 bg-primary" : "w-3 bg-border hover:bg-muted-foreground"}`}
+              />
+            ))}
+          </div>
+          <button
+            type="button"
+            onClick={() => move(1)}
+            aria-label={language === "pt" ? "Próximo projeto" : "Next project"}
+            className="flex size-11 items-center justify-center rounded-full border border-border bg-surface/50 text-muted-foreground transition hover:translate-x-0.5 hover:border-primary/50 hover:text-primary"
+          >
+            <ArrowRight className="size-4" />
+          </button>
         </div>
       </Section>
-    </div>
+      {selected && <ProjectModal project={selected} onClose={() => setSelected(null)} />}
+    </>
   );
 }
