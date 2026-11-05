@@ -32,12 +32,18 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
   const demoUrl = "demo" in project ? project.demo : undefined;
   const slides = useMemo(
     () => [
-      { type: "image", label: "Interface" },
+      ...(
+        project.gallery ??
+        (project.image
+          ? [{ src: project.image, label: language === "pt" ? "Interface" : "Interface" }]
+          : [])
+      ).map((image) => ({ type: "image" as const, ...image })),
       { type: "architecture", label: language === "pt" ? "Arquitetura" : "Architecture" },
       { type: "features", label: language === "pt" ? "Funcionalidades" : "Features" },
     ],
-    [language],
+    [language, project.gallery, project.image],
   );
+  const activeSlide = slides[slide];
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
@@ -90,22 +96,20 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
           <div>
             <div className="relative overflow-hidden rounded-2xl border border-border bg-surface/40">
               <div className="relative aspect-[16/10]" style={{ background: project.gradient }}>
-                {slide === 0 && (
+                {activeSlide.type === "image" && (
                   <>
-                    {project.image && (
-                      <img
-                        src={project.image}
-                        alt={`${t("Captura de tela do projeto")} ${project.title}`}
-                        className={`absolute inset-0 size-full ${project.imageFit === "contain" ? "object-contain" : "object-cover"}`}
-                      />
-                    )}
+                    <img
+                      src={activeSlide.src}
+                      alt={`${activeSlide.label} — ${project.title}`}
+                      className={`absolute inset-0 size-full ${project.imageFit === "contain" ? "object-contain" : "object-cover"}`}
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10" />
                   </>
                 )}
-                {slide === 1 && (
+                {activeSlide.type === "architecture" && (
                   <div className="absolute inset-0 flex flex-col justify-between p-6 sm:p-8">
                     <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-white/75">
-                      <Layers className="size-4" /> {slides[1].label}
+                      <Layers className="size-4" /> {activeSlide.label}
                     </div>
                     <p className="max-w-xl text-lg font-medium leading-relaxed text-white sm:text-2xl">
                       {t(project.architecture)}
@@ -122,10 +126,10 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
                     </div>
                   </div>
                 )}
-                {slide === 2 && (
+                {activeSlide.type === "features" && (
                   <div className="absolute inset-0 flex flex-col p-6 sm:p-8">
                     <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-white/75">
-                      <CheckCircle2 className="size-4" /> {slides[2].label}
+                      <CheckCircle2 className="size-4" /> {activeSlide.label}
                     </div>
                     <div className="my-auto grid gap-3 sm:grid-cols-2">
                       {(project.highlights ?? [project.problem, project.learnings])
@@ -166,7 +170,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
             >
               {slides.map((item, index) => (
                 <button
-                  key={item.type}
+                  key={`${item.type}-${item.label}`}
                   type="button"
                   onClick={() => setSlide(index)}
                   aria-label={item.label}
