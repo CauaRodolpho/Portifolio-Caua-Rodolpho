@@ -2,7 +2,17 @@ import { useEffect, useId, useRef } from "react";
 import gsap from "gsap";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Check, Code2, Crosshair, Database, Flame, LockKeyhole, Route, Server } from "lucide-react";
+import {
+  Check,
+  Code2,
+  Crosshair,
+  Database,
+  Flame,
+  LockKeyhole,
+  Navigation,
+  Route,
+  Server,
+} from "lucide-react";
 import { Section, SectionHeader, Panel } from "./Panel";
 import { TIMELINE } from "@/data/portfolio";
 import { useLanguage } from "../language-provider";
@@ -100,6 +110,7 @@ export function Timeline() {
             scrub: 0.8,
             invalidateOnRefresh: true,
             onUpdate: (self) => paintSteps(self.progress),
+            onLeaveBack: () => paintSteps(0),
           },
         });
 
@@ -109,7 +120,7 @@ export function Timeline() {
           .to(
             marker,
             {
-              motionPath: { path, align: path, alignOrigin: [0.5, 0.5], autoRotate: 90 },
+              motionPath: { path, align: path, alignOrigin: [0.5, 0.5], autoRotate: true },
             },
             0,
           )
@@ -138,7 +149,11 @@ export function Timeline() {
               duration: 0.65,
               ease: "power3.out",
               clearProps: "transform,opacity",
-              scrollTrigger: { trigger: card, start: "top 86%" },
+              scrollTrigger: {
+                trigger: card,
+                start: "top 86%",
+                toggleActions: "play none none reverse",
+              },
             },
           );
         });
@@ -152,7 +167,11 @@ export function Timeline() {
               opacity: 1,
               duration: 0.45,
               ease: "back.out(1.8)",
-              scrollTrigger: { trigger: node, start: "top 78%" },
+              scrollTrigger: {
+                trigger: node,
+                start: "top 78%",
+                toggleActions: "play none none reverse",
+              },
             },
           );
         });
@@ -270,17 +289,16 @@ export function Timeline() {
               opacity="0.9"
             />
             <g ref={routeMarker}>
-              <circle
-                r="24"
+              <path
+                d="m3 11 19-9-9 19-2-8-8-2Z"
+                transform="translate(-12 -12) rotate(45 12 12) scale(1.15)"
                 fill="var(--background)"
                 stroke="var(--primary)"
-                strokeWidth="3"
+                strokeWidth="2.25"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 vectorEffect="non-scaling-stroke"
                 filter={`url(#${routeId}-glow)`}
-              />
-              <path
-                d="M-7 10C-3 2-8-2-2-12c0 6 5 6 4 12 4-4 7-2 7 2 0 7-6 11-10 11-3 0-5-1-6-3Z"
-                fill="var(--primary)"
               />
             </g>
           </svg>
@@ -295,9 +313,9 @@ export function Timeline() {
             />
             <div
               ref={mobileMarker}
-              className="absolute -left-[15px] top-0 z-30 flex size-8 items-center justify-center rounded-full border border-primary bg-background text-primary shadow-glow"
+              className="absolute -left-[11px] top-0 z-30 flex size-6 items-center justify-center text-primary drop-shadow-[0_0_8px_var(--primary)]"
             >
-              <Flame className="size-4" />
+              <Navigation className="size-6 rotate-[135deg] fill-background stroke-[2.25]" />
             </div>
           </div>
 
