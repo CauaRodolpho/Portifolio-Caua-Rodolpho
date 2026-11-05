@@ -365,13 +365,6 @@ type LanguageContextValue = {
   t: (text: string) => string;
 };
 
-type LanguageContextValue = {
-  language: Language;
-  setLanguage: (language: Language) => void;
-  toggleLanguage: () => void;
-  t: (text: string) => string;
-};
-
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
