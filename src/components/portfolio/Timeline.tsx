@@ -2,7 +2,7 @@ import { useEffect, useId, useRef } from "react";
 import gsap from "gsap";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Check, Crosshair, LockKeyhole, Route } from "lucide-react";
+import { Check, Code2, Crosshair, Database, Flame, LockKeyhole, Route, Server } from "lucide-react";
 import { Section, SectionHeader, Panel } from "./Panel";
 import { TIMELINE } from "@/data/portfolio";
 import { useLanguage } from "../language-provider";
@@ -16,7 +16,10 @@ export function Timeline() {
   const root = useRef<HTMLDivElement>(null);
   const routePath = useRef<SVGPathElement>(null);
   const routeProgress = useRef<SVGPathElement>(null);
+  const routePulse = useRef<SVGPathElement>(null);
   const routeMarker = useRef<SVGGElement>(null);
+  const mobileProgress = useRef<HTMLDivElement>(null);
+  const mobileMarker = useRef<HTMLDivElement>(null);
   const routeId = useId().replace(/:/g, "");
   const { language, t: tr } = useLanguage();
   const copy =
@@ -54,57 +57,134 @@ export function Timeline() {
     const element = root.current;
     const path = routePath.current;
     const progress = routeProgress.current;
+    const pulse = routePulse.current;
     const marker = routeMarker.current;
-    if (!element || !path || !progress || !marker) return;
+    const mobileLine = mobileProgress.current;
+    const mobileDot = mobileMarker.current;
+    if (!element || !path || !progress || !pulse || !marker || !mobileLine || !mobileDot) return;
 
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const length = path.getTotalLength();
-    gsap.set(progress, { strokeDasharray: length, strokeDashoffset: reducedMotion ? 0 : length });
-    if (reducedMotion) return;
-
     const ctx = gsap.context(() => {
-      const travel = gsap.timeline({
-        defaults: { ease: "none" },
-        scrollTrigger: {
-          trigger: "[data-journey-map]",
-          start: "top 62%",
-          end: "bottom 66%",
-          scrub: 0.8,
-        },
+      const cards = gsap.utils.toArray<HTMLElement>("[data-journey-card]");
+      const steps = gsap.utils.toArray<HTMLElement>("[data-journey-step]");
+      const nodes = gsap.utils.toArray<HTMLElement>("[data-journey-node]");
+      const mm = gsap.matchMedia();
+
+      const paintSteps = (progressValue: number) => {
+        const activeIndex = Math.min(steps.length - 1, Math.floor(progressValue * steps.length));
+        steps.forEach((step, index) => {
+          const isFinalLocked = step.dataset.future === "true";
+          const state = isFinalLocked
+            ? "locked"
+            : index < activeIndex
+              ? "reached"
+              : index === activeIndex
+                ? "active"
+                : "waiting";
+          step.dataset.trailState = state;
+        });
+      };
+
+      gsap.set([progress, pulse], { strokeDasharray: length, strokeDashoffset: length });
+      gsap.set(mobileLine, { scaleY: 0, transformOrigin: "top" });
+      paintSteps(0);
+
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const hoverCleanups: Array<() => void> = [];
+        const travel = gsap.timeline({
+          defaults: { ease: "none" },
+          scrollTrigger: {
+            trigger: "[data-journey-map]",
+            start: "top 62%",
+            end: "bottom 66%",
+            scrub: 0.8,
+            invalidateOnRefresh: true,
+            onUpdate: (self) => paintSteps(self.progress),
+          },
+        });
+
+        travel
+          .to(progress, { strokeDashoffset: 0 }, 0)
+          .to(pulse, { strokeDashoffset: -length }, 0)
+          .to(
+            marker,
+            {
+              motionPath: { path, align: path, alignOrigin: [0.5, 0.5], autoRotate: 90 },
+            },
+            0,
+          )
+          .to(mobileLine, { scaleY: 1 }, 0)
+          .to(
+            mobileDot,
+            {
+              y: () =>
+                Math.max(
+                  0,
+                  (element.querySelector<HTMLElement>("[data-journey-map]")?.offsetHeight ?? 0) -
+                    96,
+                ),
+            },
+            0,
+          );
+
+        cards.forEach((card) => {
+          gsap.fromTo(
+            card,
+            { y: 42, opacity: 0, scale: 0.96 },
+            {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              duration: 0.65,
+              ease: "power3.out",
+              clearProps: "transform,opacity",
+              scrollTrigger: { trigger: card, start: "top 86%" },
+            },
+          );
+        });
+
+        nodes.forEach((node) => {
+          gsap.fromTo(
+            node,
+            { scale: 0.5, opacity: 0 },
+            {
+              scale: 1,
+              opacity: 1,
+              duration: 0.45,
+              ease: "back.out(1.8)",
+              scrollTrigger: { trigger: node, start: "top 78%" },
+            },
+          );
+        });
+
+        cards.forEach((card) => {
+          const xTo = gsap.quickTo(card, "x", { duration: 0.35, ease: "power3.out" });
+          const yTo = gsap.quickTo(card, "y", { duration: 0.35, ease: "power3.out" });
+          const onMove = (event: PointerEvent) => {
+            if (event.pointerType === "touch") return;
+            const bounds = card.getBoundingClientRect();
+            xTo(((event.clientX - bounds.left) / bounds.width - 0.5) * 5);
+            yTo(((event.clientY - bounds.top) / bounds.height - 0.5) * 5);
+          };
+          const onLeave = () => {
+            xTo(0);
+            yTo(0);
+          };
+          card.addEventListener("pointermove", onMove);
+          card.addEventListener("pointerleave", onLeave);
+          hoverCleanups.push(() => {
+            card.removeEventListener("pointermove", onMove);
+            card.removeEventListener("pointerleave", onLeave);
+          });
+        });
+
+        return () => hoverCleanups.forEach((cleanup) => cleanup());
       });
 
-      travel
-        .to(progress, { strokeDashoffset: 0 }, 0)
-        .to(marker, { motionPath: { path, align: path, alignOrigin: [0.5, 0.5] } }, 0);
-
-      gsap.utils.toArray<HTMLElement>("[data-journey-card]").forEach((card) => {
-        gsap.fromTo(
-          card,
-          { y: 42, opacity: 0, scale: 0.96 },
-          {
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 0.65,
-            ease: "power3.out",
-            clearProps: "transform,opacity",
-            scrollTrigger: { trigger: card, start: "top 86%" },
-          },
-        );
-      });
-
-      gsap.utils.toArray<HTMLElement>("[data-journey-node]").forEach((node) => {
-        gsap.fromTo(
-          node,
-          { scale: 0.5, opacity: 0 },
-          {
-            scale: 1,
-            opacity: 1,
-            duration: 0.45,
-            ease: "back.out(1.8)",
-            scrollTrigger: { trigger: node, start: "top 78%" },
-          },
-        );
+      mm.add("(prefers-reduced-motion: reduce)", () => {
+        gsap.set([progress, mobileLine], { strokeDashoffset: 0, scaleY: 1 });
+        gsap.set(cards, { opacity: 1, clearProps: "transform" });
+        paintSteps(1);
       });
     }, element);
 
@@ -178,16 +258,30 @@ export function Timeline() {
               vectorEffect="non-scaling-stroke"
               filter={`url(#${routeId}-glow)`}
             />
+            <path
+              ref={routePulse}
+              d={PATH}
+              fill="none"
+              stroke="var(--background)"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeDasharray="2 28"
+              vectorEffect="non-scaling-stroke"
+              opacity="0.9"
+            />
             <g ref={routeMarker}>
               <circle
-                r="22"
+                r="24"
                 fill="var(--background)"
                 stroke="var(--primary)"
                 strokeWidth="3"
                 vectorEffect="non-scaling-stroke"
+                filter={`url(#${routeId}-glow)`}
               />
-              <circle r="10" fill="var(--primary)" opacity="0.22" />
-              <circle r="4" fill="var(--primary)" />
+              <path
+                d="M-7 10C-3 2-8-2-2-12c0 6 5 6 4 12 4-4 7-2 7 2 0 7-6 11-10 11-3 0-5-1-6-3Z"
+                fill="var(--primary)"
+              />
             </g>
           </svg>
 
@@ -195,7 +289,23 @@ export function Timeline() {
             className="absolute bottom-8 left-6 top-8 w-px bg-border md:hidden"
             aria-hidden="true"
           >
-            <div className="h-full w-px bg-gradient-to-b from-primary via-accent to-success" />
+            <div
+              ref={mobileProgress}
+              className="h-full w-px bg-gradient-to-b from-primary via-accent to-success shadow-[0_0_12px_var(--primary)]"
+            />
+            <div
+              ref={mobileMarker}
+              className="absolute -left-[15px] top-0 z-30 flex size-8 items-center justify-center rounded-full border border-primary bg-background text-primary shadow-glow"
+            >
+              <Flame className="size-4" />
+            </div>
+          </div>
+
+          <div className="pointer-events-none absolute inset-0 hidden md:block" aria-hidden="true">
+            <Code2 className="absolute left-[7%] top-[9%] size-5 text-primary/20" />
+            <Database className="absolute right-[8%] top-[34%] size-5 text-accent/20" />
+            <Server className="absolute left-[9%] top-[66%] size-5 text-primary/20" />
+            <Flame className="absolute right-[9%] top-[88%] size-5 text-success/25" />
           </div>
 
           <ol className="relative space-y-8 md:space-y-12">
@@ -207,13 +317,16 @@ export function Timeline() {
               return (
                 <li
                   key={item.title}
-                  className={`relative min-h-48 pl-16 md:grid md:min-h-[204px] md:grid-cols-[1fr_84px_1fr] md:items-center md:pl-0 ${
+                  data-journey-step
+                  data-future={future}
+                  data-trail-state={future ? "locked" : "waiting"}
+                  className={`group relative min-h-48 pl-16 md:grid md:min-h-[204px] md:grid-cols-[1fr_84px_1fr] md:items-center md:pl-0 ${
                     even ? "md:[&>article]:col-start-1" : "md:[&>article]:col-start-3"
                   }`}
                 >
                   <div
                     data-journey-node
-                    className={`absolute left-6 top-8 z-20 flex size-11 -translate-x-1/2 items-center justify-center rounded-full border-2 bg-background md:left-1/2 md:top-1/2 md:-translate-y-1/2 ${
+                    className={`absolute left-6 top-8 z-20 flex size-11 -translate-x-1/2 items-center justify-center rounded-full border-2 bg-background transition-[border-color,color,box-shadow,transform] duration-500 group-data-[trail-state=waiting]:scale-90 group-data-[trail-state=waiting]:border-border group-data-[trail-state=waiting]:text-muted-foreground group-data-[trail-state=active]:scale-110 group-data-[trail-state=active]:border-primary group-data-[trail-state=active]:text-primary group-data-[trail-state=active]:shadow-glow md:left-1/2 md:top-1/2 md:-translate-y-1/2 ${
                       future
                         ? "border-border text-muted-foreground"
                         : current
@@ -231,7 +344,10 @@ export function Timeline() {
                     )}
                   </div>
 
-                  <article data-journey-card className="md:row-start-1">
+                  <article
+                    data-journey-card
+                    className="md:row-start-1 transition-[filter,opacity] duration-500 group-data-[trail-state=waiting]:opacity-55 group-data-[trail-state=waiting]:grayscale-[.35] group-data-[trail-state=locked]:opacity-45"
+                  >
                     <Panel
                       className={`group relative p-5 transition duration-300 hover:-translate-y-1 sm:p-6 ${
                         current
