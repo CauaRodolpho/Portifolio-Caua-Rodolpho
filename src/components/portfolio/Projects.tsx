@@ -14,8 +14,6 @@ import {
   Maximize2,
   Route,
   Server,
-  Sparkles,
-  Target,
   X,
 } from "lucide-react";
 import { Section, SectionHeader, Panel } from "./Panel";
@@ -194,18 +192,6 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
               {t(project.description ?? project.tagline)}
             </p>
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              <Info
-                icon={<Target className="size-3.5" />}
-                label={t("Problema resolvido")}
-                text={t(project.problem)}
-              />
-              <Info
-                icon={<Sparkles className="size-3.5" />}
-                label={t("Aprendizados")}
-                text={t(project.learnings)}
-              />
-            </div>
             {project.origin && (
               <div className="mt-4 rounded-xl border border-primary/20 bg-primary/[0.04] p-4">
                 <div className="hud-label flex items-center gap-2">
@@ -276,17 +262,6 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
       </div>
     </div>,
     document.body,
-  );
-}
-
-function Info({ icon, label, text }: { icon: React.ReactNode; label: string; text: string }) {
-  return (
-    <div className="rounded-xl border border-border bg-surface/35 p-4">
-      <div className="hud-label flex items-center gap-2 text-primary">
-        {icon} {label}
-      </div>
-      <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{text}</p>
-    </div>
   );
 }
 
