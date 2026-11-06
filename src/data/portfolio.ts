@@ -297,7 +297,7 @@ export const PROJECTS: PortfolioProject[] = [
       "Front-end, API e MongoDB publicados na Vercel",
     ],
     origin:
-      "Iniciado a partir de aulas gratuitas do DevClub sobre Front-End e Back-End e ampliado por mim com novo design, TypeScript, autenticação, acesso demo, JWT, bcrypt, Zod, proteção de rotas, dashboard, animações, Spline 3D, responsividade e deploy. Usei Inteligência Artificial como apoio em planejamento, revisão e resolução de problemas.",
+      "Começou a partir de aulas do DevClub e evoluiu para uma aplicação Full Stack própria. Refiz a interface e ampliei o projeto com TypeScript, acesso demo, validações, rotas protegidas, dashboard, Spline 3D e deploy separado do front-end e da API.",
     originLinks: [
       {
         label: "Aula base - Front-End",
@@ -336,6 +336,8 @@ export const PROJECTS: PortfolioProject[] = [
       "Integração com serviços de Inteligência Artificial",
       "Interface responsiva para acompanhamento da produtividade",
     ],
+    origin:
+      "Criado para explorar como Inteligência Artificial pode apoiar a organização da rotina sem substituir o controle do usuário. A construção priorizou estados assíncronos tipados, interface responsiva e uma base preparada para mover credenciais sensíveis ao servidor.",
     image: "/projects/chronos.webp",
     gradient: "linear-gradient(135deg, oklch(0.3 0.09 235), oklch(0.72 0.15 205))",
     github: "https://github.com/CauaRodolpho/Chronos.ia",
@@ -363,6 +365,8 @@ export const PROJECTS: PortfolioProject[] = [
       "Importação CSV e exportação em CSV, JSON, PNG e PDF",
       "Testes automatizados para cálculos e persistência",
     ],
+    origin:
+      "Criado como uma solução Front-End para transformar dados pessoais em painéis úteis sem exigir cadastro ou servidor. O desenvolvimento separou regras de cálculo da interface e adicionou importação, exportação, persistência local e testes.",
     image: "https://raw.githubusercontent.com/CauaRodolpho/FlowView/main/docs/flowview-preview.jpg",
     gradient: "linear-gradient(135deg, oklch(0.2 0.11 265), oklch(0.58 0.18 225))",
     github: "https://github.com/CauaRodolpho/FlowView",
@@ -403,6 +407,8 @@ export const PROJECTS: PortfolioProject[] = [
       "Relatórios de produtividade e saúde do projeto",
       "Importação e exportação de backup em JSON",
     ],
+    origin:
+      "Criado para simular o fluxo real de uma equipe de desenvolvimento em um único ambiente demonstrativo. O projeto evoluiu com perfis de acesso, Kanban, revisão de entregas, relatórios, validação de backups e persistência local.",
     image: "/projects/flowtask.webp",
     gallery: [
       { src: "/projects/flowtask.webp", label: "Visão geral" },
@@ -448,6 +454,8 @@ export const PROJECTS: PortfolioProject[] = [
       "Carrinho que separa itens com opções diferentes",
       "Checkout demonstrativo com confirmação do pedido",
     ],
+    origin:
+      "Criado como uma vitrine demonstrativa para um ateliê de produtos personalizados. O desenvolvimento reuniu catálogo, busca, favoritos, personalização, carrinho e checkout em uma experiência responsiva com animações GSAP.",
     image:
       "https://raw.githubusercontent.com/CauaRodolpho/Loja-Atelie/main/docs/images/home-desktop.webp",
     gradient: "linear-gradient(135deg, oklch(0.2 0.11 345), oklch(0.65 0.16 20))",

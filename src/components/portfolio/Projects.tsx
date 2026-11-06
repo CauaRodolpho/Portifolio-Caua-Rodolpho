@@ -187,16 +187,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
               </div>
             )}
 
-            <div className="mt-4 grid gap-3">
-              <div className="rounded-xl border border-border bg-surface/30 p-4">
-                <div className="hud-label flex items-center gap-2 text-primary">
-                  <Layers className="size-3.5" />{" "}
-                  {language === "pt" ? "Arquitetura" : "Architecture"}
-                </div>
-                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                  {t(project.architecture)}
-                </p>
-              </div>
+            <div className="mt-4">
               <div className="rounded-xl border border-border bg-surface/30 p-4">
                 <div className="hud-label flex items-center gap-2 text-primary">
                   <CheckCircle2 className="size-3.5" />{" "}
@@ -257,15 +248,26 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
                 ))}
               </div>
             </div>
-            <div className="mt-5 rounded-xl border border-border bg-surface/30 p-4">
-              <div className="hud-label flex items-center gap-2">
-                <Route className="size-3.5 text-primary" /> Roadmap
+            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+              <div className="rounded-xl border border-border bg-surface/30 p-4">
+                <div className="hud-label flex items-center gap-2">
+                  <Layers className="size-3.5 text-primary" />{" "}
+                  {language === "pt" ? "Arquitetura" : "Architecture"}
+                </div>
+                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                  {t(project.architecture)}
+                </p>
               </div>
-              <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                {project.roadmap.map((item) => t(item)).join(" · ")}
-              </p>
+              <div className="rounded-xl border border-border bg-surface/30 p-4">
+                <div className="hud-label flex items-center gap-2">
+                  <Route className="size-3.5 text-primary" /> Roadmap
+                </div>
+                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                  {project.roadmap.map((item) => t(item)).join(" · ")}
+                </p>
+              </div>
             </div>
-            <div className="mt-auto flex flex-wrap gap-3 pt-7">
+            <div className="flex flex-wrap justify-center gap-3 pt-6 lg:justify-center">
               {demoUrl && (
                 <a
                   href={demoUrl}
