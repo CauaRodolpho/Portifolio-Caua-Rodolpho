@@ -25,32 +25,48 @@ type Project = (typeof PROJECTS)[number];
 
 function ProjectModal({ project, onClose }: { project: Project; onClose: () => void }) {
   const dialog = useRef<HTMLDivElement>(null);
+  const visual = useRef<HTMLDivElement>(null);
+  const slideDirection = useRef(1);
+  const touchStart = useRef<number | null>(null);
   const [slide, setSlide] = useState(0);
   const { language, t } = useLanguage();
   const demoUrl = "demo" in project ? project.demo : undefined;
   const slides = useMemo(
-    () => [
-      ...(
-        project.gallery ??
-        (project.image
-          ? [{ src: project.image, label: language === "pt" ? "Interface" : "Interface" }]
-          : [])
-      ).map((image) => ({ type: "image" as const, ...image })),
-      { type: "architecture", label: language === "pt" ? "Arquitetura" : "Architecture" },
-      { type: "features", label: language === "pt" ? "Funcionalidades" : "Features" },
-    ],
+    () =>
+      project.gallery ??
+      (project.image
+        ? [{ src: project.image, label: language === "pt" ? "Interface" : "Interface" }]
+        : []),
     [language, project.gallery, project.image],
   );
   const activeSlide = slides[slide];
+  const hasMultipleSlides = slides.length > 1;
+
+  const goToSlide = useCallback(
+    (next: number, direction?: number) => {
+      if (!hasMultipleSlides) return;
+      slideDirection.current = direction ?? (next > slide ? 1 : -1);
+      setSlide((next + slides.length) % slides.length);
+    },
+    [hasMultipleSlides, slide, slides.length],
+  );
+
+  const moveSlide = useCallback(
+    (direction: number) => {
+      if (!hasMultipleSlides) return;
+      slideDirection.current = direction;
+      setSlide((value) => (value + direction + slides.length) % slides.length);
+    },
+    [hasMultipleSlides, slides.length],
+  );
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
-      if (event.key === "ArrowRight") setSlide((value) => (value + 1) % slides.length);
-      if (event.key === "ArrowLeft")
-        setSlide((value) => (value - 1 + slides.length) % slides.length);
+      if (event.key === "ArrowRight") moveSlide(1);
+      if (event.key === "ArrowLeft") moveSlide(-1);
     };
     window.addEventListener("keydown", onKeyDown);
     dialog.current?.focus();
@@ -65,7 +81,16 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [onClose, slides.length]);
+  }, [moveSlide, onClose]);
+
+  useEffect(() => {
+    if (!visual.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    gsap.fromTo(
+      visual.current,
+      { x: 34 * slideDirection.current, opacity: 0.25, scale: 0.985 },
+      { x: 0, opacity: 1, scale: 1, duration: 0.48, ease: "power3.out" },
+    );
+  }, [slide]);
 
   return createPortal(
     <div
@@ -91,91 +116,105 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
         </button>
 
         <div className="grid gap-8 px-5 pb-8 pt-1 sm:px-8 lg:grid-cols-[1.08fr_.92fr] lg:px-10">
-          <div>
-            <div className="relative overflow-hidden rounded-2xl border border-border bg-surface/40">
-              <div className="relative aspect-[16/10]" style={{ background: project.gradient }}>
-                {activeSlide.type === "image" && (
-                  <>
+          <div className="min-w-0">
+            <div className="relative rounded-2xl border border-border bg-surface/40 shadow-[0_18px_45px_-32px_color-mix(in_oklab,var(--primary)_70%,transparent)]">
+              <div
+                className="relative aspect-[16/10] overflow-hidden rounded-2xl"
+                style={{ background: project.gradient }}
+                onTouchStart={(event) => {
+                  touchStart.current = event.touches[0]?.clientX ?? null;
+                }}
+                onTouchEnd={(event) => {
+                  if (touchStart.current === null) return;
+                  const distance = event.changedTouches[0].clientX - touchStart.current;
+                  if (Math.abs(distance) > 45) moveSlide(distance < 0 ? 1 : -1);
+                  touchStart.current = null;
+                }}
+              >
+                {activeSlide && (
+                  <div ref={visual} className="absolute inset-0">
                     <img
                       src={activeSlide.src}
                       alt={`${activeSlide.label} — ${project.title}`}
                       className={`absolute inset-0 size-full ${project.imageFit === "contain" ? "object-contain" : "object-cover"}`}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10" />
-                  </>
-                )}
-                {activeSlide.type === "architecture" && (
-                  <div className="absolute inset-0 flex flex-col justify-between p-6 sm:p-8">
-                    <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-white/75">
-                      <Layers className="size-4" /> {activeSlide.label}
-                    </div>
-                    <p className="max-w-xl text-lg font-medium leading-relaxed text-white sm:text-2xl">
-                      {t(project.architecture)}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tech.slice(0, 7).map((tech) => (
-                        <span
-                          key={tech}
-                          className="rounded-full border border-white/25 bg-black/20 px-3 py-1 font-mono text-[10px] text-white backdrop-blur"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
                   </div>
                 )}
-                {activeSlide.type === "features" && (
-                  <div className="absolute inset-0 flex flex-col p-6 sm:p-8">
-                    <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-white/75">
-                      <CheckCircle2 className="size-4" /> {activeSlide.label}
-                    </div>
-                    <div className="my-auto grid gap-3 sm:grid-cols-2">
-                      {(project.highlights ?? [project.problem, project.learnings])
-                        .slice(0, 6)
-                        .map((item) => (
-                          <div
-                            key={item}
-                            className="rounded-xl border border-white/20 bg-black/20 p-3 text-xs leading-relaxed text-white/90 backdrop-blur-sm sm:text-sm"
-                          >
-                            {t(item)}
-                          </div>
-                        ))}
-                    </div>
+                {hasMultipleSlides && (
+                  <div className="absolute right-4 top-4 rounded-full border border-white/20 bg-black/45 px-3 py-1 font-mono text-[10px] tracking-[0.16em] text-white backdrop-blur-md">
+                    {String(slide + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}
                   </div>
                 )}
               </div>
-              <button
-                type="button"
-                onClick={() => setSlide((value) => (value - 1 + slides.length) % slides.length)}
-                aria-label={language === "pt" ? "Visual anterior" : "Previous visual"}
-                className="absolute left-3 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur transition hover:bg-black/60"
-              >
-                <ChevronLeft className="size-5" />
-              </button>
-              <button
-                type="button"
-                onClick={() => setSlide((value) => (value + 1) % slides.length)}
-                aria-label={language === "pt" ? "Próximo visual" : "Next visual"}
-                className="absolute right-3 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur transition hover:bg-black/60"
-              >
-                <ChevronRight className="size-5" />
-              </button>
+              {hasMultipleSlides && (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => moveSlide(-1)}
+                    aria-label={language === "pt" ? "Imagem anterior" : "Previous image"}
+                    className="group absolute -left-3 top-1/2 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-xl border border-primary/55 bg-background/90 text-primary shadow-[0_10px_30px_-12px_color-mix(in_oklab,var(--primary)_80%,transparent)] backdrop-blur-md transition duration-300 hover:-left-4 hover:scale-105 hover:bg-primary hover:text-primary-foreground active:scale-95 sm:-left-5"
+                  >
+                    <ChevronLeft className="size-5 transition-transform duration-300 group-hover:-translate-x-0.5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => moveSlide(1)}
+                    aria-label={language === "pt" ? "Próxima imagem" : "Next image"}
+                    className="group absolute -right-3 top-1/2 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-xl border border-primary/55 bg-background/90 text-primary shadow-[0_10px_30px_-12px_color-mix(in_oklab,var(--primary)_80%,transparent)] backdrop-blur-md transition duration-300 hover:-right-4 hover:scale-105 hover:bg-primary hover:text-primary-foreground active:scale-95 sm:-right-5"
+                  >
+                    <ChevronRight className="size-5 transition-transform duration-300 group-hover:translate-x-0.5" />
+                  </button>
+                </>
+              )}
             </div>
-            <div
-              className="mt-3 flex justify-center gap-2"
-              role="tablist"
-              aria-label={language === "pt" ? "Visuais do projeto" : "Project visuals"}
-            >
-              {slides.map((item, index) => (
-                <button
-                  key={`${item.type}-${item.label}`}
-                  type="button"
-                  onClick={() => setSlide(index)}
-                  aria-label={item.label}
-                  aria-selected={slide === index}
-                  className={`h-1.5 rounded-full transition-all ${slide === index ? "w-8 bg-primary" : "w-3 bg-border hover:bg-muted-foreground"}`}
-                />
-              ))}
+            {hasMultipleSlides && (
+              <div
+                className="mt-3 flex justify-center gap-2"
+                role="tablist"
+                aria-label={language === "pt" ? "Imagens do projeto" : "Project images"}
+              >
+                {slides.map((item, index) => (
+                  <button
+                    key={`${item.src}-${item.label}`}
+                    type="button"
+                    onClick={() => goToSlide(index)}
+                    aria-label={item.label}
+                    aria-selected={slide === index}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${slide === index ? "w-8 bg-primary shadow-[0_0_12px_var(--primary)]" : "w-3 bg-border hover:bg-muted-foreground"}`}
+                  />
+                ))}
+              </div>
+            )}
+
+            <div className="mt-4 grid gap-3">
+              <div className="rounded-xl border border-border bg-surface/30 p-4">
+                <div className="hud-label flex items-center gap-2 text-primary">
+                  <Layers className="size-3.5" />{" "}
+                  {language === "pt" ? "Arquitetura" : "Architecture"}
+                </div>
+                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                  {t(project.architecture)}
+                </p>
+              </div>
+              <div className="rounded-xl border border-border bg-surface/30 p-4">
+                <div className="hud-label flex items-center gap-2 text-primary">
+                  <CheckCircle2 className="size-3.5" />{" "}
+                  {language === "pt" ? "Funcionalidades" : "Features"}
+                </div>
+                <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                  {(project.highlights ?? [project.problem, project.learnings])
+                    .slice(0, 6)
+                    .map((item) => (
+                      <div
+                        key={item}
+                        className="rounded-lg border border-border/80 bg-background/35 px-3 py-2 text-[11px] leading-relaxed text-muted-foreground"
+                      >
+                        {t(item)}
+                      </div>
+                    ))}
+                </div>
+              </div>
             </div>
           </div>
 
