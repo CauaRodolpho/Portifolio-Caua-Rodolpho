@@ -209,6 +209,9 @@ export function Skills() {
                     </p>
                   </div>
                 </div>
+                <span className="font-mono text-[10px] text-muted-foreground">
+                  {String(AI_SKILLS.length).padStart(2, "0")} AI TOOLS
+                </span>
               </div>
 
               <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
