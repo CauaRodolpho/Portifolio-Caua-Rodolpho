@@ -314,6 +314,8 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
 
 export function Projects() {
   const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const previousControl = useRef<HTMLButtonElement>(null);
+  const nextControl = useRef<HTMLButtonElement>(null);
   const [active, setActive] = useState(0);
   const [selected, setSelected] = useState<Project | null>(null);
   const [compact, setCompact] = useState(false);
@@ -334,6 +336,21 @@ export function Projects() {
     (direction: number) =>
       setActive((value) => (value + direction + PROJECTS.length) % PROJECTS.length),
     [],
+  );
+  const navigate = useCallback(
+    (direction: number) => {
+      const control = direction < 0 ? previousControl.current : nextControl.current;
+      const icon = control?.querySelector("svg");
+      if (icon && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        gsap.fromTo(
+          icon,
+          { x: 0 },
+          { x: direction * 5, duration: 0.16, repeat: 1, yoyo: true, ease: "power2.out" },
+        );
+      }
+      move(direction);
+    },
+    [move],
   );
 
   useEffect(() => {
@@ -528,16 +545,32 @@ export function Projects() {
               </div>
             );
           })}
+          <div className="pointer-events-none absolute left-1/2 top-[42%] z-30 w-full max-w-[920px] -translate-x-1/2 -translate-y-1/2 px-1 sm:px-3">
+            <button
+              ref={previousControl}
+              type="button"
+              onClick={() => navigate(-1)}
+              aria-label={language === "pt" ? "Projeto anterior" : "Previous project"}
+              className="group pointer-events-auto absolute left-0 flex h-12 w-12 -translate-y-1/2 items-center justify-center gap-2 rounded-xl border border-primary/45 bg-background/85 font-mono text-[10px] uppercase tracking-[0.12em] text-primary shadow-[0_14px_35px_-18px_color-mix(in_oklab,var(--primary)_85%,transparent)] backdrop-blur-md transition duration-300 hover:-translate-x-1 hover:border-primary hover:bg-primary hover:text-primary-foreground active:scale-95 lg:w-24"
+            >
+              <ArrowLeft className="size-4 shrink-0" />
+              <span className="hidden lg:inline">
+                {language === "pt" ? "Anterior" : "Previous"}
+              </span>
+            </button>
+            <button
+              ref={nextControl}
+              type="button"
+              onClick={() => navigate(1)}
+              aria-label={language === "pt" ? "Próximo projeto" : "Next project"}
+              className="group pointer-events-auto absolute right-0 flex h-12 w-12 -translate-y-1/2 items-center justify-center gap-2 rounded-xl border border-primary/45 bg-background/85 font-mono text-[10px] uppercase tracking-[0.12em] text-primary shadow-[0_14px_35px_-18px_color-mix(in_oklab,var(--primary)_85%,transparent)] backdrop-blur-md transition duration-300 hover:translate-x-1 hover:border-primary hover:bg-primary hover:text-primary-foreground active:scale-95 lg:w-24"
+            >
+              <span className="hidden lg:inline">{language === "pt" ? "Próximo" : "Next"}</span>
+              <ArrowRight className="size-4 shrink-0" />
+            </button>
+          </div>
         </div>
-        <div className="relative z-30 mt-4 flex items-center justify-center gap-4">
-          <button
-            type="button"
-            onClick={() => move(-1)}
-            aria-label={language === "pt" ? "Projeto anterior" : "Previous project"}
-            className="flex size-11 items-center justify-center rounded-full border border-border bg-surface/50 text-muted-foreground transition hover:-translate-x-0.5 hover:border-primary/50 hover:text-primary"
-          >
-            <ArrowLeft className="size-4" />
-          </button>
+        <div className="relative z-30 mt-4 flex items-center justify-center">
           <div
             className="flex gap-2"
             role="tablist"
@@ -554,14 +587,6 @@ export function Projects() {
               />
             ))}
           </div>
-          <button
-            type="button"
-            onClick={() => move(1)}
-            aria-label={language === "pt" ? "Próximo projeto" : "Next project"}
-            className="flex size-11 items-center justify-center rounded-full border border-border bg-surface/50 text-muted-foreground transition hover:translate-x-0.5 hover:border-primary/50 hover:text-primary"
-          >
-            <ArrowRight className="size-4" />
-          </button>
         </div>
       </Section>
       {selected && <ProjectModal project={selected} onClose={() => setSelected(null)} />}
