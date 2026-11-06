@@ -35,9 +35,15 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
     () =>
       project.gallery ??
       (project.image
-        ? [{ src: project.image, label: language === "pt" ? "Interface" : "Interface" }]
+        ? [
+            {
+              src: project.image,
+              label: language === "pt" ? "Interface" : "Interface",
+              fit: project.imageFit,
+            },
+          ]
         : []),
-    [language, project.gallery, project.image],
+    [language, project.gallery, project.image, project.imageFit],
   );
   const activeSlide = slides[slide];
   const hasMultipleSlides = slides.length > 1;
@@ -136,7 +142,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
                     <img
                       src={activeSlide.src}
                       alt={`${activeSlide.label} — ${project.title}`}
-                      className={`absolute inset-0 size-full ${project.imageFit === "contain" ? "object-contain" : "object-cover"}`}
+                      className={`absolute inset-0 size-full ${(activeSlide.fit ?? project.imageFit) === "contain" ? "object-contain" : "object-cover"}`}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10" />
                   </div>

@@ -244,7 +244,7 @@ export type PortfolioProject = {
   demoAvailable?: boolean;
   featured?: boolean;
   image?: string;
-  gallery?: { src: string; label: string }[];
+  gallery?: { src: string; label: string; fit?: "cover" | "contain" }[];
   imageFit?: "cover" | "contain";
   gradient: string;
   github: string;
@@ -311,6 +311,14 @@ export const PROJECTS: PortfolioProject[] = [
     demoAvailable: true,
     featured: true,
     image: "/projects/authflow.webp",
+    gallery: [
+      { src: "/projects/authflow.webp", label: "Tela de autenticação" },
+      {
+        src: "/projects/authflow-user-dashboard.png",
+        label: "Painel de usuários",
+        fit: "contain",
+      },
+    ],
     imageFit: "contain",
     gradient: "linear-gradient(135deg, oklch(0.18 0.06 255), oklch(0.48 0.16 220))",
     github: "https://github.com/CauaRodolpho/authflow-fullstack",
@@ -368,6 +376,22 @@ export const PROJECTS: PortfolioProject[] = [
     origin:
       "Criado como uma solução Front-End para transformar dados pessoais em painéis úteis sem exigir cadastro ou servidor. O desenvolvimento separou regras de cálculo da interface e adicionou importação, exportação, persistência local e testes.",
     image: "https://raw.githubusercontent.com/CauaRodolpho/FlowView/main/docs/flowview-preview.jpg",
+    gallery: [
+      {
+        src: "https://raw.githubusercontent.com/CauaRodolpho/FlowView/main/docs/flowview-preview.jpg",
+        label: "Visão geral",
+      },
+      {
+        src: "/projects/flowview-finance-dashboard.png",
+        label: "Dashboard financeiro",
+        fit: "contain",
+      },
+      {
+        src: "/projects/flowview-dashboard-templates.png",
+        label: "Modelos de dashboard",
+        fit: "contain",
+      },
+    ],
     gradient: "linear-gradient(135deg, oklch(0.2 0.11 265), oklch(0.58 0.18 225))",
     github: "https://github.com/CauaRodolpho/FlowView",
     demo: "https://flowview-two.vercel.app/",
@@ -458,6 +482,22 @@ export const PROJECTS: PortfolioProject[] = [
       "Criado como uma vitrine demonstrativa para um ateliê de produtos personalizados. O desenvolvimento reuniu catálogo, busca, favoritos, personalização, carrinho e checkout em uma experiência responsiva com animações GSAP.",
     image:
       "https://raw.githubusercontent.com/CauaRodolpho/Loja-Atelie/main/docs/images/home-desktop.webp",
+    gallery: [
+      {
+        src: "https://raw.githubusercontent.com/CauaRodolpho/Loja-Atelie/main/docs/images/home-desktop.webp",
+        label: "Página inicial",
+      },
+      {
+        src: "/projects/anacraft-product-catalog.png",
+        label: "Catálogo de produtos",
+        fit: "contain",
+      },
+      {
+        src: "/projects/anacraft-checkout.png",
+        label: "Checkout do pedido",
+        fit: "contain",
+      },
+    ],
     gradient: "linear-gradient(135deg, oklch(0.2 0.11 345), oklch(0.65 0.16 20))",
     github: "https://github.com/CauaRodolpho/Loja-Atelie",
     demo: "https://loja-atelie-phi.vercel.app/",
