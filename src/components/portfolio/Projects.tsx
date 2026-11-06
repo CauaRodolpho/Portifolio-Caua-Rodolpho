@@ -429,7 +429,7 @@ export function Projects() {
         </div>
 
         <div
-          className="relative h-[460px] perspective-[1400px] sm:h-[510px] lg:h-[540px]"
+          className="relative h-[480px] perspective-[1400px] sm:h-[590px] lg:h-[650px]"
           onPointerDown={(event) => {
             dragStart.current = event.clientX;
           }}
@@ -545,34 +545,30 @@ export function Projects() {
               </div>
             );
           })}
-          <div className="pointer-events-none absolute left-1/2 top-[42%] z-30 w-full max-w-[920px] -translate-x-1/2 -translate-y-1/2 px-1 sm:px-3">
+          <div className="pointer-events-none absolute left-1/2 top-[42%] z-30 w-[88%] max-w-[760px] -translate-x-1/2 -translate-y-1/2 sm:w-[72%]">
             <button
               ref={previousControl}
               type="button"
               onClick={() => navigate(-1)}
               aria-label={language === "pt" ? "Projeto anterior" : "Previous project"}
-              className="group pointer-events-auto absolute left-0 flex h-12 w-12 -translate-y-1/2 items-center justify-center gap-2 rounded-xl border border-primary/45 bg-background/85 font-mono text-[10px] uppercase tracking-[0.12em] text-primary shadow-[0_14px_35px_-18px_color-mix(in_oklab,var(--primary)_85%,transparent)] backdrop-blur-md transition duration-300 hover:-translate-x-1 hover:border-primary hover:bg-primary hover:text-primary-foreground active:scale-95 lg:w-24"
+              className="group pointer-events-auto absolute left-0 flex size-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-xl border border-border/90 bg-background/75 text-muted-foreground backdrop-blur-md transition duration-300 hover:scale-105 hover:border-primary/70 hover:bg-background/95 hover:text-primary active:scale-95 sm:size-12"
             >
               <ArrowLeft className="size-4 shrink-0" />
-              <span className="hidden lg:inline">
-                {language === "pt" ? "Anterior" : "Previous"}
-              </span>
             </button>
             <button
               ref={nextControl}
               type="button"
               onClick={() => navigate(1)}
               aria-label={language === "pt" ? "Próximo projeto" : "Next project"}
-              className="group pointer-events-auto absolute right-0 flex h-12 w-12 -translate-y-1/2 items-center justify-center gap-2 rounded-xl border border-primary/45 bg-background/85 font-mono text-[10px] uppercase tracking-[0.12em] text-primary shadow-[0_14px_35px_-18px_color-mix(in_oklab,var(--primary)_85%,transparent)] backdrop-blur-md transition duration-300 hover:translate-x-1 hover:border-primary hover:bg-primary hover:text-primary-foreground active:scale-95 lg:w-24"
+              className="group pointer-events-auto absolute right-0 flex size-11 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-xl border border-border/90 bg-background/75 text-muted-foreground backdrop-blur-md transition duration-300 hover:scale-105 hover:border-primary/70 hover:bg-background/95 hover:text-primary active:scale-95 sm:size-12"
             >
-              <span className="hidden lg:inline">{language === "pt" ? "Próximo" : "Next"}</span>
               <ArrowRight className="size-4 shrink-0" />
             </button>
           </div>
         </div>
-        <div className="relative z-30 mt-4 flex items-center justify-center">
+        <div className="relative z-30 mt-5 flex items-center justify-center">
           <div
-            className="flex gap-2"
+            className="flex items-center gap-2.5 rounded-full border border-border/70 bg-surface/55 px-4 py-2.5 shadow-[0_14px_35px_-26px_color-mix(in_oklab,var(--primary)_65%,transparent)] backdrop-blur"
             role="tablist"
             aria-label={language === "pt" ? "Selecionar projeto" : "Select project"}
           >
@@ -583,7 +579,7 @@ export function Projects() {
                 onClick={() => setActive(index)}
                 aria-label={item.title}
                 aria-selected={index === active}
-                className={`h-1.5 rounded-full transition-all ${index === active ? "w-8 bg-primary" : "w-3 bg-border hover:bg-muted-foreground"}`}
+                className={`size-2 rounded-full transition-all duration-300 ${index === active ? "w-6 bg-primary shadow-[0_0_10px_color-mix(in_oklab,var(--primary)_70%,transparent)]" : "bg-muted-foreground/35 hover:bg-muted-foreground/70"}`}
               />
             ))}
           </div>
