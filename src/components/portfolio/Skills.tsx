@@ -209,9 +209,6 @@ export function Skills() {
                     </p>
                   </div>
                 </div>
-                <span className="rounded-full border border-primary/30 bg-primary/10 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-primary">
-                  AI
-                </span>
               </div>
 
               <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
