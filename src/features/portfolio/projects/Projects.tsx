@@ -16,10 +16,13 @@ import {
   Server,
   X,
 } from "lucide-react";
-import { Section, SectionHeader, Panel } from "./Panel";
+import { Section, SectionHeader, Panel } from "@/components/ui/portfolio";
+import { ActionLink, IconButton } from "@/components/ui/button";
+import { TechBadge } from "@/components/ui/badge";
 import { getRepositoryByUrl, useGitHubPortfolio } from "@/hooks/useGitHubPortfolio";
+import { useFocusTrap } from "@/hooks/useFocusTrap";
 import { PROJECTS } from "@/data/portfolio";
-import { useLanguage } from "../language-provider";
+import { useLanguage } from "@/components/language-provider";
 
 type Project = (typeof PROJECTS)[number];
 
@@ -30,6 +33,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
   const touchStart = useRef<number | null>(null);
   const [slide, setSlide] = useState(0);
   const { language, t } = useLanguage();
+  useFocusTrap(dialog);
   const demoUrl = "demo" in project ? project.demo : undefined;
   const slides = useMemo(
     () =>
@@ -75,7 +79,6 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
       if (event.key === "ArrowLeft") moveSlide(-1);
     };
     window.addEventListener("keydown", onKeyDown);
-    dialog.current?.focus();
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       gsap.fromTo(
         dialog.current,
@@ -112,14 +115,13 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
         tabIndex={-1}
         className="hud-panel hud-corner relative max-h-[94vh] w-full max-w-6xl overflow-x-hidden overflow-y-auto border-primary/35 bg-background shadow-[0_30px_120px_-30px_color-mix(in_oklab,var(--primary)_55%,transparent)] outline-none"
       >
-        <button
-          type="button"
+        <IconButton
           onClick={onClose}
           aria-label={language === "pt" ? "Fechar especificações" : "Close specifications"}
-          className="sticky right-4 top-4 z-30 ml-auto mr-4 mt-4 flex size-10 items-center justify-center rounded-full border border-border bg-background/90 text-muted-foreground backdrop-blur transition hover:border-primary/50 hover:text-primary"
+          className="sticky right-4 top-4 z-30 ml-auto mr-4 mt-4"
         >
           <X className="size-5" />
-        </button>
+        </IconButton>
 
         <div className="grid gap-8 px-5 pb-8 pt-1 sm:px-8 lg:grid-cols-[1.08fr_.92fr] lg:px-10">
           <div className="min-w-0">
@@ -245,12 +247,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
               </div>
               <div className="flex flex-wrap gap-1.5">
                 {project.tech.map((tech) => (
-                  <span
-                    key={tech}
-                    className="rounded-md border border-border bg-surface/50 px-2 py-1 font-mono text-[9px] text-muted-foreground"
-                  >
-                    {tech}
-                  </span>
+                  <TechBadge key={tech}>{tech}</TechBadge>
                 ))}
               </div>
             </div>
@@ -275,33 +272,28 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
             </div>
             <div className="flex flex-wrap justify-center gap-3 pt-6 lg:justify-center">
               {demoUrl && (
-                <a
-                  href={demoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg border border-primary/45 bg-primary/10 px-4 py-2.5 font-mono text-xs text-primary transition hover:-translate-y-0.5 hover:bg-primary/15"
-                >
+                <ActionLink href={demoUrl} target="_blank" rel="noopener noreferrer">
                   <ArrowUpRight className="size-4" />{" "}
                   {language === "pt" ? "Ver demonstração" : "View demo"}
-                </a>
+                </ActionLink>
               )}
-              <a
+              <ActionLink
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg border border-border px-4 py-2.5 font-mono text-xs text-muted-foreground transition hover:border-primary/40 hover:text-foreground"
+                variant="secondary"
               >
                 <Github className="size-4" /> {language === "pt" ? "Ver código" : "View code"}
-              </a>
+              </ActionLink>
               {project.api && (
-                <a
+                <ActionLink
                   href={project.api}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-2 py-2.5 font-mono text-xs text-muted-foreground transition hover:text-foreground"
+                  variant="ghost"
                 >
                   <Server className="size-4" /> API
-                </a>
+                </ActionLink>
               )}
             </div>
           </div>

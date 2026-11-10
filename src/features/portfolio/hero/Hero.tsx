@@ -23,8 +23,8 @@ import {
   SiTypescript,
 } from "react-icons/si";
 import { CONTACT_EMAIL, PROFILE, PROJECTS } from "@/data/portfolio";
-import { useTheme } from "../theme-provider";
-import { useLanguage } from "../language-provider";
+import { useTheme } from "@/components/theme-provider";
+import { useLanguage } from "@/components/language-provider";
 
 const FEATURED_PROJECT_NAMES = ["AuthFlow", "FlowView", "FlowTask", "Ateliê AnaCraft"];
 
@@ -70,7 +70,7 @@ export function Hero({ start }: { start: boolean }) {
   const resumeFilename =
     language === "pt" ? "curriculo-caua-rodolpho.pdf" : "caua-rodolpho-resume-en.pdf";
   const isDark = theme === "dark";
-  const heroVideo = isDark ? "/Video%20Hero%20Dark.mp4" : "/Video%20Hero%20Light.mp4";
+  const heroVideo = isDark ? "/hero-dark.mp4" : "/hero-light.mp4";
   const heroPoster = isDark ? "/hero-hologram-poster.jpg" : "/hero-hologram-light-poster.jpg";
 
   useEffect(() => {

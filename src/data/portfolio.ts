@@ -314,7 +314,7 @@ export const PROJECTS: PortfolioProject[] = [
     gallery: [
       { src: "/projects/authflow.webp", label: "Tela de autenticação" },
       {
-        src: "/projects/authflow-user-dashboard.png",
+        src: "/projects/authflow-user-dashboard.webp",
         label: "Painel de usuários",
         fit: "contain",
       },
@@ -382,12 +382,12 @@ export const PROJECTS: PortfolioProject[] = [
         label: "Visão geral",
       },
       {
-        src: "/projects/flowview-finance-dashboard.png",
+        src: "/projects/flowview-finance-dashboard.webp",
         label: "Dashboard financeiro",
         fit: "contain",
       },
       {
-        src: "/projects/flowview-dashboard-templates.png",
+        src: "/projects/flowview-dashboard-templates.webp",
         label: "Modelos de dashboard",
         fit: "contain",
       },
@@ -436,8 +436,8 @@ export const PROJECTS: PortfolioProject[] = [
     image: "/projects/flowtask.webp",
     gallery: [
       { src: "/projects/flowtask.webp", label: "Visão geral" },
-      { src: "/projects/flowtask-dashboard.png", label: "Dashboard e Kanban" },
-      { src: "/projects/flowtask-relatorios.png", label: "Relatórios do projeto" },
+      { src: "/projects/flowtask-dashboard.webp", label: "Dashboard e Kanban" },
+      { src: "/projects/flowtask-relatorios.webp", label: "Relatórios do projeto" },
     ],
     gradient: "linear-gradient(135deg, oklch(0.2 0.11 265), oklch(0.58 0.18 225))",
     github: "https://github.com/CauaRodolpho/FlowStack",
@@ -488,12 +488,12 @@ export const PROJECTS: PortfolioProject[] = [
         label: "Página inicial",
       },
       {
-        src: "/projects/anacraft-product-catalog.png",
+        src: "/projects/anacraft-product-catalog.webp",
         label: "Catálogo de produtos",
         fit: "contain",
       },
       {
-        src: "/projects/anacraft-checkout.png",
+        src: "/projects/anacraft-checkout.webp",
         label: "Checkout do pedido",
         fit: "contain",
       },

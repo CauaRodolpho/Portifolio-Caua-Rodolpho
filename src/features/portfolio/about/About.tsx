@@ -11,11 +11,11 @@ import {
   Rocket,
   Target,
 } from "lucide-react";
-import { Section, SectionHeader, Panel } from "./Panel";
+import { Section, SectionHeader, Panel } from "@/components/ui/portfolio";
 import { useReveal } from "@/hooks/useReveal";
 import { getLanguageDistribution, useGitHubPortfolio } from "@/hooks/useGitHubPortfolio";
 import { CONTACT_EMAIL, getGmailComposeUrl, STATS, LANGUAGES } from "@/data/portfolio";
-import { useLanguage } from "../language-provider";
+import { useLanguage } from "@/components/language-provider";
 
 const STORY = [
   {

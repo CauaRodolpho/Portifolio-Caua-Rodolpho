@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Portfólio de Cauã Rodolpho</title>
+  <desc id="desc">Desenvolvedor Front-End criando interfaces e produtos digitais.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#020a12"/>
+      <stop offset="1" stop-color="#071d2a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="80%" cy="20%" r="65%">
+      <stop stop-color="#00d8ff" stop-opacity=".32"/>
+      <stop offset="1" stop-color="#00d8ff" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
+      <path d="M44 0H0V44" fill="none" stroke="#67e8f9" stroke-opacity=".07"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#background)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect x="70" y="62" width="1060" height="506" rx="28" fill="#03111b" fill-opacity=".72" stroke="#22d3ee" stroke-opacity=".32"/>
+  <circle cx="110" cy="108" r="7" fill="#22d3ee"/>
+  <text x="135" y="116" fill="#a5f3fc" font-family="monospace" font-size="18" letter-spacing="5">SYS.CAUA · PORTFÓLIO</text>
+  <text x="110" y="275" fill="#f8fafc" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="700">Cauã Rodolpho</text>
+  <text x="110" y="345" fill="#67e8f9" font-family="Inter, Arial, sans-serif" font-size="34">Desenvolvedor Front-End Júnior</text>
+  <text x="110" y="412" fill="#94a3b8" font-family="Inter, Arial, sans-serif" font-size="25">React · TypeScript · Interfaces · Experiências digitais</text>
+  <rect x="110" y="478" width="290" height="52" rx="26" fill="#22d3ee" fill-opacity=".12" stroke="#22d3ee" stroke-opacity=".6"/>
+  <text x="145" y="512" fill="#a5f3fc" font-family="monospace" font-size="17" letter-spacing="2">PROJETOS EM PRODUÇÃO</text>
+</svg>

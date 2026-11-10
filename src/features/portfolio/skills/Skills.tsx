@@ -28,10 +28,10 @@ import { LuBot } from "react-icons/lu";
 import { VscVscode } from "react-icons/vsc";
 import { Code2, Sparkles, Wrench } from "lucide-react";
 import type { IconType } from "react-icons";
-import { Panel, Section, SectionHeader } from "./Panel";
+import { Panel, Section, SectionHeader } from "@/components/ui/portfolio";
 import { useReveal } from "@/hooks/useReveal";
 import { SKILLS } from "@/data/portfolio";
-import { useLanguage } from "../language-provider";
+import { useLanguage } from "@/components/language-provider";
 
 const ICONS: Record<string, IconType> = {
   HTML5: SiHtml5,

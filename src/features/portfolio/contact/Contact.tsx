@@ -1,9 +1,9 @@
 import { useRef } from "react";
 import { Github, Linkedin, Mail, MessageCircle, FileText, ArrowUpRight } from "lucide-react";
-import { Section, SectionHeader, Panel } from "./Panel";
+import { Section, SectionHeader, Panel } from "@/components/ui/portfolio";
 import { useReveal } from "@/hooks/useReveal";
 import { CONTACT_EMAIL, getGmailComposeUrl, PROFILE } from "@/data/portfolio";
-import { useLanguage } from "../language-provider";
+import { useLanguage } from "@/components/language-provider";
 
 const CHANNELS = [
   {

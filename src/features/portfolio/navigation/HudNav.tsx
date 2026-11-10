@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { Languages, Moon, Sun } from "lucide-react";
-import { useTheme } from "../theme-provider";
-import { useLanguage } from "../language-provider";
+import { useTheme } from "@/components/theme-provider";
+import { useLanguage } from "@/components/language-provider";
 import { NAV_ITEMS } from "@/data/portfolio";
 
 export function HudNav() {

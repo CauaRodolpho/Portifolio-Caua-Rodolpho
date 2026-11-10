@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://portifolio-caua-rodolpho-hazel.vercel.app/sitemap.xml

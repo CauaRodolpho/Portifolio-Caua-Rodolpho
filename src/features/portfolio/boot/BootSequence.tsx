@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { useLanguage } from "../language-provider";
+import { useLanguage } from "@/components/language-provider";
 
 const LINES = [
   "SISTEMA INICIALIZADO",

@@ -13,9 +13,9 @@ import {
   Route,
   Server,
 } from "lucide-react";
-import { Section, SectionHeader, Panel } from "./Panel";
+import { Section, SectionHeader, Panel } from "@/components/ui/portfolio";
 import { TIMELINE } from "@/data/portfolio";
-import { useLanguage } from "../language-provider";
+import { useLanguage } from "@/components/language-provider";
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 

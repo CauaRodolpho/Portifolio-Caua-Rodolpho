@@ -1,9 +1,9 @@
 import { useRef } from "react";
 import { Award, BookOpen, GraduationCap } from "lucide-react";
-import { Section, SectionHeader, Panel } from "./Panel";
+import { Section, SectionHeader, Panel } from "@/components/ui/portfolio";
 import { useReveal } from "@/hooks/useReveal";
 import { ACHIEVEMENTS, COURSES_IN_PROGRESS, EDUCATION } from "@/data/portfolio";
-import { useLanguage } from "../language-provider";
+import { useLanguage } from "@/components/language-provider";
 
 function formatCompletionDate(value: string, language: "pt" | "en") {
   const [year, month] = value.split("-").map(Number);
