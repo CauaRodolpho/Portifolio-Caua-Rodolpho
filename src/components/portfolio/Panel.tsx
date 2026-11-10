@@ -1,4 +1,5 @@
-import type { ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
+import { useSectionTransition } from "@/hooks/useSectionTransition";
 import { cn } from "@/lib/utils";
 
 export function Panel({
@@ -48,9 +49,18 @@ export function Section({
   children: ReactNode;
   className?: string;
 }) {
+  const sectionRef = useRef<HTMLElement>(null);
+  useSectionTransition(sectionRef);
+
   return (
-    <section id={id} className={cn("relative scroll-mt-28 px-6 py-24 sm:py-28", className)}>
-      <div className="mx-auto w-full max-w-6xl">{children}</div>
+    <section
+      ref={sectionRef}
+      id={id}
+      className={cn("relative scroll-mt-28 px-6 py-24 sm:py-28", className)}
+    >
+      <div data-section-content className="mx-auto w-full max-w-6xl">
+        {children}
+      </div>
     </section>
   );
 }
