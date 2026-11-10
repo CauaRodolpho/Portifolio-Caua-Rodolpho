@@ -70,7 +70,7 @@ export function Hero({ start }: { start: boolean }) {
   const resumeFilename =
     language === "pt" ? "curriculo-caua-rodolpho.pdf" : "caua-rodolpho-resume-en.pdf";
   const isDark = theme === "dark";
-  const heroVideo = isDark ? "/hero-dark.mp4" : "/hero-light.mp4";
+  const heroVideo = isDark ? "/Video Hero Dark.mp4" : "/Video Hero Light.mp4";
   const heroPoster = isDark ? "/hero-hologram-poster.jpg" : "/hero-hologram-light-poster.jpg";
 
   useEffect(() => {
