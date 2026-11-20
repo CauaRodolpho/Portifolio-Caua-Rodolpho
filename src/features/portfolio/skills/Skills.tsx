@@ -1,5 +1,6 @@
 import {
   SiAngular,
+  SiAnthropic,
   SiClaude,
   SiCss,
   SiDocker,
@@ -23,7 +24,7 @@ import {
   SiVercel,
   SiVite,
 } from "react-icons/si";
-import { LuBot } from "react-icons/lu";
+import { LuBot, LuHeart } from "react-icons/lu";
 import { VscVscode } from "react-icons/vsc";
 import { Code2, Sparkles, Wrench } from "lucide-react";
 import type { IconType } from "react-icons";
@@ -56,6 +57,8 @@ const ICONS: Record<string, IconType> = {
   "GitHub Copilot": SiGithubcopilot,
   "ChatGPT / Codex": LuBot,
   Claude: SiClaude,
+  Anthropic: SiAnthropic,
+  Lovable: LuHeart,
   Gemini: SiGooglegemini,
 };
 
@@ -76,7 +79,11 @@ const DEVELOPMENT_SKILLS = SKILLS.filter(
   (skill) => !AI_SKILL_NAMES.has(skill.name) && !WORKFLOW_SKILL_NAMES.has(skill.name),
 );
 const WORKFLOW_SKILLS = SKILLS.filter((skill) => WORKFLOW_SKILL_NAMES.has(skill.name));
-const AI_SKILLS = SKILLS.filter((skill) => AI_SKILL_NAMES.has(skill.name));
+const AI_SKILLS = [
+  ...SKILLS.filter((skill) => AI_SKILL_NAMES.has(skill.name)),
+  { name: "Anthropic", desc: "Anthropic" },
+  { name: "Lovable", desc: "Lovable" },
+];
 
 export function Skills() {
   const { language, t } = useLanguage();
