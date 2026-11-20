@@ -124,6 +124,13 @@ export const SKILLS: {
     desc: "Timelines, ScrollTrigger e motion com propósito.",
   },
   {
+    name: "Node.js",
+    level: 35,
+    status: "Learning",
+    category: "Runtime",
+    desc: "Módulos, programação assíncrona e desenvolvimento de APIs.",
+  },
+  {
     name: "Vite",
     level: 75,
     status: "Training",
