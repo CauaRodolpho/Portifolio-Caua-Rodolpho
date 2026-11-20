@@ -339,6 +339,11 @@ export function Projects() {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     cardRefs.current.forEach((card, index) => {
       if (!card) return;
+      if (compact) {
+        gsap.killTweensOf(card);
+        gsap.set(card, { clearProps: "transform,opacity,filter,zIndex,pointerEvents" });
+        return;
+      }
       const position = positionOf(index);
       const distance = Math.abs(position);
       const visible = distance <= (compact ? 1 : 2);
@@ -403,7 +408,7 @@ export function Projects() {
         </div>
 
         <div
-          className="relative h-[480px] touch-pan-y cursor-grab select-none perspective-[1400px] active:cursor-grabbing sm:h-[590px] lg:h-[650px]"
+          className="relative touch-pan-y cursor-grab select-none perspective-[1400px] active:cursor-grabbing md:h-[590px] lg:h-[650px]"
           onPointerDown={(event) => {
             if (!event.isPrimary || event.button !== 0) return;
             suppressClick.current = false;
@@ -445,7 +450,7 @@ export function Projects() {
                 ref={(node) => {
                   cardRefs.current[index] = node;
                 }}
-                className="absolute left-1/2 top-0 w-[88%] max-w-[760px] -translate-x-1/2 cursor-pointer will-change-transform sm:w-[72%]"
+                className={`${isActive ? "block" : "hidden"} w-full md:absolute md:left-1/2 md:top-0 md:block md:w-[72%] md:max-w-[760px] md:will-change-transform`}
                 style={{ transformStyle: "preserve-3d" }}
                 onClick={() => !isActive && setActive(index)}
                 aria-hidden={!isActive}
@@ -475,9 +480,9 @@ export function Projects() {
                         Rank {item.difficulty}
                       </span>
                     </div>
-                    <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-4">
+                    <div className="absolute bottom-3 left-3 right-3 flex flex-wrap items-end justify-between gap-2 sm:bottom-4 sm:left-4 sm:right-4">
                       <div>
-                        <p className="font-display text-2xl font-bold text-white sm:text-4xl">
+                        <p className="font-display text-xl font-bold text-white sm:text-4xl">
                           {item.title}
                         </p>
                         <p className="mt-1 hidden max-w-xl text-xs text-white/70 sm:block">
