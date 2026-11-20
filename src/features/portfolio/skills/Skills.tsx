@@ -123,7 +123,7 @@ export function Skills() {
       <div className="space-y-8">
         {rows.map(({ title, items, icon: RowIcon, right }) => (
           <div key={title}>
-            <h3 className="mb-3 flex items-center gap-3 border-t border-border/60 pt-3 text-sm font-semibold">
+            <h3 className="mb-3 flex items-center gap-3 border-t border-border/60 pt-4 text-base font-semibold sm:text-lg">
               <RowIcon className="size-4 text-primary" aria-hidden="true" />
               {title}
             </h3>
@@ -144,10 +144,10 @@ export function Skills() {
                           key={`${item.name}-${index}`}
                           aria-hidden={duplicate || undefined}
                           title={t(item.desc)}
-                          className={`${duplicate ? "stack-copy " : ""}flex w-44 shrink-0 items-center gap-3 border-r border-border/60 px-4 py-4 text-xs font-medium`}
+                          className={`${duplicate ? "stack-copy " : ""}flex min-h-24 w-52 shrink-0 items-center gap-4 border-r border-border/60 px-5 py-5 text-sm sm:min-h-28 sm:w-60 sm:text-base font-medium`}
                         >
-                          <span className="grid size-8 shrink-0 place-items-center rounded-full border border-primary/20 bg-primary/5 text-primary">
-                            {Icon && <Icon className="size-4" aria-hidden="true" />}
+                          <span className="grid size-11 shrink-0 sm:size-12 place-items-center rounded-full border border-primary/20 bg-primary/5 text-primary">
+                            {Icon && <Icon className="size-5 sm:size-6" aria-hidden="true" />}
                           </span>
                           {item.name}
                         </li>
