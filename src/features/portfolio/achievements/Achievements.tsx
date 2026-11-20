@@ -31,7 +31,7 @@ export function Achievements() {
         />
 
         <div className="mb-8">
-          <div className="mb-4 flex items-center gap-3">
+          <div className="mb-4 flex items-center justify-center gap-3 text-center">
             <span className="flex size-9 items-center justify-center rounded-full border border-accent/40 bg-accent/10 text-accent">
               <GraduationCap className="size-4" />
             </span>
@@ -76,7 +76,7 @@ export function Achievements() {
         </div>
 
         <div className="mt-12">
-          <h3 className="mb-4 flex items-center gap-3 font-display text-base font-semibold">
+          <h3 className="mb-4 flex items-center justify-center gap-3 text-center font-display text-base font-semibold">
             <span className="flex size-9 items-center justify-center rounded-full bg-success/10 text-success">
               <Award className="size-4" aria-hidden="true" />
             </span>
@@ -116,7 +116,7 @@ export function Achievements() {
         </div>
 
         <div className="mt-12">
-          <div className="mb-4 flex items-center gap-3">
+          <div className="mb-4 flex items-center justify-center gap-3 text-center">
             <span className="flex size-9 items-center justify-center rounded-full border border-primary/40 bg-primary/10 text-primary">
               <BookOpen className="size-4" />
             </span>
