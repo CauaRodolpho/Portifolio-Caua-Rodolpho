@@ -36,7 +36,7 @@ const STORY = [
   {
     title: "Aprendizado atual",
     icon: BookOpen,
-    text: "Atualmente curso Análise e Desenvolvimento de Sistemas na UNINTER, a Formação Node.js Fundamentals e inglês aplicado à tecnologia.",
+    text: "Concluí a Formação Node.js Fundamentals pela DIO. Atualmente curso Análise e Desenvolvimento de Sistemas na UNINTER, a Formação SQL Database Specialist e inglês aplicado à tecnologia.",
   },
   {
     title: "Direção profissional",

@@ -48,8 +48,8 @@ const translations: Record<string, string> = {
   "O AuthFlow ampliou minha experiência com integração Full Stack. Com FlowView, FlowTask e Ateliê AnaCraft, pratiquei diferentes desafios de arquitetura, dados e experiência Front-End.":
     "AuthFlow expanded my experience with Full Stack integration. With FlowView, FlowTask, and Ateliê AnaCraft, I practiced different challenges in architecture, data, and Front-End experience.",
   "Aprendizado atual": "Current learning",
-  "Atualmente curso Análise e Desenvolvimento de Sistemas na UNINTER, a Formação Node.js Fundamentals e inglês aplicado à tecnologia.":
-    "I am currently studying Systems Analysis and Development at UNINTER, the Node.js Fundamentals Program, and English for technology.",
+  "Concluí a Formação Node.js Fundamentals pela DIO. Atualmente curso Análise e Desenvolvimento de Sistemas na UNINTER, a Formação SQL Database Specialist e inglês aplicado à tecnologia.":
+    "I completed the Node.js Fundamentals Program at DIO. I am currently studying Systems Analysis and Development at UNINTER, the SQL Database Specialist Program, and English for technology.",
   "Direção profissional": "Professional direction",
   "Meu foco atual é consolidar minha base em Front-End e conquistar minha primeira oportunidade na área. No longo prazo, quero evoluir como Desenvolvedor Full Stack, ampliando meus conhecimentos em back-end, APIs e bancos de dados.":
     "My current focus is to consolidate my Front-End foundation and earn my first opportunity in the field. In the long term, I aim to grow as a Full Stack Developer by expanding my knowledge of back-end development, APIs, and databases.",
@@ -255,6 +255,17 @@ const translations: Record<string, string> = {
   "Formação GitHub Copilot": "GitHub Copilot Program",
   "Formação Angular Developer": "Angular Developer Program",
   "Formação Node.js Fundamentals": "Node.js Fundamentals Program",
+  "Formação SQL Database Specialist": "SQL Database Specialist Program",
+  "Banco de dados": "Databases",
+  "SQL e bancos de dados relacionais": "SQL and relational databases",
+  "Conclusão da Formação Node.js Fundamentals pela DIO, fortalecendo a base de desenvolvimento back-end.":
+    "Completed DIO's Node.js Fundamentals Program, strengthening my back-end development foundations.",
+  "Formação SQL Database Specialist em andamento, com estudos em SQL, MySQL e modelagem de dados, junto à graduação em ADS e ao inglês técnico.":
+    "SQL Database Specialist Program in progress, studying SQL, MySQL, and data modeling alongside my degree and technical English.",
+  "Fundamentos de Node.js, módulos, npm e programação assíncrona aplicados em desafios práticos.":
+    "Node.js fundamentals, modules, npm, and asynchronous programming applied in practical challenges.",
+  "Em estudo desde novembro de 2026: SQL, MySQL, modelagem relacional, consultas, transações e recuperação de dados.":
+    "Studying since November 2026: SQL, MySQL, relational modeling, queries, transactions, and data recovery.",
   "TypeScript, arquitetura de aplicações, front-end e fundamentos de back-end.":
     "TypeScript, application architecture, front-end development, and back-end foundations.",
   "Uso do GitHub Copilot como apoio ao desenvolvimento, revisão e produtividade.":

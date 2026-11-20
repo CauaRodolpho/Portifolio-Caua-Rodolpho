@@ -554,9 +554,15 @@ export const TIMELINE = [
     period: "Outubro de 2026",
   },
   {
-    level: "Current",
+    level: "Level 9",
     title: "Node.js e visão Full Stack",
-    desc: "Graduação em ADS, Formação Node.js Fundamentals e evolução contínua no inglês técnico.",
+    desc: "Conclusão da Formação Node.js Fundamentals pela DIO, fortalecendo a base de desenvolvimento back-end.",
+    period: "Novembro de 2026",
+  },
+  {
+    level: "Current",
+    title: "SQL e bancos de dados relacionais",
+    desc: "Formação SQL Database Specialist em andamento, com estudos em SQL, MySQL e modelagem de dados, junto à graduação em ADS e ao inglês técnico.",
     period: "Em andamento",
   },
   {
@@ -568,6 +574,13 @@ export const TIMELINE = [
 ];
 
 export const ACHIEVEMENTS = [
+  {
+    title: "Formação Node.js Fundamentals",
+    state: "Unlocked",
+    institution: "DIO",
+    completedAt: "2026-11",
+    desc: "Fundamentos de Node.js, módulos, npm e programação assíncrona aplicados em desafios práticos.",
+  },
   {
     title: "Santander 2026 - AI React Front-End",
     state: "Unlocked",
@@ -645,11 +658,11 @@ export const EDUCATION = [
 
 export const COURSES_IN_PROGRESS = [
   {
-    title: "Formação Node.js Fundamentals",
+    title: "Formação SQL Database Specialist",
     state: "Training",
     institution: "DIO",
-    category: "Back-end",
-    desc: "Fundamentos de Node.js, criação de APIs, módulos, desenvolvimento assíncrono e organização de aplicações back-end.",
+    category: "Banco de dados",
+    desc: "Em estudo desde novembro de 2026: SQL, MySQL, modelagem relacional, consultas, transações e recuperação de dados.",
   },
   {
     title: "New U-best",
@@ -669,7 +682,7 @@ export const COURSES_IN_PROGRESS = [
 
 export const STATS = [
   { label: "Projetos principais", value: "5" },
-  { label: "Certificações", value: "9" },
+  { label: "Certificações", value: "10" },
   { label: "Tecnologias", value: "10" },
   { label: "Objetivo", value: "1ª vaga" },
 ];
