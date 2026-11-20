@@ -101,6 +101,21 @@ export function Timeline() {
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         const hoverCleanups: Array<() => void> = [];
+        gsap.fromTo(
+          "[data-journey-finish]",
+          { opacity: 0.35, y: 12 },
+          {
+            opacity: 1,
+            y: 0,
+            ease: "none",
+            scrollTrigger: {
+              trigger: "[data-journey-finish]",
+              start: "top 95%",
+              end: "top 72%",
+              scrub: true,
+            },
+          },
+        );
         const travel = gsap.timeline({
           defaults: { ease: "none" },
           scrollTrigger: {
@@ -404,9 +419,12 @@ export function Timeline() {
             })}
           </ol>
 
-          <div className="relative z-20 mx-auto mt-10 flex w-fit items-center gap-3 rounded-full border border-primary/35 bg-background px-5 py-3 shadow-glow">
+          <div
+            data-journey-finish
+            className="relative z-20 mx-auto mt-10 flex w-fit items-center gap-3 rounded-full border border-primary/35 bg-background px-5 py-3 shadow-glow"
+          >
             <span className="relative flex size-2.5">
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-60" />
+              <span className="absolute inline-flex size-full motion-safe:animate-ping rounded-full bg-primary opacity-60" />
               <span className="relative inline-flex size-2.5 rounded-full bg-primary" />
             </span>
             <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-primary">
