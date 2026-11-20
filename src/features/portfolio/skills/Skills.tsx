@@ -113,42 +113,25 @@ export function Skills() {
           mask-image: linear-gradient(to right, transparent, black var(--stack-fade), black calc(100% - var(--stack-fade)), transparent);
         }
         .stack-window:hover .stack-track { animation-play-state: paused; }
-        .stack-card::after {
-          content: "";
-          position: absolute;
-          inset: 6px;
-          pointer-events: none;
-          opacity: 0;
-          background:
-            linear-gradient(currentColor, currentColor) top left / 12px 1px,
-            linear-gradient(currentColor, currentColor) top left / 1px 12px,
-            linear-gradient(currentColor, currentColor) bottom right / 12px 1px,
-            linear-gradient(currentColor, currentColor) bottom right / 1px 12px;
-          background-repeat: no-repeat;
-          transition: opacity 180ms ease;
-        }
-        .stack-card:hover::after { opacity: 0.8; }
         @media (prefers-reduced-motion: reduce) {
           .stack-window { mask-image: none; }
-          .stack-card::after { transition: none; }
+          .stack-card, .stack-icon { transition: none; }
           .stack-track { animation: none; width: 100%; }
           .stack-window .stack-copy { display: none; }
           .stack-window .stack-list { flex-wrap: wrap; }
-
         }
       `}</style>
-      <div className="space-y-8">
+      <div className="space-y-7">
         {rows.map(({ title, items, icon: RowIcon, right }) => (
           <div key={title}>
-            <h3 className="mb-3 flex items-center gap-3 border-t border-border/60 pt-4 font-mono text-xs font-medium uppercase tracking-[0.16em] text-primary sm:text-sm">
+            <h3 className="mb-3 flex items-center gap-3 border-t border-border/60 pt-4 font-mono text-xs font-medium uppercase tracking-[0.16em] text-primary sm:text-xs">
               <RowIcon className="size-4 text-primary" aria-hidden="true" />
               {title}
             </h3>
-            <div className="stack-window relative left-1/2 w-screen -translate-x-1/2 overflow-hidden border-y border-border/60 bg-surface/40">
+            <div className="stack-window relative left-1/2 w-screen -translate-x-1/2 overflow-hidden border-y border-border/40 bg-surface/20">
               <div
                 className="stack-track flex w-max"
                 data-right={right}
-
                 style={{ "--stack-duration": `${Math.max(items.length, 8) * 5}s` } as React.CSSProperties}
               >
                 {[0, 1].map((copy) => (
@@ -161,12 +144,12 @@ export function Skills() {
                           key={`${item.name}-${index}`}
                           aria-hidden={duplicate || undefined}
                           title={t(item.desc)}
-                          className={`${duplicate ? "stack-copy " : ""}stack-card relative flex min-h-32 w-52 shrink-0 flex-col items-center justify-center gap-3 text-center font-mono tracking-wide border-r border-border/60 px-5 py-5 text-sm sm:min-h-36 sm:w-60 sm:text-base font-medium transition-colors duration-300 hover:bg-sky-500/15 hover:text-primary`}
+                          className={`${duplicate ? "stack-copy " : ""}stack-card group flex min-h-16 w-40 shrink-0 items-center gap-2.5 border-r border-border/40 px-3.5 py-3 font-mono text-xs font-medium leading-snug transition-colors duration-200 hover:bg-primary/10 hover:text-primary sm:min-h-20 sm:w-52 sm:gap-3 sm:px-5 sm:text-sm`}
                         >
-                          <span className="grid size-12 shrink-0 sm:size-14 place-items-center rounded-full border border-primary/20 bg-primary/5 text-primary">
-                            {Icon && <Icon className="size-6 sm:size-7" aria-hidden="true" />}
+                          <span className="stack-icon grid size-8 shrink-0 place-items-center rounded-full border border-primary/20 text-primary transition-colors duration-200 group-hover:border-primary/50 group-hover:bg-primary/15 sm:size-9">
+                            {Icon && <Icon className="size-4 sm:size-[18px]" aria-hidden="true" />}
                           </span>
-                          {item.name}
+                          <span>{item.name}</span>
                         </li>
                       );
                     })}
