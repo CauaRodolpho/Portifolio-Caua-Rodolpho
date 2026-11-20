@@ -14,7 +14,7 @@ import {
 import { Section, SectionHeader, Panel } from "@/components/ui/portfolio";
 import { useReveal } from "@/hooks/useReveal";
 import { getLanguageDistribution, useGitHubPortfolio } from "@/hooks/useGitHubPortfolio";
-import { CONTACT_EMAIL, getGmailComposeUrl, STATS, LANGUAGES } from "@/data/portfolio";
+import { CONTACT_EMAIL, getGmailComposeUrl, LANGUAGES } from "@/data/portfolio";
 import { useLanguage } from "@/components/language-provider";
 
 const STORY = [
@@ -52,14 +52,6 @@ export function About() {
   const { language, t } = useLanguage();
   const githubLanguages = githubData ? getLanguageDistribution(githubData.languageBytes) : [];
   const languages = githubLanguages.length > 0 ? githubLanguages : LANGUAGES;
-  const stats = githubData
-    ? [
-        { label: t("Repositórios públicos"), value: String(githubData.profile.public_repos) },
-        { label: t("Seguidores"), value: String(githubData.profile.followers) },
-        { label: t("Projetos analisados"), value: String(githubData.repositories.length) },
-        { label: t("Fonte dos dados"), value: "GitHub" },
-      ]
-    : STATS;
 
   return (
     <div ref={root}>
@@ -104,17 +96,17 @@ export function About() {
             <Panel className="overflow-hidden p-6">
               <div className="pointer-events-none absolute inset-0 grid-bg opacity-25" />
               <div className="relative">
-                <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
-                  <div className="relative flex aspect-[4/5] w-24 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-primary/45 bg-[radial-gradient(circle_at_50%_35%,color-mix(in_oklab,var(--primary)_28%,transparent),transparent_65%),linear-gradient(145deg,var(--surface-elevated),var(--background))] shadow-[0_0_32px_-15px_color-mix(in_oklab,var(--primary)_80%,transparent)] sm:w-28">
+                <div className="flex flex-col gap-5 xl:flex-row xl:items-center">
+                  <div className="relative flex aspect-square w-40 self-center shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-primary/45 bg-[radial-gradient(circle_at_50%_35%,color-mix(in_oklab,var(--primary)_28%,transparent),transparent_65%),linear-gradient(145deg,var(--surface-elevated),var(--background))] shadow-[0_0_32px_-15px_color-mix(in_oklab,var(--primary)_80%,transparent)] sm:w-44">
                     <img
-                      src="/profile-caua-rodolpho.webp"
+                      src="/avatar-caua-rodolpho.webp"
                       alt={
                         language === "pt"
-                          ? "Foto profissional de Cauã Rodolpho"
-                          : "Professional portrait of Cauã Rodolpho"
+                          ? "Avatar ilustrado de Cauã Rodolpho"
+                          : "Illustrated avatar of Cauã Rodolpho"
                       }
-                      width="719"
-                      height="1080"
+                      width="1254"
+                      height="1254"
                       loading="lazy"
                       className="size-full object-cover object-center saturate-[0.96] contrast-[1.03]"
                     />
@@ -203,19 +195,6 @@ export function About() {
               </p>
             </Panel>
 
-            <Panel className="p-6">
-              <div className="hud-label">{t("Indicadores do perfil")}</div>
-              <div data-reveal-group className="mt-5 grid grid-cols-2 gap-4">
-                {stats.map((stat) => (
-                  <div key={stat.label} data-reveal-item>
-                    <div className="font-display text-xl font-semibold text-foreground">
-                      {stat.value}
-                    </div>
-                    <div className="hud-label mt-0.5">{t(stat.label)}</div>
-                  </div>
-                ))}
-              </div>
-            </Panel>
           </div>
         </div>
       </Section>
