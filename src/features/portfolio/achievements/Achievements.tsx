@@ -76,6 +76,46 @@ export function Achievements() {
         </div>
 
         <div className="mt-12">
+          <h3 className="mb-4 flex items-center gap-3 font-display text-base font-semibold">
+            <span className="flex size-9 items-center justify-center rounded-full bg-success/10 text-success">
+              <Award className="size-4" aria-hidden="true" />
+            </span>
+            {language === "pt" ? "Certificações concluídas" : "Completed certifications"}
+          </h3>
+          <div data-reveal-group className="grid gap-x-8 sm:grid-cols-2">
+            {[...ACHIEVEMENTS]
+              .sort((a, b) => b.completedAt.localeCompare(a.completedAt))
+              .map((a) => {
+                return (
+                  <div key={a.title} data-reveal-item>
+                    <div className="h-full border-b border-border/60 px-1 py-4 sm:px-3">
+                      <div className="flex items-start gap-3">
+                        <span className="flex size-9 shrink-0 items-center justify-center rounded-full border border-success/40 bg-success/10 text-success">
+                          <Award className="size-4" />
+                        </span>
+                        <div>
+                          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-success">
+                            {a.institution}
+                          </span>
+                          <h4 className="font-display text-sm font-semibold">{t(a.title)}</h4>
+                          <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                            {t(a.desc)}
+                          </p>
+                          <span className="mt-3 inline-block font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                            {"completedAt" in a
+                              ? `${t("Concluída em")} ${formatCompletionDate(a.completedAt, language)}`
+                              : t("Certificação concluída")}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+          </div>
+        </div>
+
+        <div className="mt-12">
           <div className="mb-4 flex items-center gap-3">
             <span className="flex size-9 items-center justify-center rounded-full border border-primary/40 bg-primary/10 text-primary">
               <BookOpen className="size-4" />
@@ -114,45 +154,6 @@ export function Achievements() {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-        <div className="mt-12">
-          <h3 className="mb-4 flex items-center gap-3 font-display text-base font-semibold">
-            <span className="flex size-9 items-center justify-center rounded-full bg-success/10 text-success">
-              <Award className="size-4" aria-hidden="true" />
-            </span>
-            {language === "pt" ? "Certificações concluídas" : "Completed certifications"}
-          </h3>
-          <div data-reveal-group className="grid gap-x-8 sm:grid-cols-2">
-            {[...ACHIEVEMENTS]
-              .sort((a, b) => b.completedAt.localeCompare(a.completedAt))
-              .map((a) => {
-                return (
-                  <div key={a.title} data-reveal-item>
-                    <div className="h-full border-b border-border/60 px-1 py-4 sm:px-3">
-                      <div className="flex items-start gap-3">
-                        <span className="flex size-9 shrink-0 items-center justify-center rounded-full border border-success/40 bg-success/10 text-success">
-                          <Award className="size-4" />
-                        </span>
-                        <div>
-                          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-success">
-                            {a.institution}
-                          </span>
-                          <h4 className="font-display text-sm font-semibold">{t(a.title)}</h4>
-                          <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                            {t(a.desc)}
-                          </p>
-                          <span className="mt-3 inline-block font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-                            {"completedAt" in a
-                              ? `${t("Concluída em")} ${formatCompletionDate(a.completedAt, language)}`
-                              : t("Certificação concluída")}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
           </div>
         </div>
       </Section>
