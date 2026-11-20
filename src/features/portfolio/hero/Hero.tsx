@@ -69,9 +69,18 @@ export function Hero({ start }: { start: boolean }) {
     language === "pt" ? "/curriculo-caua-rodolpho.pdf" : "/caua-rodolpho-resume-en.pdf";
   const resumeFilename =
     language === "pt" ? "curriculo-caua-rodolpho.pdf" : "caua-rodolpho-resume-en.pdf";
+  const [showHeroVideo, setShowHeroVideo] = useState(false);
   const isDark = theme === "dark";
   const heroVideo = isDark ? "/Video Hero Dark.mp4" : "/Video Hero Light.mp4";
   const heroPoster = isDark ? "/hero-hologram-poster.jpg" : "/hero-hologram-light-poster.jpg";
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 768px) and (prefers-reduced-motion: no-preference)");
+    const sync = () => setShowHeroVideo(media.matches);
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
+  }, []);
 
   useEffect(() => {
     const section = root.current;
@@ -151,22 +160,24 @@ export function Hero({ start }: { start: boolean }) {
     >
       <div
         className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url('${heroPoster}')` }}
+        style={isDark || !showHeroVideo ? { backgroundImage: `url('${heroPoster}')` } : undefined}
         aria-hidden="true"
       />
-      <video
-        key={heroVideo}
-        className="absolute inset-0 size-full object-cover object-[45%_center] motion-reduce:hidden sm:object-center"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        poster={heroPoster}
-        aria-hidden="true"
-      >
-        <source src={heroVideo} type="video/mp4" />
-      </video>
+      {showHeroVideo && (
+        <video
+          key={heroVideo}
+          className="absolute inset-0 size-full object-cover object-[45%_center] motion-reduce:hidden sm:object-center"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster={isDark ? heroPoster : undefined}
+          aria-hidden="true"
+        >
+          <source src={heroVideo} type="video/mp4" />
+        </video>
+      )}
 
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(248,250,252,0.94)_0%,rgba(248,250,252,0.64)_28%,rgba(248,250,252,0.05)_53%,rgba(248,250,252,0.68)_79%,rgba(248,250,252,0.92)_100%)] dark:bg-[linear-gradient(90deg,rgba(1,8,15,0.95)_0%,rgba(1,8,15,0.74)_27%,rgba(1,8,15,0.04)_52%,rgba(1,8,15,0.68)_78%,rgba(1,8,15,0.94)_100%)]" />
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(248,250,252,0.5)_0%,transparent_25%,transparent_58%,rgba(241,245,249,0.96)_100%)] dark:bg-[linear-gradient(180deg,rgba(1,8,15,0.5)_0%,transparent_25%,transparent_58%,rgba(1,8,15,0.97)_100%)]" />
