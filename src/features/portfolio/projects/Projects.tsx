@@ -2,8 +2,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import gsap from "gsap";
 import {
-  ArrowLeft,
-  ArrowRight,
   ArrowUpRight,
   BookOpen,
   CheckCircle2,
@@ -306,12 +304,11 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
 
 export function Projects() {
   const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
-  const previousControl = useRef<HTMLButtonElement>(null);
-  const nextControl = useRef<HTMLButtonElement>(null);
   const [active, setActive] = useState(0);
   const [selected, setSelected] = useState<Project | null>(null);
   const [compact, setCompact] = useState(false);
-  const dragStart = useRef<number | null>(null);
+  const dragStart = useRef<{ id: number; x: number } | null>(null);
+  const suppressClick = useRef(false);
   const { data: githubData, loading: githubLoading } = useGitHubPortfolio();
   const { language, t } = useLanguage();
 
@@ -328,21 +325,6 @@ export function Projects() {
     (direction: number) =>
       setActive((value) => (value + direction + PROJECTS.length) % PROJECTS.length),
     [],
-  );
-  const navigate = useCallback(
-    (direction: number) => {
-      const control = direction < 0 ? previousControl.current : nextControl.current;
-      const icon = control?.querySelector("svg");
-      if (icon && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        gsap.fromTo(
-          icon,
-          { x: 0 },
-          { x: direction * 5, duration: 0.16, repeat: 1, yoyo: true, ease: "power2.out" },
-        );
-      }
-      move(direction);
-    },
-    [move],
   );
 
   useEffect(() => {
@@ -421,15 +403,38 @@ export function Projects() {
         </div>
 
         <div
-          className="relative h-[480px] perspective-[1400px] sm:h-[590px] lg:h-[650px]"
+          className="relative h-[480px] touch-pan-y cursor-grab select-none perspective-[1400px] active:cursor-grabbing sm:h-[590px] lg:h-[650px]"
           onPointerDown={(event) => {
-            dragStart.current = event.clientX;
+            if (!event.isPrimary || event.button !== 0) return;
+            suppressClick.current = false;
+            if ((event.target as Element).closest("button, a")) return;
+            dragStart.current = { id: event.pointerId, x: event.clientX };
+          }}
+          onPointerMove={(event) => {
+            const start = dragStart.current;
+            if (start?.id !== event.pointerId || Math.abs(event.clientX - start.x) < 8) return;
+            suppressClick.current = true;
+            if (!event.currentTarget.hasPointerCapture(event.pointerId)) {
+              event.currentTarget.setPointerCapture(event.pointerId);
+            }
           }}
           onPointerUp={(event) => {
-            if (dragStart.current === null) return;
-            const distance = event.clientX - dragStart.current;
-            if (Math.abs(distance) > 45) move(distance < 0 ? 1 : -1);
+            const start = dragStart.current;
+            if (start?.id !== event.pointerId) return;
             dragStart.current = null;
+            const distance = event.clientX - start.x;
+            if (Math.abs(distance) < 45) return;
+            suppressClick.current = true;
+            move(distance < 0 ? 1 : -1);
+          }}
+          onPointerCancel={() => {
+            dragStart.current = null;
+          }}
+          onClickCapture={(event) => {
+            if (!suppressClick.current || event.detail === 0) return;
+            suppressClick.current = false;
+            event.preventDefault();
+            event.stopPropagation();
           }}
         >
           {PROJECTS.map((item, index) => {
@@ -456,6 +461,7 @@ export function Projects() {
                       <img
                         src={item.image}
                         alt=""
+                        draggable={false}
                         className={`absolute inset-0 size-full transition-transform duration-700 group-hover:scale-[1.025] ${item.imageFit === "contain" ? "object-contain" : "object-cover"}`}
                       />
                     )}
@@ -537,26 +543,6 @@ export function Projects() {
               </div>
             );
           })}
-          <div className="pointer-events-none absolute left-1/2 top-[42%] z-30 w-[90%] -translate-x-1/2 -translate-y-1/2 lg:top-[36%] lg:w-[min(80vw,1600px)]">
-            <button
-              ref={previousControl}
-              type="button"
-              onClick={() => navigate(-1)}
-              aria-label={language === "pt" ? "Projeto anterior" : "Previous project"}
-              className="group pointer-events-auto absolute left-0 flex size-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-transparent bg-transparent text-foreground/60 transition duration-300 hover:border-primary/45 hover:bg-primary/10 hover:text-primary hover:shadow-[0_0_24px_-6px_var(--primary)] focus-visible:border-primary/45 focus-visible:bg-primary/10 focus-visible:text-primary focus-visible:shadow-[0_0_24px_-6px_var(--primary)] active:scale-95 sm:size-12"
-            >
-              <ArrowLeft className="size-4 shrink-0" />
-            </button>
-            <button
-              ref={nextControl}
-              type="button"
-              onClick={() => navigate(1)}
-              aria-label={language === "pt" ? "Próximo projeto" : "Next project"}
-              className="group pointer-events-auto absolute right-0 flex size-11 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-transparent bg-transparent text-foreground/60 transition duration-300 hover:border-primary/45 hover:bg-primary/10 hover:text-primary hover:shadow-[0_0_24px_-6px_var(--primary)] focus-visible:border-primary/45 focus-visible:bg-primary/10 focus-visible:text-primary focus-visible:shadow-[0_0_24px_-6px_var(--primary)] active:scale-95 sm:size-12"
-            >
-              <ArrowRight className="size-4 shrink-0" />
-            </button>
-          </div>
         </div>
         <div className="relative z-30 mt-5 flex items-center justify-center">
           <div
