@@ -1,5 +1,4 @@
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
+import { useState } from "react";
 import {
   SiAngular,
   SiClaude,
@@ -29,8 +28,7 @@ import { LuBot } from "react-icons/lu";
 import { VscVscode } from "react-icons/vsc";
 import { Code2, Sparkles, Wrench } from "lucide-react";
 import type { IconType } from "react-icons";
-import { Panel, Section, SectionHeader } from "@/components/ui/portfolio";
-import { useReveal } from "@/hooks/useReveal";
+import { Section, SectionHeader } from "@/components/ui/portfolio";
 import { SKILLS } from "@/data/portfolio";
 import { useLanguage } from "@/components/language-provider";
 
@@ -82,209 +80,86 @@ const WORKFLOW_SKILLS = SKILLS.filter((skill) => WORKFLOW_SKILL_NAMES.has(skill.
 const AI_SKILLS = SKILLS.filter((skill) => AI_SKILL_NAMES.has(skill.name));
 
 export function Skills() {
-  const root = useRef<HTMLDivElement>(null);
-  useReveal(root, true, "subtle");
-  useEffect(() => {
-    const context = gsap.matchMedia();
-    context.add(
-      "(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)",
-      () => {
-        const cleanups = Array.from(
-          root.current?.querySelectorAll<HTMLElement>("[data-stack-glow]") ?? [],
-        ).map((panel) => {
-          const glow = panel.querySelector<HTMLElement>("[data-stack-halo]");
-          if (!glow) return () => {};
-          gsap.set(glow, { xPercent: -50, yPercent: -50 });
-          const x = gsap.quickTo(glow, "x", { duration: 0.28, ease: "power2.out" });
-          const y = gsap.quickTo(glow, "y", { duration: 0.28, ease: "power2.out" });
-          const move = (event: PointerEvent) => {
-            const bounds = panel.getBoundingClientRect();
-            x(event.clientX - bounds.left);
-            y(event.clientY - bounds.top);
-          };
-          panel.addEventListener("pointermove", move);
-          return () => panel.removeEventListener("pointermove", move);
-        });
-        return () => cleanups.forEach((cleanup) => cleanup());
-      },
-    );
-    return () => context.revert();
-  }, []);
+  const [paused, setPaused] = useState(false);
   const { language, t } = useLanguage();
+  const pt = language === "pt";
+  const rows = [
+    { title: pt ? "Desenvolvimento" : "Development", items: DEVELOPMENT_SKILLS, icon: Code2, right: true },
+    { title: pt ? "Ferramentas e fluxo de trabalho" : "Tools and workflow", items: WORKFLOW_SKILLS, icon: Wrench, right: false },
+    { title: pt ? "Ferramentas de IA" : "AI tools", items: AI_SKILLS, icon: Sparkles, right: true },
+  ];
 
   return (
-    <div ref={root}>
-      <Section id="skills">
-        <SectionHeader
-          code={t("P04 · Árvore de habilidades")}
-          title={t("Painel de habilidades")}
-          subtitle={
-            language === "pt"
-              ? "Tecnologias e ferramentas que uso para transformar ideias em interfaces."
-              : "Technologies and tools I use to turn ideas into interfaces."
-          }
-        />
-
-        <div className="flex flex-col gap-4">
-          <Panel corners={false} className="rounded-3xl! p-4 sm:p-6">
-            <div data-stack-glow data-reveal-group className="group/stack relative isolate">
-              <span
-                data-stack-halo
-                aria-hidden="true"
-                className="pointer-events-none absolute left-0 top-0 -z-10 hidden size-56 rounded-full bg-[radial-gradient(circle,var(--primary),transparent_68%)] opacity-0 transition-opacity duration-300 group-hover/stack:opacity-15 motion-safe:[@media(hover:hover)_and_(pointer:fine)]:block"
-              />
-              <div className="mb-5 flex items-center justify-between gap-4 border-b border-border/60 pb-4">
-                <div className="flex items-center gap-3">
-                  <span className="flex size-9 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <Code2 className="size-4" aria-hidden="true" />
-                  </span>
-                  <div>
-                    <h3 className="font-display text-base font-semibold">
-                      {language === "pt" ? "Desenvolvimento" : "Development"}
-                    </h3>
-                    <p className="hud-label mt-0.5">
-                      {language === "pt" ? "Stack principal" : "Core stack"}
-                    </p>
-                  </div>
-                </div>
-                <span className="font-mono text-[10px] text-muted-foreground">
-                  {String(DEVELOPMENT_SKILLS.length).padStart(2, "0")} TECH
-                </span>
-              </div>
-
-              <div className="grid grid-cols-3 gap-2.5 sm:grid-cols-4 lg:grid-cols-6">
-                {DEVELOPMENT_SKILLS.map((skill) => {
-                  const Icon = ICONS[skill.name];
-                  return (
-                    <div
-                      key={skill.name}
-                      data-reveal-item
-                      title={`${skill.name} — ${t(skill.desc)}`}
-                      className="group/skill flex min-h-24 flex-col items-center justify-center gap-3 px-2 py-3 text-center transition duration-300 motion-safe:hover:-translate-y-1"
-                    >
-                      {Icon ? (
-                        <Icon
-                          className="size-8 text-primary transition duration-300 group-hover/skill:scale-105 group-hover/skill:drop-shadow-[0_0_12px_color-mix(in_oklab,var(--primary)_90%,transparent)]"
-                          aria-hidden="true"
-                        />
-                      ) : null}
-                      <span className="text-[11px] font-medium leading-tight text-foreground sm:text-xs">
-                        {skill.name}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </Panel>
-
-          <Panel corners={false} className="rounded-3xl! p-4 sm:p-6">
-            <div data-stack-glow data-reveal-group className="group/stack relative isolate">
-              <span
-                data-stack-halo
-                aria-hidden="true"
-                className="pointer-events-none absolute left-0 top-0 -z-10 hidden size-56 rounded-full bg-[radial-gradient(circle,var(--primary),transparent_68%)] opacity-0 transition-opacity duration-300 group-hover/stack:opacity-15 motion-safe:[@media(hover:hover)_and_(pointer:fine)]:block"
-              />
-              <div className="mb-5 flex items-center justify-between gap-4 border-b border-border/60 pb-4">
-                <div className="flex items-center gap-3">
-                  <span className="flex size-9 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <Wrench className="size-4" aria-hidden="true" />
-                  </span>
-                  <div>
-                    <h3 className="font-display text-base font-semibold">
-                      {language === "pt" ? "Ferramentas e fluxo de trabalho" : "Tools and workflow"}
-                    </h3>
-                    <p className="hud-label mt-0.5">
-                      {language === "pt"
-                        ? "Ambiente de desenvolvimento"
-                        : "Development environment"}
-                    </p>
-                  </div>
-                </div>
-                <span className="font-mono text-[10px] text-muted-foreground">
-                  {String(WORKFLOW_SKILLS.length).padStart(2, "0")} TOOLS
-                </span>
-              </div>
-
-              <div className="grid grid-cols-3 gap-2.5 sm:grid-cols-4 lg:grid-cols-6">
-                {WORKFLOW_SKILLS.map((skill) => {
-                  const Icon = ICONS[skill.name];
-                  return (
-                    <div
-                      key={skill.name}
-                      data-reveal-item
-                      title={`${skill.name} — ${t(skill.desc)}`}
-                      className="group/tool flex min-h-24 flex-col items-center justify-center gap-3 px-2 py-3 text-center transition duration-300 motion-safe:hover:-translate-y-1"
-                    >
-                      {Icon ? (
-                        <Icon
-                          className="size-8 text-primary transition duration-300 group-hover/tool:scale-105 group-hover/tool:drop-shadow-[0_0_12px_color-mix(in_oklab,var(--primary)_90%,transparent)]"
-                          aria-hidden="true"
-                        />
-                      ) : null}
-                      <span className="text-[11px] font-medium leading-tight text-foreground sm:text-xs">
-                        {skill.name}
-                      </span>
-                    </div>
-                  );
-                })}
+    <Section id="skills">
+      <SectionHeader
+        code={t("P04 · Árvore de habilidades")}
+        title={t("Painel de habilidades")}
+        subtitle={pt ? "Tecnologias e ferramentas que uso para transformar ideias em interfaces." : "Technologies and tools I use to turn ideas into interfaces."}
+      />
+      <style>{`
+        @keyframes stack-loop {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+        .stack-track { animation: stack-loop var(--stack-duration) linear infinite; }
+        .stack-track[data-right="true"] { animation-direction: reverse; }
+        .stack-track[data-paused="true"], .stack-window:hover .stack-track { animation-play-state: paused; }
+        @media (prefers-reduced-motion: reduce) {
+          .stack-track { animation: none; width: 100%; }
+          .stack-window .stack-copy { display: none; }
+          .stack-window .stack-list { flex-wrap: wrap; }
+          .stack-pause { display: none; }
+        }
+      `}</style>
+      <div className="mb-4 flex justify-end">
+        <button
+          type="button"
+          className="stack-pause rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"
+          onClick={() => setPaused((value) => !value)}
+        >
+          {paused ? (pt ? "Retomar animação" : "Resume animation") : (pt ? "Pausar animação" : "Pause animation")}
+        </button>
+      </div>
+      <div className="space-y-8">
+        {rows.map(({ title, items, icon: RowIcon, right }) => (
+          <div key={title}>
+            <h3 className="mb-3 flex items-center gap-3 border-t border-border/60 pt-3 text-sm font-semibold">
+              <RowIcon className="size-4 text-primary" aria-hidden="true" />
+              {title}
+            </h3>
+            <div className="stack-window overflow-hidden rounded-xl border-y border-border/60 bg-surface/40">
+              <div
+                className="stack-track flex w-max"
+                data-right={right}
+                data-paused={paused}
+                style={{ "--stack-duration": `${Math.max(items.length, 8) * 5}s` } as React.CSSProperties}
+              >
+                {[0, 1].map((copy) => (
+                  <ul key={copy} aria-hidden={copy === 1 || undefined} className={copy === 1 ? "stack-copy flex shrink-0" : "stack-list flex shrink-0"}>
+                    {[...items, ...(items.length < 8 ? items : [])].map((item, index) => {
+                      const Icon = ICONS[item.name];
+                      const duplicate = index >= items.length;
+                      return (
+                        <li
+                          key={`${item.name}-${index}`}
+                          aria-hidden={duplicate || undefined}
+                          title={t(item.desc)}
+                          className={`${duplicate ? "stack-copy " : ""}flex w-44 shrink-0 items-center gap-3 border-r border-border/60 px-4 py-4 text-xs font-medium`}
+                        >
+                          <span className="grid size-8 shrink-0 place-items-center rounded-full border border-primary/20 bg-primary/5 text-primary">
+                            {Icon && <Icon className="size-4" aria-hidden="true" />}
+                          </span>
+                          {item.name}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                ))}
               </div>
             </div>
-          </Panel>
-
-          <Panel corners={false} className="rounded-3xl! p-4 sm:p-6">
-            <div data-stack-glow data-reveal-group className="group/stack relative isolate">
-              <span
-                data-stack-halo
-                aria-hidden="true"
-                className="pointer-events-none absolute left-0 top-0 -z-10 hidden size-56 rounded-full bg-[radial-gradient(circle,var(--primary),transparent_68%)] opacity-0 transition-opacity duration-300 group-hover/stack:opacity-15 motion-safe:[@media(hover:hover)_and_(pointer:fine)]:block"
-              />
-              <div className="mb-5 flex items-center justify-between gap-4 border-b border-border/60 pb-4">
-                <div className="flex items-center gap-3">
-                  <span className="flex size-9 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <Sparkles className="size-4" aria-hidden="true" />
-                  </span>
-                  <div>
-                    <h3 className="font-display text-base font-semibold">
-                      {language === "pt" ? "Ferramentas de IA" : "AI tools"}
-                    </h3>
-                    <p className="hud-label mt-0.5">
-                      {language === "pt" ? "Apoio ao desenvolvimento" : "Development support"}
-                    </p>
-                  </div>
-                </div>
-                <span className="font-mono text-[10px] text-muted-foreground">
-                  {String(AI_SKILLS.length).padStart(2, "0")} AI TOOLS
-                </span>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-                {AI_SKILLS.map((skill) => {
-                  const Icon = ICONS[skill.name];
-                  return (
-                    <div
-                      key={skill.name}
-                      data-reveal-item
-                      title={`${skill.name} — ${t(skill.desc)}`}
-                      className="group/ai flex min-h-24 flex-col items-center justify-center gap-3 px-2 py-3 text-center transition duration-300 motion-safe:hover:-translate-y-1"
-                    >
-                      {Icon ? (
-                        <Icon
-                          className="size-8 text-primary transition duration-300 group-hover/ai:scale-105 group-hover/ai:drop-shadow-[0_0_12px_color-mix(in_oklab,var(--primary)_90%,transparent)]"
-                          aria-hidden="true"
-                        />
-                      ) : null}
-                      <span className="text-[11px] font-medium leading-tight text-foreground sm:text-xs">
-                        {skill.name}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </Panel>
-        </div>
-      </Section>
-    </div>
+          </div>
+        ))}
+      </div>
+    </Section>
   );
 }
