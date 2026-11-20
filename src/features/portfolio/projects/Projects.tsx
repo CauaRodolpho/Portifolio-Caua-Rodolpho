@@ -537,13 +537,13 @@ export function Projects() {
               </div>
             );
           })}
-          <div className="pointer-events-none absolute left-1/2 top-[42%] z-30 w-[88%] max-w-[760px] -translate-x-1/2 -translate-y-1/2 sm:w-[72%]">
+          <div className="pointer-events-none absolute left-1/2 top-[42%] z-30 w-[90%] -translate-x-1/2 -translate-y-1/2 lg:top-[36%] lg:w-[min(80vw,1600px)]">
             <button
               ref={previousControl}
               type="button"
               onClick={() => navigate(-1)}
               aria-label={language === "pt" ? "Projeto anterior" : "Previous project"}
-              className="group pointer-events-auto absolute left-0 flex size-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-xl border border-border/90 bg-background/75 text-muted-foreground backdrop-blur-md transition duration-300 hover:scale-105 hover:border-primary/70 hover:bg-background/95 hover:text-primary active:scale-95 sm:size-12"
+              className="group pointer-events-auto absolute left-0 flex size-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-transparent bg-transparent text-foreground/60 transition duration-300 hover:border-primary/45 hover:bg-primary/10 hover:text-primary hover:shadow-[0_0_24px_-6px_var(--primary)] focus-visible:border-primary/45 focus-visible:bg-primary/10 focus-visible:text-primary focus-visible:shadow-[0_0_24px_-6px_var(--primary)] active:scale-95 sm:size-12"
             >
               <ArrowLeft className="size-4 shrink-0" />
             </button>
@@ -552,7 +552,7 @@ export function Projects() {
               type="button"
               onClick={() => navigate(1)}
               aria-label={language === "pt" ? "Próximo projeto" : "Next project"}
-              className="group pointer-events-auto absolute right-0 flex size-11 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-xl border border-border/90 bg-background/75 text-muted-foreground backdrop-blur-md transition duration-300 hover:scale-105 hover:border-primary/70 hover:bg-background/95 hover:text-primary active:scale-95 sm:size-12"
+              className="group pointer-events-auto absolute right-0 flex size-11 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-transparent bg-transparent text-foreground/60 transition duration-300 hover:border-primary/45 hover:bg-primary/10 hover:text-primary hover:shadow-[0_0_24px_-6px_var(--primary)] focus-visible:border-primary/45 focus-visible:bg-primary/10 focus-visible:text-primary focus-visible:shadow-[0_0_24px_-6px_var(--primary)] active:scale-95 sm:size-12"
             >
               <ArrowRight className="size-4 shrink-0" />
             </button>
