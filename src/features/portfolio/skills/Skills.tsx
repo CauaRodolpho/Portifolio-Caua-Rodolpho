@@ -133,10 +133,10 @@ export function Skills() {
                           key={`${item.name}-${index}`}
                           aria-hidden={duplicate || undefined}
                           title={t(item.desc)}
-                          className={`${duplicate ? "stack-copy " : ""}flex min-h-24 w-52 shrink-0 items-center gap-4 border-r border-border/60 px-5 py-5 text-sm sm:min-h-28 sm:w-60 sm:text-base font-medium transition-colors duration-300 hover:bg-sky-500/15 hover:text-sky-400`}
+                          className={`${duplicate ? "stack-copy " : ""}flex min-h-32 w-52 shrink-0 flex-col items-center justify-center gap-3 text-center border-r border-border/60 px-5 py-5 text-sm sm:min-h-36 sm:w-60 sm:text-base font-medium transition-colors duration-300 hover:bg-sky-500/15 hover:text-sky-400`}
                         >
-                          <span className="grid size-11 shrink-0 sm:size-12 place-items-center rounded-full border border-primary/20 bg-primary/5 text-primary">
-                            {Icon && <Icon className="size-5 sm:size-6" aria-hidden="true" />}
+                          <span className="grid size-12 shrink-0 sm:size-14 place-items-center rounded-full border border-primary/20 bg-primary/5 text-primary">
+                            {Icon && <Icon className="size-6 sm:size-7" aria-hidden="true" />}
                           </span>
                           {item.name}
                         </li>
