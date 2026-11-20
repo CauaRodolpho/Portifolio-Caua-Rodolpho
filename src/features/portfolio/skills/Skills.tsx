@@ -1,4 +1,5 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 import {
   SiAngular,
   SiClaude,
@@ -82,7 +83,33 @@ const AI_SKILLS = SKILLS.filter((skill) => AI_SKILL_NAMES.has(skill.name));
 
 export function Skills() {
   const root = useRef<HTMLDivElement>(null);
-  useReveal(root);
+  useReveal(root, true, "subtle");
+  useEffect(() => {
+    const context = gsap.matchMedia();
+    context.add(
+      "(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)",
+      () => {
+        const cleanups = Array.from(
+          root.current?.querySelectorAll<HTMLElement>("[data-stack-glow]") ?? [],
+        ).map((panel) => {
+          const glow = panel.querySelector<HTMLElement>("[data-stack-halo]");
+          if (!glow) return () => {};
+          gsap.set(glow, { xPercent: -50, yPercent: -50 });
+          const x = gsap.quickTo(glow, "x", { duration: 0.28, ease: "power2.out" });
+          const y = gsap.quickTo(glow, "y", { duration: 0.28, ease: "power2.out" });
+          const move = (event: PointerEvent) => {
+            const bounds = panel.getBoundingClientRect();
+            x(event.clientX - bounds.left);
+            y(event.clientY - bounds.top);
+          };
+          panel.addEventListener("pointermove", move);
+          return () => panel.removeEventListener("pointermove", move);
+        });
+        return () => cleanups.forEach((cleanup) => cleanup());
+      },
+    );
+    return () => context.revert();
+  }, []);
   const { language, t } = useLanguage();
 
   return (
@@ -98,12 +125,17 @@ export function Skills() {
           }
         />
 
-        <div data-reveal-group className="flex flex-col gap-4">
-          <Panel className="p-4 sm:p-6">
-            <div data-reveal-item>
+        <div className="flex flex-col gap-4">
+          <Panel corners={false} className="rounded-3xl! p-4 sm:p-6">
+            <div data-stack-glow data-reveal-group className="group/stack relative isolate">
+              <span
+                data-stack-halo
+                aria-hidden="true"
+                className="pointer-events-none absolute left-0 top-0 -z-10 hidden size-56 rounded-full bg-[radial-gradient(circle,var(--primary),transparent_68%)] opacity-0 transition-opacity duration-300 group-hover/stack:opacity-15 motion-safe:[@media(hover:hover)_and_(pointer:fine)]:block"
+              />
               <div className="mb-5 flex items-center justify-between gap-4 border-b border-border/60 pb-4">
                 <div className="flex items-center gap-3">
-                  <span className="flex size-9 items-center justify-center rounded-lg border border-primary/25 bg-primary/10 text-primary">
+                  <span className="flex size-9 items-center justify-center rounded-full bg-primary/10 text-primary">
                     <Code2 className="size-4" aria-hidden="true" />
                   </span>
                   <div>
@@ -126,12 +158,13 @@ export function Skills() {
                   return (
                     <div
                       key={skill.name}
+                      data-reveal-item
                       title={`${skill.name} — ${t(skill.desc)}`}
-                      className="group/skill flex min-h-24 flex-col items-center justify-center gap-3 px-2 py-3 text-center transition duration-300 hover:-translate-y-1"
+                      className="group/skill flex min-h-24 flex-col items-center justify-center gap-3 px-2 py-3 text-center transition duration-300 motion-safe:hover:-translate-y-1"
                     >
                       {Icon ? (
                         <Icon
-                          className="size-8 text-primary transition duration-300 group-hover/skill:scale-115 group-hover/skill:drop-shadow-[0_0_12px_color-mix(in_oklab,var(--primary)_90%,transparent)]"
+                          className="size-8 text-primary transition duration-300 group-hover/skill:scale-105 group-hover/skill:drop-shadow-[0_0_12px_color-mix(in_oklab,var(--primary)_90%,transparent)]"
                           aria-hidden="true"
                         />
                       ) : null}
@@ -145,11 +178,16 @@ export function Skills() {
             </div>
           </Panel>
 
-          <Panel className="p-4 sm:p-6">
-            <div data-reveal-item>
+          <Panel corners={false} className="rounded-3xl! p-4 sm:p-6">
+            <div data-stack-glow data-reveal-group className="group/stack relative isolate">
+              <span
+                data-stack-halo
+                aria-hidden="true"
+                className="pointer-events-none absolute left-0 top-0 -z-10 hidden size-56 rounded-full bg-[radial-gradient(circle,var(--primary),transparent_68%)] opacity-0 transition-opacity duration-300 group-hover/stack:opacity-15 motion-safe:[@media(hover:hover)_and_(pointer:fine)]:block"
+              />
               <div className="mb-5 flex items-center justify-between gap-4 border-b border-border/60 pb-4">
                 <div className="flex items-center gap-3">
-                  <span className="flex size-9 items-center justify-center rounded-lg border border-primary/25 bg-primary/10 text-primary">
+                  <span className="flex size-9 items-center justify-center rounded-full bg-primary/10 text-primary">
                     <Wrench className="size-4" aria-hidden="true" />
                   </span>
                   <div>
@@ -174,12 +212,13 @@ export function Skills() {
                   return (
                     <div
                       key={skill.name}
+                      data-reveal-item
                       title={`${skill.name} — ${t(skill.desc)}`}
-                      className="group/tool flex min-h-24 flex-col items-center justify-center gap-3 px-2 py-3 text-center transition duration-300 hover:-translate-y-1"
+                      className="group/tool flex min-h-24 flex-col items-center justify-center gap-3 px-2 py-3 text-center transition duration-300 motion-safe:hover:-translate-y-1"
                     >
                       {Icon ? (
                         <Icon
-                          className="size-8 text-primary transition duration-300 group-hover/tool:scale-115 group-hover/tool:drop-shadow-[0_0_12px_color-mix(in_oklab,var(--primary)_90%,transparent)]"
+                          className="size-8 text-primary transition duration-300 group-hover/tool:scale-105 group-hover/tool:drop-shadow-[0_0_12px_color-mix(in_oklab,var(--primary)_90%,transparent)]"
                           aria-hidden="true"
                         />
                       ) : null}
@@ -193,11 +232,16 @@ export function Skills() {
             </div>
           </Panel>
 
-          <Panel className="p-4 sm:p-6">
-            <div data-reveal-item>
+          <Panel corners={false} className="rounded-3xl! p-4 sm:p-6">
+            <div data-stack-glow data-reveal-group className="group/stack relative isolate">
+              <span
+                data-stack-halo
+                aria-hidden="true"
+                className="pointer-events-none absolute left-0 top-0 -z-10 hidden size-56 rounded-full bg-[radial-gradient(circle,var(--primary),transparent_68%)] opacity-0 transition-opacity duration-300 group-hover/stack:opacity-15 motion-safe:[@media(hover:hover)_and_(pointer:fine)]:block"
+              />
               <div className="mb-5 flex items-center justify-between gap-4 border-b border-border/60 pb-4">
                 <div className="flex items-center gap-3">
-                  <span className="flex size-9 items-center justify-center rounded-lg border border-primary/25 bg-primary/10 text-primary">
+                  <span className="flex size-9 items-center justify-center rounded-full bg-primary/10 text-primary">
                     <Sparkles className="size-4" aria-hidden="true" />
                   </span>
                   <div>
@@ -220,12 +264,13 @@ export function Skills() {
                   return (
                     <div
                       key={skill.name}
+                      data-reveal-item
                       title={`${skill.name} — ${t(skill.desc)}`}
-                      className="group/ai flex min-h-24 flex-col items-center justify-center gap-3 px-2 py-3 text-center transition duration-300 hover:-translate-y-1"
+                      className="group/ai flex min-h-24 flex-col items-center justify-center gap-3 px-2 py-3 text-center transition duration-300 motion-safe:hover:-translate-y-1"
                     >
                       {Icon ? (
                         <Icon
-                          className="size-8 text-primary transition duration-300 group-hover/ai:scale-115 group-hover/ai:drop-shadow-[0_0_12px_color-mix(in_oklab,var(--primary)_90%,transparent)]"
+                          className="size-8 text-primary transition duration-300 group-hover/ai:scale-105 group-hover/ai:drop-shadow-[0_0_12px_color-mix(in_oklab,var(--primary)_90%,transparent)]"
                           aria-hidden="true"
                         />
                       ) : null}

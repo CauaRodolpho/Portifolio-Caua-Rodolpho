@@ -4,11 +4,32 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export function useReveal(root: RefObject<HTMLElement | null>, enabled = true) {
+export function useReveal(
+  root: RefObject<HTMLElement | null>,
+  enabled = true,
+  variant: "default" | "subtle" = "default",
+) {
   useEffect(() => {
     if (!enabled) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const ctx = gsap.context(() => {
+    const ctx = gsap.context(() => {}, root);
+    const revealItems = (items: Element[]) => {
+      ctx.add(() =>
+        gsap.fromTo(
+          items,
+          { y: 10, opacity: 0.6 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.42,
+            stagger: 0.045,
+            ease: "power2.out",
+            clearProps: "opacity,transform",
+          },
+        ),
+      );
+    };
+    ctx.add(() => {
       gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((el) => {
         gsap.fromTo(
           el,
@@ -25,6 +46,15 @@ export function useReveal(root: RefObject<HTMLElement | null>, enabled = true) {
         );
       });
       const groups = gsap.utils.toArray<HTMLElement>("[data-reveal-group]");
+      if (variant === "subtle") {
+        ScrollTrigger.batch(root.current?.querySelectorAll("[data-reveal-item]") ?? [], {
+          start: "top 94%",
+          once: true,
+          batchMax: 6,
+          onEnter: revealItems,
+        });
+        return;
+      }
       groups.forEach((group) => {
         gsap.fromTo(
           group.querySelectorAll("[data-reveal-item]"),
@@ -42,11 +72,11 @@ export function useReveal(root: RefObject<HTMLElement | null>, enabled = true) {
         );
       });
       ScrollTrigger.refresh();
-    }, root);
+    });
     const t = window.setTimeout(() => ScrollTrigger.refresh(), 800);
     return () => {
       window.clearTimeout(t);
       ctx.revert();
     };
-  }, [root, enabled]);
+  }, [root, enabled, variant]);
 }
