@@ -29,11 +29,6 @@ const Timeline = lazy(() =>
     default: module.Timeline,
   })),
 );
-const Achievements = lazy(() =>
-  import("@/features/portfolio/achievements/Achievements").then((module) => ({
-    default: module.Achievements,
-  })),
-);
 const Contact = lazy(() =>
   import("@/features/portfolio/contact/Contact").then((module) => ({
     default: module.Contact,
@@ -91,7 +86,7 @@ function Index() {
             <Projects />
             <Skills />
             <Timeline />
-            <Achievements />
+
             <Contact />
           </Suspense>
         </main>
