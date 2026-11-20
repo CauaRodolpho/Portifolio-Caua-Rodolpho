@@ -92,12 +92,12 @@ export function About() {
             </div>
           </Panel>
 
-          <div className="space-y-4">
+          <div className="flex min-w-0 flex-col gap-4">
             <Panel className="overflow-hidden p-6">
               <div className="pointer-events-none absolute inset-0 grid-bg opacity-25" />
               <div className="relative">
-                <div className="flex flex-col gap-5 xl:flex-row xl:items-center">
-                  <div className="relative flex aspect-square w-40 self-center shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-primary/45 bg-[radial-gradient(circle_at_50%_35%,color-mix(in_oklab,var(--primary)_28%,transparent),transparent_65%),linear-gradient(145deg,var(--surface-elevated),var(--background))] shadow-[0_0_32px_-15px_color-mix(in_oklab,var(--primary)_80%,transparent)] sm:w-44">
+                <div className="flex flex-col gap-5 min-[1150px]:flex-row min-[1150px]:items-center">
+                  <div className="relative flex aspect-square w-48 max-w-full self-center shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-primary/45 bg-[radial-gradient(circle_at_50%_35%,color-mix(in_oklab,var(--primary)_28%,transparent),transparent_65%),linear-gradient(145deg,var(--surface-elevated),var(--background))] shadow-[0_0_32px_-15px_color-mix(in_oklab,var(--primary)_80%,transparent)] sm:w-52">
                     <img
                       src="/avatar-caua-rodolpho.webp"
                       alt={
@@ -108,7 +108,7 @@ export function About() {
                       width="1254"
                       height="1254"
                       loading="lazy"
-                      className="size-full object-cover object-center saturate-[0.96] contrast-[1.03]"
+                      className="size-full object-contain object-center saturate-[0.96] contrast-[1.03]"
                     />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#020a12]/35 via-transparent to-cyan-200/[0.04]" />
                     <div className="pointer-events-none absolute inset-0 grid-bg opacity-10 mix-blend-screen" />
@@ -157,7 +157,7 @@ export function About() {
               </div>
             </Panel>
 
-            <Panel className="p-6">
+            <Panel className="flex flex-1 flex-col p-6">
               <div className="flex items-center justify-between gap-3">
                 <div className="hud-label">{t("Linguagens no GitHub")}</div>
                 <a
@@ -170,7 +170,7 @@ export function About() {
                   <Github className="size-3.5" /> {t("Perfil")}
                 </a>
               </div>
-              <div data-reveal-group className="mt-5 space-y-4">
+              <div data-reveal-group className="mt-5 flex flex-1 flex-col justify-between gap-4">
                 {languages.map((language) => (
                   <div key={language.name} data-reveal-item>
                     <div className="flex items-center justify-between font-mono text-[11px]">
