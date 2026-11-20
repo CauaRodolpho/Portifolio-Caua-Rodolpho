@@ -30,7 +30,6 @@ export const NAV_ITEMS = [
   { id: "projects", label: "Projetos", code: "P03" },
   { id: "skills", label: "Habilidades", code: "P04" },
   { id: "timeline", label: "Jornada", code: "P05" },
-  { id: "certifications", label: "Certificações", code: "P06" },
   { id: "contact", label: "Contato", code: "P07" },
 ] as const;
 
@@ -682,7 +681,6 @@ export const COURSES_IN_PROGRESS = [
 
 export const STATS = [
   { label: "Projetos principais", value: "5" },
-  { label: "Certificações", value: "10" },
   { label: "Tecnologias", value: "10" },
   { label: "Objetivo", value: "1ª vaga" },
 ];
