@@ -144,7 +144,7 @@ export function Skills() {
                           key={`${item.name}-${index}`}
                           aria-hidden={duplicate || undefined}
                           title={t(item.desc)}
-                          className={`${duplicate ? "stack-copy " : ""}stack-card group flex min-h-16 w-40 shrink-0 items-center gap-2.5 border-r border-border/40 px-3.5 py-3 font-mono text-xs font-medium leading-snug transition-colors duration-200 hover:bg-primary/10 hover:text-primary sm:min-h-20 sm:w-52 sm:gap-3 sm:px-5 sm:text-sm lg:min-h-24 lg:w-60 lg:whitespace-nowrap lg:text-base`}
+                          className={`${duplicate ? "stack-copy " : ""}stack-card group flex min-h-16 w-40 shrink-0 items-center gap-2.5 border-r border-border/40 px-3.5 py-3 font-mono text-xs font-medium leading-snug transition-colors duration-200 hover:bg-primary/10 hover:text-primary sm:min-h-20 sm:w-52 sm:gap-3 sm:px-5 sm:text-sm lg:min-h-24 lg:w-[17rem] lg:whitespace-nowrap lg:text-base`}
                         >
                           <span className="stack-icon grid size-8 shrink-0 place-items-center rounded-full border border-primary/20 text-primary transition-colors duration-200 group-hover:border-primary/50 group-hover:bg-primary/15 sm:size-9 lg:size-11">
                             {Icon && <Icon className="size-4 sm:size-[18px] lg:size-[22px]" aria-hidden="true" />}
